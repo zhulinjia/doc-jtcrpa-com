@@ -1,0 +1,67 @@
+﻿---
+sidebar_position: 5
+description: 通过 WebSocket 长连接接收服务端下发的消息，按 event 字段匹配后自动触发工作流。
+---
+
+import ReceiveParamsUrl from '../../_snippets/receive-params-url.mdx'
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# WebSocket 触发
+
+WebSocket 触发器建立长连接接收服务端消息，按 `event` 字段匹配后触发工作流。
+
+## 概述
+
+连接 WebSocket 服务器后，插件持续监听服务端推送的 JSON 消息。当 `event` 字段与配置的「触发事件」匹配时，工作流自动启动，`data` 字段自动 JSON 解析后存入指定变量。配置面板会实时显示当前连接状态（已连接/未连接）。
+
+服务端推送的消息必须为以下 JSON 格式：
+
+```json
+{
+  "event": "task_notify",
+  "data": {
+    "url": "https://example.com/order/12345",
+    "orderId": "12345"
+  }
+}
+```
+
+<a href="/img/WebSocket.png" target="_blank"><img src="/img/WebSocket.png" alt="WebSocket" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## 快速上手
+
+1. 拖入「WebSocket 触发」节点到画布
+2. 填写 WebSocket 服务器 URL，如 `wss://ws.example.com`
+3. 填写「触发事件」——对应服务端消息中的 `event` 字段值，如 `task_notify`
+4. 配置执行方式和接收数据[变量名](../../core-concepts/variables)
+5. 服务端发送匹配消息后，工作流自动启动
+
+## 参数参考
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| 服务器 URL | 文本 | — | WebSocket 地址，必填。格式：`ws://` 或 `wss://` |
+| 触发事件 | 文本 | — | 匹配服务端消息 `event` 字段的值，必填 |
+| 执行方式 | 下拉选择 | — | 必填。`打开新标签页` / `匹配已打开的页面` |
+| 执行页面 URL | 文本 | — | 新建标签页模式时必填 |
+| 匹配模式 | 文本 | — | 匹配模式时必填，参见 [URL 匹配模式](../../reference/match-patterns) |
+| 接收数据 | 文本 | — | 存储 `data` 字段解析结果的变量名 |
+| 激活标签页 | 开关 | false | 触发时是否自动切换到对应标签页 |
+
+## 执行方式
+
+<ExecutionMode />
+
+## 接收参数并实现动态 URL
+
+<ReceiveParamsUrl />
+
+## 常见问题
+
+### 连接状态一直显示"未连接"
+
+**现象**：配置了服务器 URL，但面板上一直显示红色的「未连接」。
+
+**原因**：服务端地址不可达，或 URL 格式不正确。
+
+**解决**：先用在线 WebSocket 测试工具验证服务端是否可达；确认 URL 以 `ws://` 或 `wss://` 开头。

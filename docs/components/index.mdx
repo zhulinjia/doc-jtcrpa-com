@@ -1,0 +1,125 @@
+---
+sidebar_position: 0
+---
+
+# 功能组件索引
+
+九头虫 RPA 内置 6 大模块、60 个功能节点。每个节点均可点击跳转到详细文档。
+
+---
+
+## 触发器 — 流程的启动方式
+
+| 组件 | 说明 |
+|------|------|
+| [手动执行](./triggers/manual-execute) | 点击执行按钮启动 |
+| [右键菜单](./triggers/context-menu) | 选中内容后右键触发 |
+| [快捷键触发](./triggers/keyboard-shortcut) | 绑定组合键一键启动 |
+| [定时触发](./triggers/scheduled-trigger) | Cron 周期自动执行 |
+| [元素监控](./triggers/element-monitor) | DOM 出现/更新/消失时触发 |
+| [URL 匹配](./triggers/url-match) | 地址栏变化时触发 |
+| [网络拦截](./triggers/network-intercept) | 拦截 XHR/Fetch 请求 |
+| [信号触发](./triggers/signal-trigger) | 接收其他流程的信号 |
+| [WebSocket 触发](./triggers/websocket-trigger) | 服务端长连接下发指令 |
+| [SSE 触发](./triggers/sse-trigger) | 服务端流式事件推送 |
+
+## 事件交互 — 页面上能做什么
+
+| 组件 | 说明 |
+|------|------|
+| [点击事件](./event-interaction/click) | 左/右/中键单击及双击 |
+| [悬浮事件](./event-interaction/hover) | 鼠标悬停触发菜单 |
+| [输入文字](./event-interaction/text-input) | 逐字输入，模拟打字延迟 |
+| [按下按键](./event-interaction/key-press) | 键盘事件，支持组合键 |
+| [选择选项](./event-interaction/select-option) | 下拉框及级联选择器 |
+| [勾选选框](./event-interaction/checkbox) | checkbox/radio 切换 |
+| [提交表单](./event-interaction/form-submit) | 原生提交或点击按钮 |
+| [滚动页面](./event-interaction/scroll) | 模拟滚轮，三种模式 |
+| [触发事件](./event-interaction/trigger-event) | 手动派发 JS 事件 |
+| [上传文件](./event-interaction/file-upload) | 绕过安全限制注入文件 |
+| [下载文件](./event-interaction/file-download) | 接管下载保存到本地 |
+| [读剪切板](./event-interaction/read-clipboard) | 读取剪贴板文本 |
+| [写剪切板](./event-interaction/write-clipboard) | 写入文本到剪贴板 |
+
+## 浏览器控制 — 窗口与标签页管理
+
+| 组件 | 说明 |
+|------|------|
+| [打开网页](./browser-control/open-page) | 导航到指定 URL |
+| [打开窗口](./browser-control/open-window) | 创建新窗口，支持无痕模式 |
+| [关闭窗口](./browser-control/close-window) | 关闭指定窗口 |
+| [关闭网页](./browser-control/close-page) | 关闭当前标签页 |
+| [刷新页面](./browser-control/refresh-page) | 普通刷新或强制刷新 |
+| [替换页面](./browser-control/replace-page) | 静默替换 URL |
+| [切换窗口](./browser-control/switch-window) | 切换操作上下文到指定窗口 |
+| [切换页面](./browser-control/switch-page) | 按索引或 URL 切换标签页 |
+| [切换 iframe](./browser-control/switch-iframe) | 进入 iframe 内部操作 |
+| [处理弹窗](./browser-control/handle-dialog) | 自动响应 alert/confirm/prompt |
+| [显示通知](./browser-control/show-notification) | 发送浏览器通知 |
+
+## 流程控制 — 流程逻辑编排
+
+| 组件 | 说明 |
+|------|------|
+| [条件分支](./flow-control/condition-branch) | if-else 逻辑 |
+| [多路分支](./flow-control/multi-branch) | switch-case 多路匹配 |
+| [循环执行](./flow-control/loop) | 遍历数组或固定次数 |
+| [汇聚节点](./flow-control/converge) | 合并多条分支路径 |
+| [延迟](./flow-control/delay) | 暂停指定秒数 |
+| [调用流程](./flow-control/call-flow) | 嵌套执行子流程 |
+| [发送信号](./flow-control/send-signal) | 向其他流程广播信号 |
+| [汇聚节点](./flow-control/converge) | OR/AND 合并多条分支 |
+| [返回](./flow-control/return) | 子流程返回结果 |
+
+## 通用组件 — 数据与工具
+
+| 组件 | 说明 |
+|------|------|
+| [设置变量](./general-components/set-variable) | 声明或更新上下文变量 |
+| [数据采集](./general-components/data-collection) | 提取元素文本/属性/媒体 |
+| [等待元素](./general-components/wait-element) | 等待 DOM 元素出现/可见 |
+| [等待信号](./general-components/wait-signal) | 流程中途等待外部信号 |
+| [执行代码](./general-components/execute-code) | 运行自定义 JavaScript |
+| [打印输出](./general-components/print-output) | 输出日志到面板 |
+| [读取文件](./general-components/read-file) | 读取本地或远程文件 |
+
+## 网络组件 — HTTP 请求
+
+| 组件 | 说明 |
+|------|------|
+| [等待 HTTP](./network-components/wait-http) | 监听并提取接口响应数据 |
+| [发送 HTTP](./network-components/send-http) | 绕过 UI 直接发送请求 |
+
+---
+
+## 按用户类型推荐
+
+### 刚上手
+
+先搞定"启动"和"操作"，够你完成 80% 的日常任务：
+
+1. [手动执行](./triggers/manual-execute) — 理解流程怎么跑起来
+2. [打开网页](./browser-control/open-page) — 导航到目标页面
+3. [点击事件](./event-interaction/click) — 点击按钮、链接
+4. [输入文字](./event-interaction/text-input) — 填写表单
+5. [数据采集](./general-components/data-collection) — 提取页面内容
+6. [设置变量](./general-components/set-variable) — 暂存数据给后面用
+7. [打印输出](./general-components/print-output) — 调试时看变量值
+
+### 需要批量处理
+
+数据量大了之后，加入循环和判断：
+
+8. [循环执行](./flow-control/loop) — 遍历列表逐条处理
+9. [条件分支](./flow-control/condition-branch) — 按条件走不同路径
+10. [延迟](./flow-control/delay) — 控制频率避免被限流
+
+### 进阶玩法
+
+需要更精细的控制和跨页面协同：
+
+11. [切换 iframe](./browser-control/switch-iframe) — 操作内嵌页面
+12. [元素监控](./triggers/element-monitor) — 等动态内容出来再处理
+13. [调用流程](./flow-control/call-flow) — 拆分子流程复用
+14. [网络拦截](./triggers/network-intercept) — 直接拿接口数据
+15. [定时触发](./triggers/scheduled-trigger) — 无人值守自动跑

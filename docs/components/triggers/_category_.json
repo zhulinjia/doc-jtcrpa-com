@@ -1,0 +1,11 @@
+{
+  "label": "触发器",
+  "position": 1,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "触发器索引",
+    "description": "10 种流程启动方式：手动执行、右键菜单、快捷键、定时、DOM 监控、网络拦截、WebSocket/SSE 信号等。"
+  }
+}

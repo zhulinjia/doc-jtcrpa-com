@@ -1,0 +1,11 @@
+{
+  "label": "网络组件",
+  "position": 6,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "网络组件索引",
+    "description": "2 种 HTTP 网络请求组件：等待接口响应提取数据、绕过页面 UI 直接发送请求。"
+  }
+}

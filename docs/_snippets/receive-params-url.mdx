@@ -1,0 +1,21 @@
+当触发器收到数据时，数据会按 JSON 解析后存入「接收数据」配置的[变量名](/core-concepts/variables)中（如 `data`）。之后在流程任意位置通过 `{{ }}` 表达式引用。
+
+**典型用法**：收到数据中包含 `url` 字段时，可在「执行页面 URL」中通过变量动态指定目标页面。
+
+收到的数据示例：
+
+```json
+{
+  "url": "https://shop.example.com/order/12345",
+  "orderId": "12345"
+}
+```
+
+触发器配置：
+
+```
+接收数据：data
+执行页面 URL：{{data.url}}
+```
+
+流程运行时，「[打开网页](/components/browser-control/open-page)」或其他节点中也可以引用 `{{data.orderId}}` 等字段。

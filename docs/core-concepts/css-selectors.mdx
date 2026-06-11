@@ -1,0 +1,323 @@
+﻿---
+sidebar_position: 1
+---
+
+# CSS 选择器
+
+CSS 选择器是九头虫 RPA 中定位页面元素的核心工具。几乎所有需要操作 DOM 的节点都依赖选择器来指定目标。
+
+九头虫 RPA 在浏览器原生 CSS 选择器的基础上，扩展了 **8 个自定义伪类**，覆盖 Shadow DOM 穿透、文本匹配、表格列定位、视口过滤等自动化高频场景。
+
+:::tip
+**CSS 零基础？** 先看 **[CSS 选择器完全教程](/reference/css-selector-tutorial)**，从打开开发者工具开始手把手学起。
+:::
+
+---
+
+## 标准 CSS 选择器
+
+如果你已熟悉 CSS 选择器，可直接跳到下一节。以下是自动化中最常用的几类：
+
+| 类型 | 语法 | 示例 | 说明 |
+|------|------|------|------|
+| 标签选择器 | `tag` | `div` | 匹配所有 `<div>` |
+| 类选择器 | `.class` | `.btn-primary` | 匹配 class 包含 `btn-primary` 的元素 |
+| ID 选择器 | `#id` | `#submit` | 匹配 id 为 `submit` 的元素 |
+| 属性选择器 | `[attr=val]` | `[data-id="123"]` | 匹配指定属性值的元素 |
+| 后代选择器 | `A B` | `form input` | 匹配 `<form>` 内所有 `<input>` |
+| 子选择器 | `A > B` | `ul > li` | 匹配直接子元素 |
+| 兄弟选择器 | `A + B` | `.label + input` | 匹配紧邻的下一个兄弟 |
+| 伪类选择器 | `:first-child` | `li:first-child` | 匹配第一个 `<li>` |
+| 通配符 | `*` | `div *` | 匹配所有元素 |
+
+---
+
+## 自定义伪类
+
+以下伪类为九头虫 RPA 独有，原生浏览器不支持。它们可以像标准伪类一样串联在任意选择器后。
+
+### `:shadow` — Shadow DOM 穿透
+
+穿透 Shadow DOM 边界，将查询上下文切换到元素的 `shadowRoot` 内部。
+
+```
+组件标签:shadow .内部元素
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:shadow` | 无 | 切换到当前匹配元素的 ShadowRoot 内部继续查询 |
+
+**注意**：仅能穿透 `mode: 'open'` 的 ShadowRoot。`mode: 'closed'` 需要插件 Hook 了 `attachShadow` 才能访问。
+
+**示例**：假设页面中有如下自定义组件：
+
+```html
+<product-card>
+  #shadow-root (open)
+    <div class="title">商品名称</div>
+    <span class="price">¥99.00</span>
+    <button class="buy-btn">立即购买</button>
+</product-card>
+```
+
+```css
+/* 穿透 Shadow DOM 获取价格 */
+product-card:shadow .price
+
+/* 多层嵌套时需要每层一个 :shadow */
+app-root:shadow product-list:shadow .price
+```
+
+### `:>>>` — 深度穿透（`:shadow` 别名）
+
+与 `:shadow` 功能完全一致，提供另一种写法。
+
+```
+组件标签:>>> .内部元素
+```
+
+---
+
+### `:contains` — 按文本内容筛选
+
+筛选 `textContent` 包含指定字符串的元素。
+
+```
+div:contains('订单号')
+a:contains(立即购买)
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:contains('text')` | 字符串（必填） | 匹配文本内容包含该字符串的元素，区分大小写 |
+
+**示例**：假设页面有如下列表：
+
+```html
+<ul class="order-list">
+  <li>订单 #001 — 待发货</li>
+  <li>订单 #002 — 已发货</li>
+  <li>订单 #003 — 已发货</li>
+  <li>订单 #004 — 待发货</li>
+</ul>
+```
+
+```css
+/* 只匹配文本包含"已发货"的项 */
+li:contains('已发货')
+
+/* 可串联其他选择器 */
+.order-list li:contains('已发货'):in-viewport
+```
+
+### `:text` — 文本筛选（`:contains` 别名）
+
+与 `:contains` 完全一致，两者可互换使用。
+
+```
+span:text('已发货')
+```
+
+---
+
+### `:self` — 数据采集中的行元素引用
+
+专用于[数据采集](/components/general-components/data-collection)组件的**列提取规则**中，用于引用当前行元素自身。不推荐在其他节点中使用。
+
+```
+:self
+:self(.highlight)
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:self` | 无 | 引用行元素自身，提取其文本内容 |
+| `:self(selector)` | CSS 选择器（可选） | 在行元素内部查找匹配参数选择器的后代元素 |
+
+**示例**：假设用 `.product-item` 作为行选择器，每行是一个商品卡片：
+
+```html
+<div class="product-item">
+  <span class="title">无线鼠标</span>
+  <span class="price">¥99</span>
+  <span class="tag highlight">热卖</span>
+</div>
+```
+
+在列提取规则中：
+
+```css
+/* 获取行元素自身的文本 → "无线鼠标 ¥99 热卖" */
+:self
+
+/* 在行元素内部查找带 .highlight 的后代元素 → "热卖" */
+:self(.highlight)
+
+/* 等同于直接在行内查找（推荐写法） */
+.tag.highlight
+```
+
+> `:self` 在数据采集之外的其他节点中可能有非预期行为，不建议使用。
+
+---
+
+### `:col` — 表格列匹配
+
+专为 `<table>` 设计，根据表头列名定位 `<td>` / `<th>` 单元格。自动处理 `colspan` 跨列逻辑。
+
+```
+td:col('商品名称')
+td:col('!价格')        严格模式
+td:col('姓名, 电话')    多列匹配
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:col('列名')` | 列名字符串（必填） | 模糊匹配表头文本 |
+| `:col('!列名')` | 以 `!` 为前缀 | 严格模式，仅精确匹配表头 |
+| `:col('列A, 列B')` | 逗号分隔 | 匹配任意一个指定列 |
+
+**示例**：假设有如下表格：
+
+```html
+<table class="order-table">
+  <thead>
+    <tr>
+      <th>订单号</th>
+      <th>商品名称</th>
+      <th>数量</th>
+      <th>价格</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>001</td>
+      <td>无线鼠标</td>
+      <td>2</td>
+      <td>¥99</td>
+      <td>已发货</td>
+    </tr>
+    <tr>
+      <td>002</td>
+      <td>机械键盘</td>
+      <td>1</td>
+      <td>¥499</td>
+      <td>待发货</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+```css
+/* 定位"商品名称"列的所有单元格 */
+td:col('商品名称')
+
+/* 定位"价格"列中文本包含 ¥ 的单元格——实际上就是价格数据 */
+td:col('价格')
+```
+
+---
+
+### `:in-viewport` — 仅匹配可见区域内的元素
+
+筛选当前浏览器视口内可见的元素，不可见元素被排除。
+
+```
+div.item:in-viewport
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:in-viewport` | 无 | 仅保留与视口有交集的元素，`display:none` 或尺寸为零的元素也会被排除 |
+
+**使用场景**：采集无限滚动列表中的可见项，或只操作用户当前视野中的元素避免触发懒加载。
+
+---
+
+### `:not-fetched` — 一次性去重
+
+基于内存的去重过滤器，确保同一 DOM 节点只被匹配一次。适合配合元素监控使用，避免重复处理同一元素。
+
+```
+li:not-fetched
+li:not-fetched(订单列表)
+```
+
+| 语法 | 参数 | 说明 |
+|------|------|------|
+| `:not-fetched` | 无（默认命名空间 `default`） | 元素被匹配后进入内存池，再次匹配时被排除 |
+| `:not-fetched(namespace)` | 命名空间字符串（可选） | 不同命名空间的内存池互相独立 |
+
+**注意**：内存池以 WeakSet 实现，页面关闭后自动清空。`:not-fetched` 也会排除 `offsetHeight` 或 `offsetWidth` 为零的不可见元素。
+
+**典型场景**：配合「[元素监控](/components/triggers/element-monitor)」触发器，对新出现的 DOM 节点执行一次性操作（如采集数据后不再重复处理）：
+
+```html
+<!-- 监控容器，列表项会随着时间推移不断增加 -->
+<ul class="message-list">
+  <li data-id="1">新订单 #001，请尽快处理</li>
+  <li data-id="2">新订单 #002，请尽快处理</li>
+  <!-- 下一轮轮询时新增了 #003 -->
+  <li data-id="3">新订单 #003，请尽快处理</li>
+</ul>
+```
+
+```css
+/* 每次轮询只匹配"还未处理过"的元素 */
+.message-list li:not-fetched
+
+/* 多个监控场景使用独立命名空间，互不干扰 */
+.message-list li:not-fetched(订单监控)
+.error-list li:not-fetched(错误监控)
+```
+
+首次查询匹配 `#001` 和 `#002` 并标记为已处理；下一轮轮询时 `#001` 和 `#002` 被过滤，只返回新增的 `#003`。
+
+---
+
+## 组合使用
+
+自定义伪类可与标准选择器自由串联：
+
+```
+table.order-table tr:in-viewport td:col('状态'):contains('已完成')
+```
+
+这条选择器的含义：在 `class="order-table"` 的表格中 → 找到视口可见的行 → 定位"状态"列的单元格 → 仅保留文本包含"已完成"的。
+
+---
+
+## 验证选择器
+
+自定义伪类无法在浏览器原生 API（如 `querySelectorAll`）中生效，也无法在开发者工具 Elements 面板中搜索验证。推荐在以下组件的配置面板中测试：
+
+- **[数据采集](/components/general-components/data-collection)** 节点：在「目标元素」配置中填入选择器
+- **[设置变量](/components/general-components/set-variable)** 节点：在「目标元素」字段中填入选择器
+
+![设置变量中的选择器验证](/img/设置变量.png)
+
+:::tip
+填入选择器后，点击字段右下角的 👁 **预览按钮**即可实时查看匹配到的元素列表，无需运行流程。
+:::
+
+---
+
+## 常见问题
+
+### 在浏览器 Console 中用 `querySelectorAll` 测试不生效
+
+**现象**：在 Console 中使用 `document.querySelectorAll('div:contains('订单')')` 报语法错误或无匹配。
+
+**原因**：自定义伪类是九头虫 RPA 的扩展语法，浏览器原生 API 无法识别。
+
+**解决**：在「[数据采集](/components/general-components/data-collection)」或「[设置变量](/components/general-components/set-variable)」节点的配置面板中填入选择器进行测试，配置面板内置了自定义伪类引擎，会实时展示匹配结果。
+
+### `:shadow` 穿透后找不到元素
+
+**现象**：使用了 `:shadow`，但后续的选择器报"未找到元素"。
+
+**原因**：目标 ShadowRoot 的 mode 为 `closed`，或选择器中 `:shadow` 后的选择器路径不匹配实际 DOM 结构。
+
+**解决**：在开发者工具中展开 Shadow DOM 树，逐层确认实际结构，逐步添加 `:shadow`（多层嵌套时需要每层一个 `:shadow`）。

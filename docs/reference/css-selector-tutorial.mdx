@@ -1,0 +1,487 @@
+---
+sidebar_position: 2
+---
+
+# CSS 选择器完全教程
+
+本教程面向零基础用户，从打开开发者工具开始，逐步掌握用 CSS 选择器精准定位页面上任意元素的能力。
+
+---
+
+## 什么是 CSS 选择器
+
+CSS 选择器是一套**定位规则**，用来告诉浏览器"我要操作页面上的哪个元素"。九头虫 RPA 几乎所有需要与页面交互的节点（点击、输入、采集……）都依赖选择器来指定目标。
+
+打个比方：页面是一栋楼，每个按钮、输入框、文字段落是楼里的一个房间，CSS 选择器就是房间的门牌号。
+
+---
+
+## 第一步：打开开发者工具
+
+| 方式 | 操作 |
+|------|------|
+| 快捷键 | 按 `F12`（Windows）/ `Cmd+Option+I`（Mac） |
+| 右键菜单 | 在页面上任意位置右键 → 选择「检查」 |
+| 浏览器菜单 | 右上角 `⋮` → 更多工具 → 开发者工具 |
+
+打开后你主要用到两个面板：
+
+- **Elements（元素）**：显示页面的 HTML 结构树
+- **Console（控制台）**：输入命令来测试选择器
+
+:::note[📷 需要截图]
+此处展示开发者工具整体界面截图，用箭头标注 Elements 面板和 Console 面板的位置。
+:::
+
+点击 Elements 面板左上角 **选择器图标**（带箭头的小方块，快捷键 `Ctrl+Shift+C`），然后将鼠标移到页面上任意元素上——该元素会高亮，点击后 Elements 面板自动跳转到对应的 HTML 代码。这是最快了解页面结构的方法。
+
+:::note[📷 需要截图]
+此处展示选择器图标悬停高亮元素的动态效果截图。
+:::
+
+### 最简单的方法：在 Elements 面板中搜索
+
+如果你不想敲代码，最直接的方法是**在 Elements 面板里按 `Ctrl+F` 打开搜索框**，直接输入选择器来查找元素。
+
+这个搜索框支持三种输入：
+
+| 你输入的 | 匹配方式 | 示例 |
+|----------|----------|------|
+| CSS 选择器 | 按选择器语法查找 | `div.card`、`#submit`、`[data-id]` |
+| XPath | 以 `//` 或 `/` 开头时自动识别 | `//div[@class='card']` |
+| 普通文本 | 匹配 HTML 源代码中的任意文本 | `订单号`、`submit` |
+
+:::note[📷 需要截图]
+此处展示 Elements 面板中 `Ctrl+F` 打开搜索框，输入 `div.card` 后高亮匹配结果的截图。
+:::
+
+**举例**：在任意网页打开开发者工具 → Elements 面板 → `Ctrl+F` → 输入 `[type="submit"]` → 按回车。匹配到的元素会在 HTML 树中高亮，搜索框右侧会显示匹配数量（如 "1 of 3"）。
+
+**局限**：这个搜索框只支持浏览器原生 CSS 选择器，不支持九头虫 RPA 的自定义伪类（`:contains`、`:shadow`、`:col` 等）。自定义伪类需要在 Console 中用 `$query()` 验证。但作为快速验证标准选择器的工具，它比 Console 更直观——匹配结果直接在 HTML 树中高亮，一目了然。
+
+---
+
+## 第二步：在 Console 中精确验证
+
+在 Console 面板中随时测试你的选择器：
+
+```javascript
+// 返回命中的第一个元素（可展开查看详情）
+document.querySelector('你的选择器')
+
+// 返回命中的所有元素列表
+document.querySelectorAll('你的选择器')
+
+// 九头虫 RPA 专用——支持自定义伪类 :contains、:shadow 等
+$query('你的选择器')
+```
+
+**试试看**：输入 `document.querySelectorAll('a')`，你会看到页面上所有链接。
+
+:::note[📷 需要截图]
+此处展示 Console 中执行 `document.querySelectorAll('a')` 的结果。
+:::
+
+---
+
+## 第三步：从零学选择器
+
+下面每种选择器，都会在旁边列出对应的 HTML 代码，并标注哪些元素被选中（✅）、哪些没被选中（❌）。
+
+---
+
+### 标签选择器
+
+直接用 HTML 标签名匹配，**选中页面上所有该标签的元素**。
+
+**选择器**：`a`
+
+```html
+<a href="/" class="nav-link active">首页</a>           ✅
+<a href="/products" class="nav-link">产品</a>          ✅
+<a href="/about" class="nav-link">关于</a>             ✅
+<button type="submit">登录</button>                    ❌ 不是 <a>
+<input type="text" />                                  ❌ 不是 <a>
+```
+
+**选择器**：`input`
+
+```html
+<input type="text" name="username" />                  ✅
+<input type="password" name="password" disabled />      ✅
+<input type="checkbox" name="remember" checked />       ✅
+<button type="submit">登录</button>                    ❌ 不是 <input>
+<label>用户名</label>                                   ❌ 不是 <input>
+```
+
+---
+
+### 类选择器
+
+通过 `class` 属性匹配，类名前加 `.`。一个元素有多个 class 时，只要命中任意一个就会被选中。
+
+**选择器**：`.nav-link`
+
+```html
+<a href="/" class="nav-link active">首页</a>           ✅ 有 nav-link
+<a href="/products" class="nav-link">产品</a>          ✅ 有 nav-link
+<a href="/about" class="nav-link">关于</a>             ✅ 有 nav-link
+<button class="btn btn-primary">登录</button>          ❌ 没有 nav-link
+<div class="form-group">...</div>                      ❌ 没有 nav-link
+```
+
+**选择器**：`.btn`
+
+```html
+<button class="btn btn-primary">登录</button>          ✅ 有 btn
+<button class="btn btn-secondary">重置</button>        ✅ 有 btn
+<a class="nav-link active">首页</a>                    ❌ 没有 btn
+<div class="form-group">...</div>                      ❌ 没有 btn
+```
+
+**记忆口诀**：`class="xxx"` 用 `.xxx`（点号），`id="xxx"` 用 `#xxx`（井号）。
+
+---
+
+### ID 选择器
+
+通过 `id` 属性匹配，ID 前面加 `#`。ID 在页面内必须唯一，所以 ID 选择器最多选中一个元素。
+
+**选择器**：`#product-list`
+
+```html
+<ul id="product-list">                                 ✅ id 正是 product-list
+  <li>笔记本电脑</li>
+  <li>无线鼠标</li>
+  <li>机械键盘</li>
+</ul>
+<form id="login-form">...</form>                       ❌ id 不是 product-list
+<div id="app">...</div>                                ❌ id 不是 product-list
+```
+
+---
+
+### 属性选择器
+
+根据元素的任意 HTML 属性来匹配，用方括号 `[]` 包裹。
+
+#### 只检查有没有这个属性：`[属性名]`
+
+**选择器**：`[disabled]`
+
+```html
+<input type="password" disabled />                     ✅ 有 disabled 属性
+<input type="text" name="username" />                  ❌ 没有 disabled
+<input type="checkbox" checked />                      ❌ 有 checked 但没有 disabled
+<button>登录</button>                                   ❌ 没有 disabled
+```
+
+#### 属性等于某个值：`[属性名="值"]`
+
+**选择器**：`[type="checkbox"]`
+
+```html
+<input type="checkbox" name="remember" checked />       ✅ type 等于 checkbox
+<input type="text" name="username" />                  ❌ type 是 text，不是 checkbox
+<input type="password" name="password" />              ❌ type 是 password，不是 checkbox
+```
+
+#### 属性以某个值开头：`[属性名^="值"]`
+
+**选择器**：`[src^="/images"]`
+
+```html
+<img src="/images/logo.png" alt="Logo" />              ✅ src 以 /images 开头
+<img src="https://cdn.example.com/photo.jpg" />        ❌ src 以 https 开头
+```
+
+#### 属性以某个值结尾：`[属性名$="值"]`
+
+**选择器**：`[src$=".png"]`
+
+```html
+<img src="/images/logo.png" alt="Logo" />              ✅ src 以 .png 结尾
+<img src="https://cdn.example.com/photo.jpg" />        ❌ src 以 .jpg 结尾
+```
+
+#### 属性包含某个值：`[属性名*="值"]`
+
+**选择器**：`[class*="btn"]`
+
+```html
+<button class="btn btn-primary">登录</button>          ✅ class 包含 "btn"
+<button class="btn btn-secondary">重置</button>        ✅ class 包含 "btn"
+<a class="nav-link active">首页</a>                    ❌ class 不含 "btn"
+```
+
+---
+
+### 关系选择器：按 DOM 层级定位
+
+HTML 元素是嵌套的树状结构。关系选择器利用父子、兄弟关系精准定位。
+
+:::note[📷 需要截图]
+此处用 DOM 树示意图标注父子、兄弟关系，配合箭头说明四种关系选择器的匹配范围。
+:::
+
+#### 后代选择器（空格）—— 不管嵌套多深
+
+用空格隔开两个选择器，在第一个元素内部**任意深度**找第二个。
+
+**选择器**：`form input`
+
+```html
+<form>
+  <div class="form-group">
+    <input type="text" name="username" />               ✅ 在 <form> 内部（隔了一层 <div>）
+    <label>...</label>                                  ❌ 不是 <input>
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" />           ✅ 在 <form> 内部（隔了一层 <div>）
+  </div>
+  <input type="checkbox" name="remember" />             ✅ 在 <form> 内部（直接子元素）
+</form>
+<input type="text" name="outside" />                   ❌ 不在 <form> 内部
+```
+
+**注意**：`<input type="text">` 嵌套在 `<div>` 里面，离 `<form>` 隔了一层，但**后代选择器不管深度，照样选中**。
+
+#### 子选择器（>）—— 只看直接儿子
+
+只匹配**直接子元素**，中间隔了一层的孙子元素不会被选中。
+
+**选择器**：`form > input`
+
+```html
+<form>
+  <div class="form-group">
+    <input type="text" name="username" />               ❌ 不是 form 的直接子（父是 div）
+  </div>
+  <input type="checkbox" name="remember" />             ✅ 是 form 的直接子
+</form>
+```
+
+**后代 `form input` vs 子 `form > input`**：
+
+```
+form input   → ✅ <input type="text">  ✅ <input type="password">  ✅ <input type="checkbox">
+form > input → ❌ <input type="text">  ❌ <input type="password">  ✅ <input type="checkbox">
+                          ↑ 这两个被 div 包了一层，不是 form 的直接子
+```
+
+#### 相邻兄弟选择器（+）—— 紧跟在后面的那一个
+
+匹配**紧邻**在目标后面的**第一个**同级元素。
+
+**选择器**：`label + input`
+
+```html
+<div class="form-group">
+  <label class="form-label">用户名</label>
+  <input type="text" name="username" />                 ✅ 紧跟在 <label> 后面
+</div>
+<div class="form-group">
+  <label class="form-label">密码</label>
+  <input type="password" name="password" />             ✅ 紧跟在 <label> 后面
+  <span>提示文字</span>                                  ❌ 前面是 <input> 不是 <label>
+</div>
+<div class="form-group">
+  <input type="checkbox" name="remember" />             ❌ 前面是 <div> 不是 <label>
+</div>
+```
+
+#### 通用兄弟选择器（~）—— 后面的所有兄弟
+
+匹配目标元素**之后的所有**同级元素（不需要紧邻）。
+
+**选择器**：`.active ~ .nav-link`
+
+```html
+<a href="/" class="nav-link active">首页</a>            ← 它是 .active 本身，不算
+<a href="/products" class="nav-link">产品</a>           ✅ 在 .active 后面
+<a href="/about" class="nav-link">关于</a>              ✅ 在 .active 后面
+```
+
+---
+
+### 伪类选择器
+
+伪类不靠标签名和属性，而是靠元素的**状态**——它是第几个、是否被勾选、是否被禁用。
+
+**位置伪类**：
+
+```html
+<ul id="product-list">
+  <li class="product-item" data-id="1001">笔记本电脑</li>  ← 第 1 个
+  <li class="product-item" data-id="1002">无线鼠标</li>    ← 第 2 个
+  <li class="product-item" data-id="1003">机械键盘</li>    ← 第 3 个
+</ul>
+```
+
+| 选择器 | 选中 | 未选中 |
+|--------|------|--------|
+| `li:first-child` | 笔记本电脑（第 1 个） | 无线鼠标、机械键盘 |
+| `li:last-child` | 机械键盘（最后 1 个） | 笔记本电脑、无线鼠标 |
+| `li:nth-child(2)` | 无线鼠标（第 2 个） | 笔记本电脑、机械键盘 |
+| `li:nth-child(odd)` | 笔记本电脑、机械键盘（第 1、3 个） | 无线鼠标（第 2 个） |
+| `li:nth-child(even)` | 无线鼠标（第 2 个） | 笔记本电脑、机械键盘 |
+
+**状态伪类**：
+
+```html
+<input type="checkbox" name="remember" checked />       ← 被勾选
+<input type="password" name="password" disabled />       ← 被禁用
+<input type="text" name="username" />                   ← 普通状态
+```
+
+| 选择器 | 选中 | 未选中 |
+|--------|------|--------|
+| `input:checked` | 被勾选的 checkbox | 密码框、用户名框 |
+| `input:disabled` | 被禁用的密码框 | checkbox、用户名框 |
+
+**排除伪类**：
+
+```html
+<a href="/" class="nav-link active">首页</a>            ← 有 active 类
+<a href="/products" class="nav-link">产品</a>           ← 没有 active
+<a href="/about" class="nav-link">关于</a>              ← 没有 active
+```
+
+| 选择器 | 选中 | 未选中 |
+|--------|------|--------|
+| `a:not(.active)` | 产品、关于 | 首页 |
+
+---
+
+### 组合选择器
+
+把前面的知识串起来。
+
+```html
+<nav class="navbar">
+  <a href="/" class="nav-link active">首页</a>
+  <a href="/products" class="nav-link">产品</a>
+  <a href="/about" class="nav-link">关于</a>
+</nav>
+<form id="login-form">
+  <input type="text" name="username" />
+  <input type="password" name="password" disabled />
+  <input type="checkbox" name="remember" checked />
+</form>
+```
+
+| 选择器 | 选中 | 未选中 |
+|--------|------|--------|
+| `nav a.nav-link:not(.active)` | 产品、关于（nav 内、有 nav-link、无 active） | 首页（有 active） |
+| `form input:not([disabled])` | 用户名框、checkbox（form 内、未禁用） | 密码框（禁用） |
+| `input[type="checkbox"]:checked` | checkbox（是 checkbox 且已勾选） | 用户名框、密码框 |
+
+---
+
+## 进阶实战：真实页面场景
+
+以下 3 个场景取自真实网页中常见的结构。记住一个原则：**好的选择器靠语义（class、属性），不靠位置（第几个 div）**。
+
+---
+
+### 场景一：只选一级菜单，不误伤子菜单
+
+导航菜单里往往嵌套了二级甚至三级子菜单。当你只想操作一级菜单时，用 `>` 限定直接子关系。
+
+**选择器**：`.menu > .menu-item`
+
+```html
+<ul class="menu">
+  <li class="menu-item">首页</li>          ✅ .menu 的直接子
+  <li class="menu-item">产品中心            ✅ .menu 的直接子
+    <ul class="submenu">
+      <li class="menu-item">笔记本</li>     ❌ 父元素是 submenu，中间隔了一层
+      <li class="menu-item">手机</li>       ❌ 同上
+    </ul>
+  </li>
+  <li class="menu-item">关于</li>          ✅ .menu 的直接子
+</ul>
+```
+
+> 如果用 `.menu .menu-item`（空格），所有 5 个 `<li>` 都会被选中。加一个 `>` 之后只命中 3 个一级菜单。
+
+---
+
+### 场景二：排除售罄商品
+
+电商列表中售罄商品的购买按钮带有 `disabled` 属性，你想跳过它们只采集可购买的商品。
+
+**选择器**：`li:not(:has([disabled])) .title`
+
+```html
+<li>                                           ← 含 disabled 按钮
+  <span class="title">笔记本</span>             ❌ 所属 li 被排除
+  <button disabled>售罄</button>
+</li>
+<li>                                           ← 按钮正常
+  <span class="title">鼠标</span>               ✅ 所属 li 通过
+  <button>购买</button>
+</li>
+<li>                                           ← 按钮正常
+  <span class="title">键盘</span>               ✅ 所属 li 通过
+  <button>购买</button>
+</li>
+```
+
+> `:has([disabled])` 找到"包含 disabled 属性元素"的 `<li>`，再用 `:not()` 排除它。结果命中「鼠标」和「键盘」。
+
+---
+
+### 场景三：分页器中只选可点击的页码
+
+分页器的当前页码无法点击，省略号不需要操作，剩下的才是你可以点击跳转的页码。
+
+**选择器**：`.page-item:not(.current):not(.ellipsis)`
+
+```html
+<a class="page-item prev">上一页</a>    ✅
+<a class="page-item">1</a>              ✅
+<span class="page-item current">2</span> ❌ 有 current
+<a class="page-item">3</a>              ✅
+<span class="page-item ellipsis">…</span> ❌ 有 ellipsis
+<a class="page-item next">下一页</a>    ✅
+```
+
+> 两个 `:not()` 串联，"不是 current 且不是 ellipsis"，剩下 4 个可点击项。
+
+---
+
+## 你可能遇到的问题
+
+### 选择器写对了但"找不到元素"
+
+1. **元素还没加载**：页面延迟渲染，在操作前加「等待元素」节点。
+2. **元素在 iframe 里**：用检查工具确认，如果在 `<iframe>` 内，需先用「切换 iframe」节点。
+3. **Shadow DOM**：元素在 `#shadow-root` 下，需用 `:shadow` 穿透（九头虫专用）。
+4. **动态 class 名**：如 `css-1a2b3c` 这种随机名每次刷新都变，不要用它做选择器。
+
+### 写出的选择器太脆弱
+
+```css
+/* ❌ 一碰就碎——页面结构改一点就失效 */
+body > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(5)
+
+/* ✅ 健壮——只依赖语义，不依赖物理位置 */
+td:col('价格')
+```
+
+---
+
+## 进阶：九头虫 RPA 自定义伪类
+
+掌握以上标准选择器后，学习九头虫 RPA 的 8 个自定义伪类（`:shadow`、`:contains`、`:col`、`:in-viewport` 等），详见 **[CSS 选择器（核心概念）](/core-concepts/css-selectors)**。
+
+---
+
+## 权威参考
+
+- [MDN CSS 选择器文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_selectors) — Mozilla 官方教程
+- [MDN CSS 选择器速查表](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_selectors/Selectors_and_combinators) — 所有选择器完整列表
+- [Chrome DevTools 官方文档](https://developer.chrome.com/docs/devtools?hl=zh-cn) — 谷歌官方开发者工具教程
+- [Chrome DevTools Console 指南](https://developer.chrome.com/docs/devtools/console?hl=zh-cn) — Console 面板详细用法
+- [W3C Selectors Level 4 规范](https://www.w3.org/TR/selectors-4/) — W3C 国际标准

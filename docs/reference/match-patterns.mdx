@@ -1,0 +1,60 @@
+---
+sidebar_position: 1
+---
+
+# URL 匹配模式
+
+九头虫 RPA 中涉及 URL 匹配的节点（URL 匹配触发器、网络拦截等）均采用 Chrome 扩展的 **match patterns** 语法。本文档供各节点参数中「URL 匹配规则」字段统一参考。
+
+## 基本结构
+
+```
+<scheme>://<host>/<path>
+```
+
+## 语法规则
+
+### Scheme（协议）
+
+| 取值 | 匹配范围 |
+|------|----------|
+| `http` | 仅 HTTP |
+| `https` | 仅 HTTPS |
+| `*` | 同时匹配 HTTP 和 HTTPS |
+| `file` | 本地文件 |
+
+### Host（主机）
+
+| 写法 | 匹配范围 |
+|------|----------|
+| `www.example.com` | 精确匹配指定域名 |
+| `*.example.com` | 匹配所有子域名（`*` 必须在最前面且紧跟 `.`） |
+| `*` | 匹配任意主机 |
+| `127.0.0.1` | 匹配指定 IP |
+| `localhost` | 匹配本地 localhost（任意端口） |
+
+### Path（路径）
+
+路径使用字面量，`*` 匹配任意字符序列。
+
+## 常用示例
+
+| 模式 | 匹配范围 |
+|------|----------|
+| `*://*/*` | 所有 HTTP / HTTPS 页面 |
+| `https://*.example.com/*` | example.com 所有子域名的 HTTPS 页面 |
+| `*://example.com/order/*` | example.com 上 `/order/` 路径下的所有页面 |
+| `*://*/foo*bar` | 路径以 `foo` 开头、`bar` 结尾的任意页面 |
+| `http://localhost/*` | 本地 localhost 任意端口 |
+
+## 注意事项
+
+- 通配符 `*` 在 scheme 位置仅匹配 `http` 或 `https`，不匹配 `file`、`data` 等其他协议。
+- 主机名中的 `*` 仅可作为前缀（`*.example.com`），不支持 `*` 出现在中间或尾部。
+- 路径为必填字段（至少填 `/*`）。如需匹配根路径，使用 `/`。
+
+## 相关节点
+
+- [URL 匹配触发器](../components/triggers/url-match)
+- [网络拦截](../components/triggers/network-intercept)
+- [快捷键触发](../components/triggers/keyboard-shortcut)（仅在目标页面生效选项）

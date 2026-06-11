@@ -1,0 +1,31 @@
+﻿---
+sidebar_position: 7
+description: 勾选或取消勾选复选框 (Checkbox) 和单选框 (Radio)，支持勾选、取消勾选、切换三种操作。
+---
+
+# 勾选选框
+
+勾选选框节点操作 `<input type="checkbox">` 和 `<input type="radio">`，切换其选中状态。
+
+## 概述
+
+支持三种操作：勾选、取消勾选、切换（反转当前状态）。
+
+如果选择器指向 label 或包装 div，节点会自动找到其中真正的 checkbox 或 radio 元素。
+
+<a href="/img/勾选选框.png" target="_blank"><img src="/img/勾选选框.png" alt="勾选选框" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## 快速上手
+
+1. 拖入「勾选选框」节点到画布
+2. 填写「目标元素」CSS 选择器（必填），指向目标 checkbox 或 radio
+3. 选择操作类型：勾选 / 取消勾选 / 切换
+4. 执行
+
+## 常见问题
+
+### 勾选框勾上了但关联 UI 没变化
+
+选框已选中但关联的表单区块没有展开或按钮没有激活。
+
+**解决方法**：在勾选选框后追加「触发事件」节点，手动派发 `change` 事件。

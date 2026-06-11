@@ -1,0 +1,10 @@
+{
+  "label": "功能组件",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "components/index"
+  }
+}

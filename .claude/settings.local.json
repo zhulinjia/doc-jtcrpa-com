@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm build *)",
+      "WebFetch(domain:developer.chrome.com)",
+      "Bash(mkdir -p /c/wwwroot/doc-jtcrpa-com/docs/components)",
+      "Bash(mv triggers *)",
+      "Bash(node *)",
+      "Bash(sed -i 's/sidebar_position: 7/sidebar_position: 5/' refresh-page.mdx)",
+      "Bash(sed -i 's/sidebar_position: 8/sidebar_position: 6/' replace-page.mdx)",
+      "Bash(sed -i 's/sidebar_position: 9/sidebar_position: 7/' switch-window.mdx)",
+      "Bash(sed -i 's/sidebar_position: 10/sidebar_position: 8/' switch-page.mdx)",
+      "Bash(sed -i 's/sidebar_position: 11/sidebar_position: 9/' switch-iframe.mdx)",
+      "Bash(sed -i 's/sidebar_position: 12/sidebar_position: 7/' return.mdx)",
+      "Bash(sed -i 's/sidebar_position: 13/sidebar_position: 8/' send-signal.mdx)",
+      "Bash(sed -i 's|to: '\\\\''/docs/|to: '\\\\''/|g' docusaurus.config.ts)",
+      "Bash(sed -i \"s|to: \\\\\"/docs/|to: \\\\\"/|g\" docusaurus.config.ts)",
+      "Read(//c/c/wwwroot/doc-jtcrpa-com/**)",
+      "Bash(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\docs\" -Recurse -Name -File)",
+      "Bash(Select-Object -First 50)",
+      "Bash(New-Item *)",
+      "PowerShell(New-Item *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\" -Depth 1)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(npx docusaurus *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\" -Depth 1 -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(Format-Table -HideTableHeaders)",
+      "Bash(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\" -Depth 1 -File)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\docs\" -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\\", \"\"\\) })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\src\" -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\\", \"\"\\) })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\" -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\\", \"\"\\) })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\docs\" -Recurse -Filter \"_category_.json\" | ForEach-Object { Write-Output \"--- $\\($_.FullName.Replace\\('C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\', ''\\)\\) ---\"; Get-Content $_.FullName; Write-Output \"\" })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\打开网页.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\数据清洗.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\添加处理方法.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\设置变量.png\" | Select-Object Name, Length, @{N='Dimensions';E={\\(New-Object -ComObject WScript.Shell\\).Exec\\(\"cmd /c dir `\"$\\($_.FullName\\)`\" 2>nul\"\\).StdOut.ReadAll\\(\\)}})",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $images = @\\(\"打开网页\", \"数据清洗\", \"添加处理方法\", \"设置变量\"\\); foreach \\($name in $images\\) { $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\$name.png\"; if \\(Test-Path $path\\) { $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$name.png : $\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\) } })",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\关闭页面.png\"; $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))"
+    ]
+  }
+}

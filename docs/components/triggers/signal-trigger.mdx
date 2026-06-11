@@ -1,0 +1,69 @@
+﻿---
+sidebar_position: 4
+description: 监听来自其他工作流的信号来启动当前工作流，接收的数据自动 JSON 解析后注入变量。
+---
+
+import ReceiveParamsUrl from '../../_snippets/receive-params-url.mdx'
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# 信号触发
+
+信号触发器监听来自其他工作流发出的自定义信号，收到信号后自动启动。
+
+## 概述
+
+通过唯一标识的「信号 ID」匹配。上游工作流使用「[发送信号](../flow-control/send-signal)」节点广播信号，当前流程收到同名信号后启动。接收到的数据会自动尝试 JSON 解析，成功后存入指定变量。
+
+**示例**：流程 A 点击手动执行后发送信号 → 流程 B 收到信号后弹出系统通知。
+
+<a href="/img/信号触发.png" target="_blank"><img src="/img/信号触发.png" alt="信号触发" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## 快速上手
+
+示例包含两个工作流：
+
+**流程 A — 手动执行 → [发送信号](../flow-control/send-signal)**：
+
+<a href="/img/信号触发示例-1.png" target="_blank"><img src="/img/信号触发示例-1.png" alt="信号触发示例-流程A" style={{maxWidth: 480, width: '100%'}} /></a>
+
+1. 拖入「[手动执行](../triggers/manual-execute)」触发器作为入口
+2. 拖入「[发送信号](../flow-control/send-signal)」节点，填写信号 ID（如 `test_signal`）
+3. 点击执行，信号发出
+
+**流程 B — [信号触发](../triggers/signal-trigger) → [显示通知](../browser-control/show-notification)**：
+
+<a href="/img/信号触发示例-2.png" target="_blank"><img src="/img/信号触发示例-2.png" alt="信号触发示例-流程B" style={{maxWidth: 480, width: '100%'}} /></a>
+
+1. 拖入「信号触发」节点，信号 ID 与流程 A 保持一致（`test_signal`）
+2. 配置「执行方式」和「接收数据」[变量名](../../core-concepts/variables)
+3. 拖入「[显示通知](../browser-control/show-notification)」节点
+4. 流程 A 发送信号后，流程 B 收到信号自动启动，弹出系统通知
+
+## 参数参考
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| 信号 ID | 文本 | — | 信号唯一标识，必填。发送方和接收方必须完全一致 |
+| 执行方式 | 下拉选择 | — | 必填。`打开新标签页` / `匹配已打开的页面` |
+| 执行页面 URL | 文本 | — | 新建标签页模式时必填 |
+| 匹配模式 | 文本 | — | 匹配模式时必填，Chrome match patterns 格式，参见 [URL 匹配模式](../../reference/match-patterns) |
+| 接收数据 | 文本 | — | 存储接收数据的变量名，如 `data` |
+| 激活标签页 | 开关 | false | 触发时是否自动切换到对应标签页 |
+
+## 执行方式
+
+<ExecutionMode />
+
+## 接收参数并实现动态 URL
+
+<ReceiveParamsUrl />
+
+## 常见问题
+
+### 信号触发一直等待不启动
+
+**现象**：流程始终不启动，日志显示等待信号中。
+
+**原因**：信号 ID 拼写不一致（大小写敏感），或发送方流程未执行。
+
+**解决**：检查发送方和接收方的信号 ID 是否完全一致。

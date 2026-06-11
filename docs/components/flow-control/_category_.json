@@ -1,0 +1,11 @@
+{
+  "label": "流程控制",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "流程控制索引",
+    "description": "13 种流程逻辑编排：条件分支、多路分支、循环、子流程、延迟、暂停、停止、跳过、跳出等。"
+  }
+}

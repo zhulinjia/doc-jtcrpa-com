@@ -1,0 +1,11 @@
+{
+  "label": "浏览器控制",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "浏览器控制索引",
+    "description": "13 种窗口与标签页管理操作：打开/关闭、前进后退、刷新、切换窗口/标签页/iframe、通知、弹窗处理。"
+  }
+}

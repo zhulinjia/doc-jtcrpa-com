@@ -1,0 +1,11 @@
+{
+  "label": "通用组件",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "通用组件索引",
+    "description": "7 种数据与工具组件：变量管理、数据采集、等待信号/元素、日志输出、执行代码、读取文件。"
+  }
+}

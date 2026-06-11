@@ -1,0 +1,45 @@
+﻿---
+sidebar_position: 9
+description: 当浏览器访问匹配指定 URL 模式的页面时，页面加载完成后自动启动工作流。支持包含模式和排除模式。
+---
+
+# URL 匹配
+
+URL 匹配触发器在浏览器导航到匹配 URL 的页面时，页面加载完成后自动启动工作流。
+
+## 概述
+
+使用 Chrome match patterns 语法定义 URL 规则。支持**包含模式**（匹配则触发）和**排除模式**（匹配则不触发），两者可同时使用以实现精准的页面范围控制。当浏览器访问一个 URL 同时满足包含模式且不匹配排除模式时，工作流自动启动。
+
+<a href="/img/url匹配.png" target="_blank"><img src="/img/url匹配.png" alt="URL 匹配" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## 快速上手
+
+**示例**：用户访问任意页面时弹出系统通知。
+
+<a href="/img/url匹配示例.png" target="_blank"><img src="/img/url匹配示例.png" alt="URL 匹配示例" style={{maxWidth: 480, width: '100%'}} /></a>
+
+1. 拖入「URL 匹配」节点到画布，「URL 匹配模式」填 `*://*/*`
+2. 拖入「[显示通知](../browser-control/show-notification)」节点，连接到触发器
+3. 保存后浏览器导航到任意页面时自动弹出通知
+
+## 参数参考
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| URL 匹配模式 | 文本 | — | Chrome match patterns 格式，必填。参见 [URL 匹配模式](../../reference/match-patterns) |
+| 排除模式 | 文本 | — | Chrome match patterns 格式，匹配到的 URL 不会触发。参见 [URL 匹配模式](../../reference/match-patterns) |
+
+## 通配符语法
+
+完整语法参见 **[URL 匹配模式](../../reference/match-patterns)** 参考文档。
+
+## 常见问题
+
+### URL 匹配模式范围过大
+
+**现象**：使用 `*` 通配符时，不相关的页面也触发了工作流。
+
+**原因**：通配符规则过于宽泛。
+
+**解决**：利用「排除模式」剔除不需要的 URL。例如匹配 `*://example.com/*` 但排除 `*://example.com/admin/*`。

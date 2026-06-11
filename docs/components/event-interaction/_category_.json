@@ -1,0 +1,11 @@
+{
+  "label": "事件交互",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "事件交互索引",
+    "description": "13 种页面交互操作：点击、悬浮、按键、滚动、输入、选择、表单提交、文件上传下载、剪贴板等。"
+  }
+}
