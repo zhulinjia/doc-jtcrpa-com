@@ -1,46 +1,76 @@
-﻿---
+---
 sidebar_position: 8
 description: 当浏览器发起匹配指定 URL 和 HTTP 方法的网络请求时，在匹配页面上自动触发工作流。
 ---
 
 # 网络拦截
 
-网络拦截触发器监听浏览器网络请求，当匹配到指定 URL 和 HTTP 方法的请求时自动触发工作流。
+网络拦截触发器监听浏览器发出的网络请求，匹配到目标请求时自动启动工作流。不需要事先知道请求何时发出——浏览器发起请求的那一刻，触发器就会捕获。
 
-## 概述
-
-不需要事先知道请求何时发出——网络拦截触发器会持续监听浏览器的 XHR/Fetch 请求。一旦检测到 URL 和请求方法同时匹配的请求，工作流在匹配页面上自动启动。
-
-**注意**：网络拦截在请求**发起时**触发，不是响应返回时。
+:::caution
+网络拦截在请求**发起时**触发，不是响应返回时。如果流程中需要用到响应数据，需配合「[等待 HTTP](/components/network-components/wait-http)」节点等待响应完成。
+:::
 
 <a href="/img/网络拦截.png" target="_blank"><img src="/img/网络拦截.png" alt="网络拦截" style={{maxWidth: 480, width: '100%'}} /></a>
 
-## 快速上手
+## 配置步骤
 
-**示例**：监听 API 接口请求 → 等待响应返回 → 采集响应数据。
-
-> 此示例为系统默认自带，名称为 **API接口采集【示例】**
+**示例**：监听一个 API 接口请求 → 等待响应返回 → 采集响应数据。
 
 <a href="/img/网络拦截示例.png" target="_blank"><img src="/img/网络拦截示例.png" alt="网络拦截示例" style={{maxWidth: 480, width: '100%'}} /></a>
 
-1. 拖入「网络拦截」节点，配置 URL 匹配模式和请求方法
-2. 拖入「[等待 HTTP](/components/network-components/wait-http)」节点，等待匹配的请求响应返回
-3. 拖入「[数据采集](/components/general-components/data-collection)」节点，从响应数据中提取字段
-4. 保存后，当浏览器发起匹配请求时工作流自动启动并采集数据
+1. 拖入「网络拦截」节点到画布，作为流程起点
+2. 填写「URL 匹配模式」，指定要拦截的请求地址
+3. 选择「请求方法」，指定拦截 GET / POST / PUT / DELETE 中的哪一种
+4. 拖入「[等待 HTTP](/components/network-components/wait-http)」节点，等待匹配的请求完成
+5. 拖入「[数据采集](/components/general-components/data-collection)」节点，从响应数据中提取需要的字段
+6. 保存后，浏览器发起匹配请求时流程自动启动
 
-## 参数参考
+## 参数说明
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| URL 匹配模式 | 文本 | — | Chrome match patterns 格式，必填。参见 [URL 匹配模式](../../reference/match-patterns) |
-| 请求方法 | 下拉选择 | — | 必填。`GET` / `POST` / `PUT` / `DELETE` |
+### URL 匹配模式
+
+指定要拦截的请求 URL。**支持多个规则，一行一个**。格式遵循 Chrome [match patterns](https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns)。
+
+```
+https://api.example.com/v1/orders*
+https://api.example.com/v1/products*
+```
+
+匹配的是浏览器实际发出的请求地址（在开发者工具 Network 面板中看到的 URL），不是当前页面的地址。
+
+### 请求方法
+
+选择要拦截的 HTTP 方法：
+
+```
+GET      —— 获取数据（查列表、查详情）
+POST     —— 提交数据（创建订单、提交表单）
+PUT      —— 更新数据（修改信息）
+DELETE   —— 删除数据
+```
+
+一次只能选一种方法。如果需要同时拦截 GET 和 POST 同一个接口，需要配两个网络拦截节点。
+
+## 使用场景
+
+网络拦截适合**绕开前端 UI 直接从接口层拿数据**的场景：
+
+- 页面上的数据是加密渲染的，DOM 里看不到原始值——拦截接口拿明文响应
+- 业务数据通过 POST 提交，你需要在提交前或提交后做一些处理
+- 页面定时轮询某个接口，你想在每次轮询时自动采集最新数据
+
+如果只是想监听**页面 URL 变化**，用「[URL 匹配](/components/triggers/url-match)」更简单。
 
 ## 常见问题
 
 ### 在 Network 面板看到请求但拦截没触发
 
-**现象**：开发者工具 Network 面板中能看到请求，但拦截节点没有触发。
+**现象**：开发者工具 Network 面板中能看到请求，但拦截器没有触发。
 
-**原因**：URL 匹配模式未命中实际请求路径，或请求方法不匹配，或拦截器在请求发出后才注册。
+**原因**：URL 匹配模式没命中实际请求路径，或请求方法不匹配，或请求在拦截器注册之前就发出了。
 
-**解决**：确认 URL 匹配模式和请求方法与 Network 面板中的请求一致；确保拦截节点在流程中的位置早于触发请求的操作。
+**解决**：
+1. 在 Network 面板中找到目标请求，复制完整 URL，对照检查 URL 匹配规则；
+2. 确认请求方法（GET/POST/PUT/DELETE）与你配置的一致；
+3. 确保页面刷新后拦截器已生效——先保存流程，再刷新页面触发请求。

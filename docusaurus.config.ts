@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: '九头虫 RPA',
+  title: '九头虫RPA帮助文档',
   tagline: '浏览器原生自动化插件',
   favicon: 'img/favicon.ico',
 
@@ -54,21 +54,15 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: '九头虫 RPA',
-      logo: {
-        alt: '九头虫 RPA',
-        src: 'img/logo.svg',
-        href: '/',
-      },
+      title: '九头虫RPA帮助文档',
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: '文档',
+          href: 'https://jtcrpa.com',
+          label: '官网',
+          position: 'right',
         },
         {
-          href: 'https://github.com/jtcrpa',
+          href: 'https://github.com/zhulinjia/doc-jtcrpa-com',
           label: 'GitHub',
           position: 'right',
         },
@@ -98,7 +92,7 @@ const config: Config = {
           title: '核心概念',
           items: [
             {
-              label: 'CSS 选择器',
+              label: '元素选择器',
               to: '/core-concepts/css-selectors',
             },
             {
@@ -125,7 +119,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 九头虫 RPA. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 九头虫RPA. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

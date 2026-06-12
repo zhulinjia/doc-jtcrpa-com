@@ -1,45 +1,92 @@
-﻿---
+---
 sidebar_position: 9
 description: 当浏览器访问匹配指定 URL 模式的页面时，页面加载完成后自动启动工作流。支持包含模式和排除模式。
 ---
 
 # URL 匹配
 
-URL 匹配触发器在浏览器导航到匹配 URL 的页面时，页面加载完成后自动启动工作流。
-
-## 概述
-
-使用 Chrome match patterns 语法定义 URL 规则。支持**包含模式**（匹配则触发）和**排除模式**（匹配则不触发），两者可同时使用以实现精准的页面范围控制。当浏览器访问一个 URL 同时满足包含模式且不匹配排除模式时，工作流自动启动。
+URL 匹配触发器在浏览器导航到指定页面时自动启动工作流。页面加载完成后触发，全程不需要人操作。
 
 <a href="/img/url匹配.png" target="_blank"><img src="/img/url匹配.png" alt="URL 匹配" style={{maxWidth: 480, width: '100%'}} /></a>
 
-## 快速上手
+## 配置步骤
 
-**示例**：用户访问任意页面时弹出系统通知。
+1. 拖入「URL 匹配」节点到画布，作为流程起点
+2. 在「URL 匹配模式」中填写要匹配的页面地址
+3. 可选填写「排除模式」，剔除不需要的子路径
+4. 连接后续节点，保存流程
+5. 浏览器导航到匹配页面时，流程自动启动
 
-<a href="/img/url匹配示例.png" target="_blank"><img src="/img/url匹配示例.png" alt="URL 匹配示例" style={{maxWidth: 480, width: '100%'}} /></a>
+## 参数说明
 
-1. 拖入「URL 匹配」节点到画布，「URL 匹配模式」填 `*://*/*`
-2. 拖入「[显示通知](../browser-control/show-notification)」节点，连接到触发器
-3. 保存后浏览器导航到任意页面时自动弹出通知
+### URL 匹配模式（必填）
 
-## 参数参考
+指定哪些页面触发工作流。**支持多个规则，一行一个**。格式遵循 Chrome [match patterns](https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns)。
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| URL 匹配模式 | 文本 | — | Chrome match patterns 格式，必填。参见 [URL 匹配模式](../../reference/match-patterns) |
-| 排除模式 | 文本 | — | Chrome match patterns 格式，匹配到的 URL 不会触发。参见 [URL 匹配模式](../../reference/match-patterns) |
+```
+https://example.com/orders/*
+https://*.taobao.com/item/*
+```
 
-## 通配符语法
+### 排除模式（选填）
 
-完整语法参见 **[URL 匹配模式](../../reference/match-patterns)** 参考文档。
+在匹配规则覆盖的范围内，剔除不想触发的页面。**同样支持多个规则，一行一个**。
+
+```
+https://example.com/orders/admin/*
+https://example.com/orders/login
+```
+
+## 示例：只监控订单页，排除后台
+
+你要在订单列表页和订单详情页自动执行流程，但不希望后台管理页也触发。
+
+**URL 匹配模式**：
+
+```
+https://admin.example.com/orders/*
+```
+
+**排除模式**：
+
+```
+https://admin.example.com/orders/admin/*
+```
+
+效果：
+
+```
+https://admin.example.com/orders          → 触发
+https://admin.example.com/orders/123      → 触发
+https://admin.example.com/orders/admin    → 不触发（被排除）
+https://admin.example.com/dashboard       → 不触发（不匹配）
+```
+
+## 使用场景
+
+URL 匹配适合**进入特定页面就要自动干活**的场景：
+
+- 打开公司 OA 首页时自动签到
+- 进入订单详情页时自动采集数据
+- 访问竞品网站时自动截图存档
+- 在 SPA 单页应用中路由切换时自动触发（如从列表页进入详情页）
+
+:::tip
+URL 匹配在**页面加载完成后**触发。如果页面是 SPA 单页应用，路由切换时 URL 变化也会触发，不需要刷新页面。
+:::
 
 ## 常见问题
 
-### URL 匹配模式范围过大
+### 使用 `*` 通配符后触发范围太大
 
-**现象**：使用 `*` 通配符时，不相关的页面也触发了工作流。
+**现象**：填了 `https://example.com/*`，不相关的子页面也触发了流程。
 
-**原因**：通配符规则过于宽泛。
+**解决**：利用「排除模式」剔除不想要的路径。保留「URL 匹配模式」的宽松范围，用「排除模式」精准掐掉不需要的部分。
 
-**解决**：利用「排除模式」剔除不需要的 URL。例如匹配 `*://example.com/*` 但排除 `*://example.com/admin/*`。
+### SPA 页面路由切换没触发
+
+**现象**：单页应用里从列表页点到详情页，URL 变了但流程没启动。
+
+**原因**：SPA 路由切换时浏览器不发起完整的页面导航，部分情况下插件可能未捕获。
+
+**解决**：确认流程已保存；如果仍然不触发，尝试刷新页面验证。

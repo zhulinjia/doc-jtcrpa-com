@@ -68,3 +68,65 @@
 2. [步骤：配置 sidebar/config] -> 验证：[本地 `pnpm start` 查看导航与侧边栏是否符合预期]
 3. [步骤：完整构建测试] -> 验证：[运行 `pnpm build` 确保无死链、无编译报错]
 ```
+
+## 5. 提交
+
+# 提交流程规范 (Commit Workflow)
+
+为了确保代码库的质量、版本可追溯性以及团队协作的顺畅，请在提交至 GitHub 前，严格遵循以下提交流程。
+
+---
+
+## 5.1 自动化质量检查 (Quality Assurance)
+
+在执行 `git commit` 前，请务必执行以下检查，确保代码逻辑无误且风格统一：
+
+- **代码格式化**：运行 `npm run lint` 或 `prettier --write`，移除无效引用，确保符合项目规范。
+- **类型检查**：运行 `tsc --noEmit`，确保 TypeScript 类型系统无任何报错。
+- **冒烟测试 (Smoke Test)**：在 RPA Playground 或目标浏览器环境下进行快速测试，验证核心交互逻辑（如选择器匹配、等待策略、错误处理）未出现回归。
+
+---
+
+## 5.2 提交说明规范 (Conventional Commits)
+
+请遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范编写 Commit Message，以便于后续查阅版本演进。
+
+**格式**：`<type>(<scope>): <description>`
+
+### 常用类型说明：
+
+| 类型       | 含义     | 场景示例                                 |
+| :--------- | :------- | :--------------------------------------- |
+| `feat`     | 新增功能 | 新增一种页面交互方式、新增自动化测试场景 |
+| `fix`      | 修复错误 | 修复选择器获取逻辑、修正报错处理边界条件 |
+| `refactor` | 代码重构 | 逻辑优化、封装公共组件、性能提升         |
+| `docs`     | 文档更新 | 修改 README.md、补充代码内注释           |
+| `chore`    | 琐碎任务 | 依赖包升级、构建配置修改                 |
+
+**提交示例**：
+
+- `feat(core): 实现策略模式处理 RPA 页面交互错误`
+- `fix(selector): 优化 table 列选择器算法，优先匹配全等`
+- `refactor(ui): 调整 TextArea 图标动态布局逻辑`
+
+---
+
+## 5.3 同步与备份 (Synchronization)
+
+完成本地检查与提交描述编写后，请按以下顺序执行操作：
+
+1.  **提交至本地暂存区**：
+    ```bash
+    git add .
+    git commit -m "<type>(<scope>): <description>"
+    ```
+2.  **更新本地代码**（确保与远程仓库同步）：
+    ```bash
+    git pull origin master
+    ```
+3.  **推送至远程 GitHub**：
+    ```bash
+    git push origin master
+    ```
+
+---

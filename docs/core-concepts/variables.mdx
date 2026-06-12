@@ -4,113 +4,223 @@ sidebar_position: 2
 
 # 变量与表达式
 
-九头虫 RPA 使用 `{{ }}` 双花括号语法引用变量和执行表达式。所有节点参数中均可用此语法动态获取上下文数据。
+九头虫 RPA 使用 `{{ }}` 双花括号语法在流程中动态引用变量和计算表达式。所有节点的参数输入框均支持此语法。
 
-## 变量基础
+表达式引擎基于 [jsep](https://github.com/EricSmekens/jsep) 实现，兼容 JavaScript 表达式语义。本页详细介绍每种写法的**输入**（你写什么）和**输出**（运行时得到什么）。
 
-上下文变量在流程运行期间全局可见。通过「[设置变量](/components/general-components/set-variable)」节点声明，或在某些节点（[数据采集](/components/general-components/data-collection)、[等待 HTTP](/components/network-components/wait-http) 等）中自动产出。引用变量时使用双花括号包裹：
+---
 
-```
-{{变量名}}
-```
+## 基础规则
 
-### 在文本中嵌入变量
+### 两种模式
 
-`{{ }}` 支持两种模式：
+`{{ }}` 有两种工作模式，区别在于是否保留原始类型：
 
-| 模式 | 示例 | 说明 |
-|------|------|------|
-| 纯表达式 | `{{score}}` | 整个字符串是一个表达式，保留原始类型 |
-| 混合文本 | `共 {{count}} 条记录` | 变量嵌入文本，结果为字符串 |
+**纯表达式**——整个输入框只写一个 `{{...}}`，计算结果是什么类型就输出什么类型：
 
 ```
-纯表达式：{{username}}        → Alice（字符串）
-纯表达式：{{score + 5}}        → 100（数字）
-混合文本：Score: {{score}}/100 → "Score: 95/100"（字符串）
+{{score}}          → 95          (数字)
+{{score + 5}}      → 100         (数字)
+{{isActive}}       → true        (布尔值)
+```
+
+**混合文本**——`{{ }}` 嵌在普通文字中，所有变量值被转为字符串拼接：
+
+```
+共 {{count}} 条       → "共 10 条"       (字符串)
+Score: {{score}}/100  → "Score: 95/100"  (字符串)
+```
+
+> 这是最重要的一条规则：**纯表达式保留原始类型，混合文本一律输出字符串。**
+
+### 支持的变量类型
+
+表达式中的变量可以是以下任意类型，不同类型在两种模式下的输出行为不同：
+
+```
+变量值              纯表达式输出        混合文本输出
+─────────────────────────────────────────────────────
+"Alice"            "Alice" (字符串)   "Alice"
+95                 95 (数字)          "95"
+true               true (布尔值)      "true"
+{name: "张三"}      {name: "张三"}     JSON字符串
+[1, 2, 3]          [1, 2, 3]         "[1,2,3]"
+null               null              "(空)"
+undefined          undefined         "(空)"
+```
+
+**数字、字符串、布尔值**在纯表达式中原样保留，可以继续参与运算。对象和数组在混合文本中会被序列化为 JSON 字符串。`null` 和 `undefined` 在混合文本中表现为空。
+
+### 变量从哪来
+
+表达式中的变量名从上下文查找。上下文在流程运行期间动态构建，来源包括：
+
+- 「[设置变量](/components/general-components/set-variable)」节点显式声明（支持手动输入、页面元素提取、代码块、引用其他变量）
+- 「[数据采集](/components/general-components/data-collection)」节点自动产出的数据集
+- 「[等待 HTTP](/components/network-components/wait-http)」节点抓取到的响应数据
+- 「[发送 HTTP](/components/network-components/send-http)」节点的返回结果
+
+变量在声明它的节点**之后**的所有位置可见。分支内部用「局部变量」限定作用域，分支外部不可见。
+
+---
+
+## 算术运算
+
+```
+price = 100, quantity = 3
+
+{{price + 10}}         → 110
+{{price - 10}}         → 90
+{{price * quantity}}   → 300
+{{price / 3}}          → 33.333...
+{{score % 10}}         → 6       (score = 96)
+{{base ** 2}}          → 16      (base = 4)
+```
+
+:::caution
+`+` 既是加法也是字符串拼接。如果变量实际值是字符串——比如 `count = "1"`，那么 `{{count + 1}}` 结果是 `"11"` 而非 `2`。在「设置变量」节点中确保类型选的是「数字」。
+:::
+
+---
+
+## 比较运算
+
+比较运算输出 `true` 或 `false`，常用于「[条件分支](/components/flow-control/condition-branch)」节点：
+
+```
+score = 75
+
+{{score > 60}}         → true
+{{score < 60}}         → false
+{{score >= 60}}        → true
+{{score <= 60}}        → false
+
+
+status = 'ok'
+
+{{status === 'ok'}}    → true
+{{status !== 'ok'}}    → false
+{{status == 'ok'}}     → true
+{{status != 'ok'}}     → false
+```
+
+> 推荐使用 `===` 和 `!==`（严格比较），避免隐式类型转换的意外结果。
+
+---
+
+## 逻辑运算
+
+逻辑运算支持短路求值：`&&` 遇到假值就停，`||` 遇到真值就停，后面的不计算。
+
+```
+isActive = true, count = 10
+
+{{isActive && count > 5}}    → true
+{{isActive && count < 5}}    → false
+
+
+isExpired = false, isCancelled = true
+
+{{isExpired || isCancelled}} → true
+{{isExpired || false}}       → false
+```
+
+### 取反运算
+
+`!` 放在表达式前面，对布尔值取反。`!!` 双取反常用于把任意值强制转为布尔值。
+
+```
+isEmpty = false, score = 80
+
+{{!isEmpty}}                 → true
+{{!isActive}}                → false      (isActive = true)
+{{!(score < 60)}}            → true       (score < 60 是 false，取反得到 true)
+{{!!score}}                  → true       (数字非零，双取反 → true)
 ```
 
 ---
 
-## 变量作用域
+## 属性访问
 
-| 作用域 | 声明方式 | 可见范围 |
-|--------|----------|----------|
-| 全局变量 | 设置变量节点（默认） | 当前流程所有节点 |
-| 局部变量 | 设置变量节点（局部模式） | 仅当前分支内可见 |
-| 节点自动产出 | 数据采集、等待 HTTP 等 | 从产出位置起全局可见 |
+用点号访问对象属性，用方括号访问数组元素或动态属性名：
+
+```
+user = { name: 'Alice', profile: { city: '北京' } }
+
+{{user.name}}              → "Alice"
+{{user.profile.city}}      → "北京"
+
+
+list = ['A', 'B', 'C']
+
+{{list[0]}}                → "A"
+{{list[1]}}                → "B"
+
+
+index = 2
+
+{{list[index]}}            → "C"
+```
+
+属性不存在时输出 `undefined`，在混合文本中表现为空字符串。
 
 ---
 
-## 支持的操作
+## 三元运算
 
-变量表达式底层基于 [jsep](https://github.com/EricSmekens/jsep) 解析引擎，支持完整的 JavaScript 表达式语义。
-
-### 算术运算
+条件判断的简写，`条件 ? 真值 : 假值`：
 
 ```
-{{price * quantity}}
-{{total / 100}}
-{{score % 10}}
-{{base ** 2}}
+score = 75
+
+{{score >= 60 ? '及格' : '不及格'}}   → "及格"
+
+
+count = 0
+
+{{count > 0 ? count : '无'}}          → "无"
+
+
+isVip = true
+
+{{isVip ? 'VIP用户' : '普通用户'}}     → "VIP用户"
 ```
 
-### 比较运算
-
-```
-{{score >= 60}}
-{{status === 'ok'}}
-{{count !== 0}}
-```
-
-### 逻辑运算
-
-```
-{{isActive && count > 5}}
-{{isExpired || isCancelled}}
-{{!isEmpty}}
-```
-
-### 属性访问
-
-支持点号和方括号访问对象属性及数组元素：
-
-```
-{{user.name}}
-{{user.profile.city}}
-{{list[0]}}
-{{list[index]}}
-```
-
-### 三元运算
-
-```
-{{score >= 60 ? '及格' : '不及格'}}
-```
+三元表达式输出什么类型取决于真值/假值的类型。例如 `{{a > 0 ? a : 0}}` 输出数字，`{{a > 0 ? '有' : '无'}}` 输出字符串。
 
 ---
 
 ## 内置函数
 
-以下函数可在表达式中直接调用，无需声明。
-
-| 函数 | 参数 | 返回值 | 说明 |
-|------|------|--------|------|
-| `getPageUrl()` | 无 | string | 当前页面完整 URL |
-| `getUUID()` | 无 | string | 生成 UUID v4 |
-| `getTimeStamp()` | 无 | number | 当前时间戳（毫秒） |
-| `random(min, max)` | number, number | number | 生成 [min, max] 范围内的随机整数 |
-
-**示例**：
+以下函数可在表达式中直接调用，无需声明：
 
 ```
-{{getPageUrl()}}
-{{getUUID()}}
-{{random(1000, 9999)}} 
+{{getPageUrl()}}               → "https://example.com/orders"
+{{getUUID()}}                  → "550e8400-e29b-41d4-a716-446655440000"
+{{getTimeStamp()}}             → 1718123456789
+{{random(1000, 9999)}}         → 5842          (随机整数)
+{{Number('123')}}              → 123           (字符串转数字)
+{{String(456)}}                → "456"         (数字转字符串)
+```
+
+`Number` 和 `String` 常用于类型转换——比如「设置变量」节点产出的值是字符串，但后续需要参与算术运算，用 `Number` 转一下即可：
+
+```
+count = '10'  (字符串)
+
+{{count + 1}}          → "101"  (字符串拼接，不是你想要的)
+{{Number(count) + 1}}  → 11     (先转数字再加，正确)
+```
+
+内置函数可像普通变量一样参与运算：
+
+```
+{{getTimeStamp() + 60000}}                  → 1718123516789
+{{'当前页面：' + getPageUrl()}}                → "当前页面：https://..."
+{{random(0, 100) >= 50 ? '通过' : '未通过'}}  → "通过" 或 "未通过"
 ```
 
 ---
-
-
 
 ## 常见问题
 
@@ -133,16 +243,16 @@ sidebar_position: 2
 **解决**：按 JSON 的正常写法使用变量：
 
 ```json
-// ✅ 字符串变量需要引号
+// 字符串变量需要引号
 {"name": "{{username}}"}        → {"name": "Alice"}
 
-// ✅ 数字变量不需要引号
+// 数字变量不需要引号
 {"count": {{total}}}            → {"count": 5}
 
-// ✅ 布尔值不需要引号
+// 布尔值不需要引号
 {"active": {{isActive}}}        → {"active": true}
 
-// ❌ 字符串变量不加引号 → 不合法 JSON
+// 错误：字符串变量不加引号 → 不合法 JSON
 {"name": {{username}}}          → {"name": Alice}
 ```
 
