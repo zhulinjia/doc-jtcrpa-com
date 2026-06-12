@@ -48,6 +48,20 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ['zh', 'en'],
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: '/',
+      },
+    ],
+  ],
+
   themeConfig: {
     image: 'img/image.png',
     colorMode: {

@@ -12,7 +12,7 @@ sidebar_position: 0
 - **开箱即用**：拖拽节点、连连线、点执行，三步搭出一个自动化流程。就像搭积木一样简单。
 - **浏览器原生体验**：作为浏览器扩展，直接运行在你正在操作的网页上，无需安装额外软件，也不受跨域限制。
 
-本页带你完成安装和第一个工作流，大约需要 **5 分钟**。
+本页带你完成安装。安装后跳到「[创建第一个工作流](/first-workflow)」，5 分钟跑通第一个自动化流程。
 
 ---
 
@@ -59,59 +59,7 @@ sidebar_position: 0
 
 ## 2. 创建第一个工作流
 
-打开插件主面板，点击「新建流程」进入画布编辑界面。
-
-<div style={{maxWidth: 640, margin: '0 auto'}}>
-  <div style={{position: 'relative', paddingBottom: '56.25%', height: 0}}>
-    <iframe
-      src="//player.bilibili.com/player.html?isOutside=true&aid=116683943447316&bvid=BV1ouV26fEGA&cid=38816254301&p=1&autoplay=0"
-      scrolling="no"
-      frameBorder="no"
-      allowFullScreen={true}
-      style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
-    />
-  </div>
-</div>
-
-### 示例：打开网页并采集数据
-
-**步骤一：添加触发节点**
-
-从左侧节点库拖入「[手动执行](/components/triggers/manual-execute)」触发器到画布，作为流程入口。
-
-**步骤二：打开目标网页**
-
-拖入「[打开网页](/components/browser-control/open-page)」节点（位于「浏览器控制」分类），连接到触发器。在配置面板中输入目标 URL，例如：
-
-```
-https://www.example.com
-```
-
-**步骤三：等待页面加载**
-
-拖入「[等待元素](/components/general-components/wait-element)」节点（位于「通用组件」分类），在「目标元素」输入框中点击 🤖 切到 [AI 模式](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)，描述你等待出现的元素即可：
-
-```
-页面标题
-```
-
-> 也可以直接写 CSS 选择器，比如 `h1`。但对于新手，AI 模式更友好——你不需要懂任何 CSS 语法。
-
-**步骤四：采集页面数据**
-
-拖入「[数据采集](/components/general-components/data-collection)」节点（位于「通用组件」分类）。同样使用 [AI 模式](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)：用大白话描述你要提取的行和列，AI 自动帮你定位。
-
-例如你想采集一个商品列表，行描述写 `所有商品卡片`，列描述写 `商品名称`、`价格`、`销量` 即可，无需手写选择器。
-
-**步骤五：输出结果**
-
-拖入「[输出打印](/components/general-components/print-output)」节点（位于「通用组件」分类），连接到数据采集节点。它会把采集到的数据输出到日志面板。
-
-**步骤六：运行流程**
-
-连接所有节点后，点击顶部工具栏的「执行」按钮，流程随即开始运行。在下方日志面板查看实时执行状态和采集结果。
-
-> 完整流程：**手动执行 → 打开网页 → 等待元素 → 数据采集 → 输出打印**
+安装完成后，打开插件主面板，点击「新建流程」。接下来的步骤请见 **[创建第一个工作流](/first-workflow)**，从零开始搭一个完整的数据采集流程——全程用 AI 自然语言模式，不需要写 CSS 选择器。
 
 
 ---
