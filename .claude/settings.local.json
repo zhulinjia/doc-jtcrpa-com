@@ -33,7 +33,8 @@
       "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\docs\" -Recurse -Filter \"_category_.json\" | ForEach-Object { Write-Output \"--- $\\($_.FullName.Replace\\('C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\', ''\\)\\) ---\"; Get-Content $_.FullName; Write-Output \"\" })",
       "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\打开网页.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\数据清洗.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\添加处理方法.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\设置变量.png\" | Select-Object Name, Length, @{N='Dimensions';E={\\(New-Object -ComObject WScript.Shell\\).Exec\\(\"cmd /c dir `\"$\\($_.FullName\\)`\" 2>nul\"\\).StdOut.ReadAll\\(\\)}})",
       "PowerShell(Add-Type -AssemblyName System.Drawing; $images = @\\(\"打开网页\", \"数据清洗\", \"添加处理方法\", \"设置变量\"\\); foreach \\($name in $images\\) { $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\$name.png\"; if \\(Test-Path $path\\) { $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$name.png : $\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\) } })",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\关闭页面.png\"; $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\关闭页面.png\"; $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "PowerShell(git *)"
     ]
   }
 }

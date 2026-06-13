@@ -4,14 +4,14 @@ sidebar_position: 1
 
 # 创建第一个工作流
 
-本页带你从零开始搭建一个完整的数据采集流程——打开网页、等待加载、采集数据、输出结果。全程用 AI 自然语言模式，不需要写一行 CSS 选择器。
+本页带你从零开始搭建一个简单的数据采集流程——右键菜单触发、AI 自然语言采集数据。全程不需要写一行 CSS 选择器。
 
 打开插件主面板，点击「新建流程」进入画布编辑界面，开始搭建。
 
 <div style={{maxWidth: 640, margin: '0 auto'}}>
   <div style={{position: 'relative', paddingBottom: '56.25%', height: 0}}>
     <iframe
-      src="//player.bilibili.com/player.html?isOutside=true&aid=116683943447316&bvid=BV1ouV26fEGA&cid=38816254301&p=1&autoplay=0"
+      src="//player.bilibili.com/player.html?isOutside=true&aid=116741791353673&bvid=BV1tQJn6oEtS&cid=39085671097&p=1&autoplay=0"
       scrolling="no"
       frameBorder="no"
       allowFullScreen={true}
@@ -22,50 +22,48 @@ sidebar_position: 1
 
 ---
 
-## 示例：打开网页并采集数据
+## 示例：右键菜单触发数据采集
 
 ### 步骤一：添加触发节点
 
-从左侧节点库拖入「[手动执行](/components/triggers/manual-execute)」触发器到画布，作为流程入口。
+从左侧节点库拖入「[右键菜单](/components/triggers/context-menu)」触发器到画布，作为流程入口。
 
-### 步骤二：打开目标网页
+### 步骤二：添加数据采集节点
 
-拖入「[打开网页](/components/browser-control/open-page)」节点（位于「浏览器控制」分类），连接到触发器。在配置面板中输入目标 URL：
+拖入「[数据采集](/components/general-components/data-collection)」节点（位于「通用组件」分类），连接到右键菜单触发器。
+
+在配置面板中点击 🤖 切换到 [AI 自然语言模式](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)，用大白话描述你要提取的行和列，让 AI 帮你定位元素。
+
+本示例以「小说排行榜」页面为例，采集排行榜中的小说信息。
+
+#### 获取行
+
+在「行描述」输入框中写入：
 
 ```
-https://www.example.com
+帮我们找出【小说排行榜】中【每一项小说卡片】的所有元素根节点
 ```
 
-### 步骤三：等待页面加载
+输入完成后，点击输入框左侧的 **发送按钮**，AI 才会开始解析你的描述并定位元素。AI 寻址完成后，可以点击 **预览按钮** 确认高亮的行元素是否覆盖了所有小说卡片，确保范围正确。
 
-拖入「[等待元素](/components/general-components/wait-element)」节点（位于「通用组件」分类）。在「目标元素」输入框中点击 🤖 切到 [AI 模式](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)，描述你等待出现的元素：
+#### 获取列
 
-```
-页面标题
-```
+依次添加以下列，每写一列都记得点击发送按钮触发 AI 寻址：
 
-> 也可以直接写 CSS 选择器，比如 `h1`。但对于新手，AI 模式更友好——你不需要懂任何 CSS 语法。
+| 列名 | 描述 |
+| :--- | :--- |
+| 小说名称 | `获取【小说名称】` |
+| 小说作者 | `获取【小说作者】` |
+| 小说类型 | `获取【小说类型】，它位于【小说作者】下方` |
+| 小说封面图 | `获取【小说封面图】` |
 
-### 步骤四：采集页面数据
+> 对于「小说封面图」这一列，需要在「输出属性」中将默认的「文本内容提取」改为 **「属性值提取」**，属性名填写 `src`，这样才能拿到图片地址而非空文本。
 
-拖入「[数据采集](/components/general-components/data-collection)」节点（位于「通用组件」分类）。同样使用 [AI 模式](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)：用大白话描述你要提取的行和列，AI 自动帮你定位。
+所有列配置完成后，建议点击预览按钮整体检查一遍，确认每一列取到的内容都符合预期。无需手写任何 CSS 选择器。
 
-例如你想采集一个商品列表：
+### 步骤三：运行流程
 
-- 行描述写 `所有商品卡片`
-- 列描述写 `商品名称`、`价格`、`销量`
-
-无需手写选择器。
-
-### 步骤五：输出结果
-
-拖入「[打印输出](/components/general-components/print-output)」节点（位于「通用组件」分类），连接到数据采集节点。它会把采集到的数据输出到日志面板。
-
-### 步骤六：运行流程
-
-连接所有节点后，点击顶部工具栏的「执行」按钮，流程随即开始运行。在下方日志面板查看实时执行状态和采集结果。
-
-> 完整流程：**手动执行 → 打开网页 → 等待元素 → 数据采集 → 打印输出**
+连接两个节点（**右键菜单 → 数据采集**）后，点击顶部工具栏的「保存」按钮保存流程。之后在小说排行榜页面上右键即可触发该工作流，在下方日志面板查看采集结果。
 
 ---
 
@@ -75,4 +73,5 @@ https://www.example.com
 
 - 浏览「[功能组件索引](/components)」了解所有可用节点
 - 深入「[元素选择器](/core-concepts/css-selectors)」了解 AI 自然语言模式的所有用法
-- 试试其他触发器——[右键菜单](/components/triggers/context-menu)、[快捷键](/components/triggers/keyboard-shortcut)、[定时任务](/components/triggers/scheduled-trigger)，让流程以不同方式启动
+- 试试其他触发器——[手动执行](/components/triggers/manual-execute)、[快捷键](/components/triggers/keyboard-shortcut)、[定时任务](/components/triggers/scheduled-trigger)，让流程以不同方式启动
+- 了解「[数据采集](/components/general-components/data-collection)」节点的更多高级配置
