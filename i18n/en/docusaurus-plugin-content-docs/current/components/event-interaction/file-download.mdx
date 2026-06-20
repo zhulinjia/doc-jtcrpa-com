@@ -1,0 +1,29 @@
+---
+sidebar_position: 11
+description: Download a file from a specified URL. Supports a custom save filename.
+---
+
+# File Download
+
+The File Download node downloads a file from a specified URL to the local machine.
+
+## Overview
+
+After providing the download URL, the node automatically initiates the download. You can optionally specify a save filename (supports relative directories); if left empty, the server-returned original filename is used.
+
+<a href="/img/下载文件.png" target="_blank"><img src="/img/下载文件.png" alt="File Download" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "File Download" node onto the canvas
+2. Fill in "Download URL" (required), e.g., `https://example.com/file.pdf`
+3. Optionally fill in "Save Filename": provide just a filename to save to the default directory (e.g., `report.pdf`); provide a relative path to save to a specific subdirectory (e.g., `downloads/report.pdf`)
+4. Execute
+
+## FAQ
+
+### Downloaded filename is not what was expected
+
+The downloaded file's name is not the custom name specified.
+
+**Solution**: Provide the desired filename (including extension) in "Save Filename," e.g., `report.pdf`.

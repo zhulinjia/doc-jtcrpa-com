@@ -1,0 +1,488 @@
+---
+sidebar_position: 2
+sidebar_label: CSS Selector Tutorial
+---
+
+# CSS Selector Tutorial
+
+This tutorial is aimed at complete beginners. Starting from opening DevTools, you'll gradually master the ability to precisely locate any element on a page using CSS selectors.
+
+---
+
+## What is a CSS Selector
+
+A CSS selector is a set of **locating rules** that tells the browser "which element on the page I want to work with." Nearly every JTC RPA node that needs to interact with the page (click, input, scrape...) depends on selectors to specify its target.
+
+Think of it this way: the page is a building, each button, input field, and text paragraph is a room in the building, and CSS selectors are the room numbers.
+
+---
+
+## Step 1: Open DevTools
+
+| Method | Action |
+|--------|--------|
+| Keyboard shortcut | Press `F12` (Windows) / `Cmd+Option+I` (Mac) |
+| Right-click menu | Right-click anywhere on the page → select "Inspect" |
+| Browser menu | Top-right `⋮` → More Tools → Developer Tools |
+
+Once open, you'll primarily use two panels:
+
+- **Elements**: Shows the page's HTML structure tree
+- **Console**: Enter commands to test selectors
+
+:::note[Screenshot needed]
+A screenshot of the overall DevTools interface with arrows pointing to the Elements panel and Console panel.
+:::
+
+Click the **selector icon** in the top-left of the Elements panel (a small square with an arrow, shortcut `Ctrl+Shift+C`), then hover over any element on the page — that element will be highlighted. Click it and the Elements panel jumps to the corresponding HTML code. This is the fastest way to understand a page's structure.
+
+:::note[Screenshot needed]
+A screenshot showing the dynamic effect of hovering over elements with the selector icon active.
+:::
+
+### The Simplest Method: Search in the Elements Panel
+
+If you don't want to write code, the most direct approach is to **press `Ctrl+F` in the Elements panel to open the search box** and directly enter a selector to find elements.
+
+This search box supports three types of input:
+
+| What You Type | Matching Method | Example |
+|---------------|-----------------|---------|
+| CSS Selector | Find by selector syntax | `div.card`, `#submit`, `[data-id]` |
+| XPath | Auto-detected when starting with `//` or `/` | `//div[@class='card']` |
+| Plain Text | Matches any text in the HTML source | `order`, `submit` |
+
+:::note[Screenshot needed]
+A screenshot showing `Ctrl+F` opened in the Elements panel with `div.card` entered and matched results highlighted.
+:::
+
+**Example**: On any webpage, open DevTools → Elements panel → `Ctrl+F` → enter `[type="submit"]` → press Enter. Matched elements are highlighted in the HTML tree, and the search box shows the match count (e.g., "1 of 3").
+
+**Limitation**: This search box only supports native browser CSS selectors. It does not support JTC RPA's custom pseudo-classes (`:contains`, `:shadow`, `:col`, etc.). Custom pseudo-classes need to be verified in the Console using `$query()`. However, as a quick tool for verifying standard selectors, it's more intuitive than the Console — matches are highlighted directly in the HTML tree at a glance.
+
+---
+
+## Step 2: Precise Verification in the Console
+
+Test your selectors anytime in the Console panel:
+
+```javascript
+// Returns the first matched element (expandable to view details)
+document.querySelector('your selector')
+
+// Returns a list of all matched elements
+document.querySelectorAll('your selector')
+
+// JTC RPA specific — supports custom pseudo-classes like :contains, :shadow, etc.
+$query('your selector')
+```
+
+**Try it**: Enter `document.querySelectorAll('a')` — you'll see all links on the page.
+
+:::note[Screenshot needed]
+A screenshot showing the result of running `document.querySelectorAll('a')` in the Console.
+:::
+
+---
+
+## Step 3: Learning Selectors from Scratch
+
+For each selector type below, corresponding HTML code is shown alongside, with annotations indicating which elements are selected (✅) and which are not (❌).
+
+---
+
+### Tag Selector
+
+Matches by HTML tag name directly, **selecting all elements with that tag on the page**.
+
+**Selector**: `a`
+
+```html
+<a href="/" class="nav-link active">Home</a>             ✅
+<a href="/products" class="nav-link">Products</a>        ✅
+<a href="/about" class="nav-link">About</a>              ✅
+<button type="submit">Login</button>                     ❌ Not <a>
+<input type="text" />                                    ❌ Not <a>
+```
+
+**Selector**: `input`
+
+```html
+<input type="text" name="username" />                    ✅
+<input type="password" name="password" disabled />        ✅
+<input type="checkbox" name="remember" checked />         ✅
+<button type="submit">Login</button>                     ❌ Not <input>
+<label>Username</label>                                   ❌ Not <input>
+```
+
+---
+
+### Class Selector
+
+Matches by `class` attribute. Prefix the class name with `.`. If an element has multiple classes, matching any one counts.
+
+**Selector**: `.nav-link`
+
+```html
+<a href="/" class="nav-link active">Home</a>             ✅ Has nav-link
+<a href="/products" class="nav-link">Products</a>        ✅ Has nav-link
+<a href="/about" class="nav-link">About</a>              ✅ Has nav-link
+<button class="btn btn-primary">Login</button>           ❌ No nav-link
+<div class="form-group">...</div>                        ❌ No nav-link
+```
+
+**Selector**: `.btn`
+
+```html
+<button class="btn btn-primary">Login</button>           ✅ Has btn
+<button class="btn btn-secondary">Reset</button>         ✅ Has btn
+<a class="nav-link active">Home</a>                      ❌ No btn
+<div class="form-group">...</div>                        ❌ No btn
+```
+
+**Mnemonic**: `class="xxx"` uses `.xxx` (dot), `id="xxx"` uses `#xxx` (hash).
+
+---
+
+### ID Selector
+
+Matches by the `id` attribute. Prefix the ID with `#`. IDs must be unique within the page, so an ID selector matches at most one element.
+
+**Selector**: `#product-list`
+
+```html
+<ul id="product-list">                                   ✅ id is exactly product-list
+  <li>Laptop</li>
+  <li>Wireless Mouse</li>
+  <li>Mechanical Keyboard</li>
+</ul>
+<form id="login-form">...</form>                         ❌ id is not product-list
+<div id="app">...</div>                                  ❌ id is not product-list
+```
+
+---
+
+### Attribute Selector
+
+Matches based on any HTML attribute, wrapped in square brackets `[]`.
+
+#### Check if an attribute exists: `[attributeName]`
+
+**Selector**: `[disabled]`
+
+```html
+<input type="password" disabled />                       ✅ Has disabled attribute
+<input type="text" name="username" />                    ❌ No disabled
+<input type="checkbox" checked />                        ❌ Has checked but no disabled
+<button>Login</button>                                   ❌ No disabled
+```
+
+#### Attribute equals a value: `[attr="value"]`
+
+**Selector**: `[type="checkbox"]`
+
+```html
+<input type="checkbox" name="remember" checked />         ✅ type equals checkbox
+<input type="text" name="username" />                    ❌ type is text, not checkbox
+<input type="password" name="password" />                ❌ type is password, not checkbox
+```
+
+#### Attribute starts with a value: `[attr^="value"]`
+
+**Selector**: `[src^="/images"]`
+
+```html
+<img src="/images/logo.png" alt="Logo" />                ✅ src starts with /images
+<img src="https://cdn.example.com/photo.jpg" />          ❌ src starts with https
+```
+
+#### Attribute ends with a value: `[attr$="value"]`
+
+**Selector**: `[src$=".png"]`
+
+```html
+<img src="/images/logo.png" alt="Logo" />                ✅ src ends with .png
+<img src="https://cdn.example.com/photo.jpg" />          ❌ src ends with .jpg
+```
+
+#### Attribute contains a value: `[attr*="value"]`
+
+**Selector**: `[class*="btn"]`
+
+```html
+<button class="btn btn-primary">Login</button>           ✅ class contains "btn"
+<button class="btn btn-secondary">Reset</button>         ✅ class contains "btn"
+<a class="nav-link active">Home</a>                      ❌ class does not contain "btn"
+```
+
+---
+
+### Relational Selectors: Locating by DOM Hierarchy
+
+HTML elements form a nested tree structure. Relational selectors use parent-child and sibling relationships for precise targeting.
+
+:::note[Screenshot needed]
+A DOM tree diagram with parent-child and sibling relationships labeled, with arrows explaining the match scope of the four relational selectors.
+:::
+
+#### Descendant Selector (space) — No matter how deep
+
+Separate two selectors with a space to find the second one at **any depth** inside the first.
+
+**Selector**: `form input`
+
+```html
+<form>
+  <div class="form-group">
+    <input type="text" name="username" />                 ✅ Inside <form> (nested in <div>)
+    <label>...</label>                                    ❌ Not <input>
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" />             ✅ Inside <form> (nested in <div>)
+  </div>
+  <input type="checkbox" name="remember" />               ✅ Inside <form> (direct child)
+</form>
+<input type="text" name="outside" />                     ❌ Not inside <form>
+```
+
+**Note**: The `<input type="text">` is nested inside a `<div>`, one level away from `<form>`, but **the descendant selector doesn't care about depth — it's still selected**.
+
+#### Child Selector (>) — Direct children only
+
+Only matches **direct children**. Grandchildren one level deeper are not selected.
+
+**Selector**: `form > input`
+
+```html
+<form>
+  <div class="form-group">
+    <input type="text" name="username" />                 ❌ Not a direct child of form (parent is div)
+  </div>
+  <input type="checkbox" name="remember" />               ✅ Direct child of form
+</form>
+```
+
+**Descendant `form input` vs. Child `form > input`**:
+
+```
+form input   → ✅ <input type="text">  ✅ <input type="password">  ✅ <input type="checkbox">
+form > input → ❌ <input type="text">  ❌ <input type="password">  ✅ <input type="checkbox">
+                          ↑ These two are wrapped in a div, not direct children of form
+```
+
+#### Adjacent Sibling Selector (+) — Only the immediately following one
+
+Matches the **first** sibling element **immediately** after the target.
+
+**Selector**: `label + input`
+
+```html
+<div class="form-group">
+  <label class="form-label">Username</label>
+  <input type="text" name="username" />                   ✅ Immediately after <label>
+</div>
+<div class="form-group">
+  <label class="form-label">Password</label>
+  <input type="password" name="password" />               ✅ Immediately after <label>
+  <span>Hint text</span>                                  ❌ Preceded by <input>, not <label>
+</div>
+<div class="form-group">
+  <input type="checkbox" name="remember" />               ❌ Preceded by <div>, not <label>
+</div>
+```
+
+#### General Sibling Selector (~) — All subsequent siblings
+
+Matches **all** siblings after the target element (not necessarily adjacent).
+
+**Selector**: `.active ~ .nav-link`
+
+```html
+<a href="/" class="nav-link active">Home</a>              ← It is .active itself, doesn't count
+<a href="/products" class="nav-link">Products</a>         ✅ After .active
+<a href="/about" class="nav-link">About</a>               ✅ After .active
+```
+
+---
+
+### Pseudo-Class Selectors
+
+Pseudo-classes don't rely on tag names and attributes, but on the element's **state** — whether it's the Nth child, whether it's checked, whether it's disabled.
+
+**Position pseudo-classes**:
+
+```html
+<ul id="product-list">
+  <li class="product-item" data-id="1001">Laptop</li>        ← 1st
+  <li class="product-item" data-id="1002">Mouse</li>         ← 2nd
+  <li class="product-item" data-id="1003">Keyboard</li>      ← 3rd
+</ul>
+```
+
+| Selector | Selected | Not Selected |
+|----------|----------|--------------|
+| `li:first-child` | Laptop (1st) | Mouse, Keyboard |
+| `li:last-child` | Keyboard (last) | Laptop, Mouse |
+| `li:nth-child(2)` | Mouse (2nd) | Laptop, Keyboard |
+| `li:nth-child(odd)` | Laptop, Keyboard (1st, 3rd) | Mouse (2nd) |
+| `li:nth-child(even)` | Mouse (2nd) | Laptop, Keyboard |
+
+**State pseudo-classes**:
+
+```html
+<input type="checkbox" name="remember" checked />         ← Checked
+<input type="password" name="password" disabled />         ← Disabled
+<input type="text" name="username" />                     ← Normal state
+```
+
+| Selector | Selected | Not Selected |
+|----------|----------|--------------|
+| `input:checked` | The checked checkbox | Password field, username field |
+| `input:disabled` | The disabled password field | Checkbox, username field |
+
+**Negation pseudo-class**:
+
+```html
+<a href="/" class="nav-link active">Home</a>              ← Has active class
+<a href="/products" class="nav-link">Products</a>         ← No active class
+<a href="/about" class="nav-link">About</a>               ← No active class
+```
+
+| Selector | Selected | Not Selected |
+|----------|----------|--------------|
+| `a:not(.active)` | Products, About | Home |
+
+---
+
+### Combining Selectors
+
+Stringing together what you've learned.
+
+```html
+<nav class="navbar">
+  <a href="/" class="nav-link active">Home</a>
+  <a href="/products" class="nav-link">Products</a>
+  <a href="/about" class="nav-link">About</a>
+</nav>
+<form id="login-form">
+  <input type="text" name="username" />
+  <input type="password" name="password" disabled />
+  <input type="checkbox" name="remember" checked />
+</form>
+```
+
+| Selector | Selected | Not Selected |
+|----------|----------|--------------|
+| `nav a.nav-link:not(.active)` | Products, About (inside nav, has nav-link, no active) | Home (has active) |
+| `form input:not([disabled])` | Username field, checkbox (inside form, not disabled) | Password field (disabled) |
+| `input[type="checkbox"]:checked` | Checkbox (is checkbox and checked) | Username field, password field |
+
+---
+
+## Advanced: Real-World Page Scenarios
+
+The following 3 scenarios are based on common structures on real web pages. Remember one principle: **good selectors rely on semantics (class, attribute), not position (the Nth div)**.
+
+---
+
+### Scenario 1: Select Only Top-Level Menu Items, Not Sub-Menus
+
+Navigation menus often contain nested second- and third-level sub-menus. When you only want to target top-level menu items, use `>` to constrain to direct children.
+
+**Selector**: `.menu > .menu-item`
+
+```html
+<ul class="menu">
+  <li class="menu-item">Home</li>            ✅ Direct child of .menu
+  <li class="menu-item">Products              ✅ Direct child of .menu
+    <ul class="submenu">
+      <li class="menu-item">Laptops</li>       ❌ Parent is submenu, one level removed
+      <li class="menu-item">Phones</li>        ❌ Same as above
+    </ul>
+  </li>
+  <li class="menu-item">About</li>            ✅ Direct child of .menu
+</ul>
+```
+
+> Using `.menu .menu-item` (space) would select all 5 `<li>` elements. Adding `>` narrows it to just the 3 top-level items.
+
+---
+
+### Scenario 2: Exclude Sold-Out Products
+
+In an e-commerce listing, sold-out products have a `disabled` attribute on their purchase button. You want to skip them and only collect purchasable products.
+
+**Selector**: `li:not(:has([disabled])) .title`
+
+```html
+<li>                                             ← Contains a disabled button
+  <span class="title">Laptop</span>               ❌ Parent li is excluded
+  <button disabled>Sold Out</button>
+</li>
+<li>                                             ← Button is normal
+  <span class="title">Mouse</span>                ✅ Parent li passes
+  <button>Buy</button>
+</li>
+<li>                                             ← Button is normal
+  <span class="title">Keyboard</span>             ✅ Parent li passes
+  <button>Buy</button>
+</li>
+```
+
+> `:has([disabled])` finds `<li>` elements "containing an element with a disabled attribute," then `:not()` excludes them. The result matches "Mouse" and "Keyboard."
+
+---
+
+### Scenario 3: Select Only Clickable Page Numbers in a Paginator
+
+A paginator's current page number is not clickable, the ellipsis doesn't need to be interacted with, and the rest are clickable page numbers.
+
+**Selector**: `.page-item:not(.current):not(.ellipsis)`
+
+```html
+<a class="page-item prev">Previous</a>      ✅
+<a class="page-item">1</a>                  ✅
+<span class="page-item current">2</span>    ❌ Has current
+<a class="page-item">3</a>                  ✅
+<span class="page-item ellipsis">…</span>   ❌ Has ellipsis
+<a class="page-item next">Next</a>          ✅
+```
+
+> Two `:not()` chained together — "not current AND not ellipsis" — leaving 4 clickable items.
+
+---
+
+## You Might Encounter These Issues
+
+### The Selector Is Correct but "Element Not Found"
+
+1. **Element hasn't loaded yet**: The page renders with a delay — add a [Wait Element](../components/general-components/wait-element) node before the operation.
+2. **Element is inside an iframe**: Check with the inspector; if it's inside an `<iframe>`, use the [Switch iframe](../components/browser-control/switch-iframe) node first.
+3. **Shadow DOM**: The element is under `#shadow-root`; use `:shadow` to penetrate (JTC RPA specific).
+4. **Dynamic class names**: Random names like `css-1a2b3c` change on every refresh — don't use them as selectors.
+
+### The Selector Is Too Fragile
+
+```css
+/* ❌ Brittle — breaks at the slightest page structure change */
+body > div:nth-child(3) > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(5)
+
+/* ✅ Robust — relies only on semantics, not physical position */
+td:col('Price')
+```
+
+---
+
+## Advanced: JTC RPA Custom Pseudo-Classes
+
+After mastering the standard selectors above, learn about JTC RPA's 8 custom pseudo-classes (`:shadow`, `:contains`, `:col`, `:in-viewport`, etc.). See **[Element Selectors (Core Concepts)](/core-concepts/css-selectors)** for details.
+
+---
+
+## Authoritative References
+
+- [MDN CSS Selectors Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors) — Official Mozilla tutorial
+- [MDN CSS Selectors Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators) — Complete list of all selectors
+- [Chrome DevTools Official Documentation](https://developer.chrome.com/docs/devtools) — Official Google DevTools tutorial
+- [Chrome DevTools Console Guide](https://developer.chrome.com/docs/devtools/console) — Detailed Console panel usage
+- [W3C Selectors Level 4 Specification](https://www.w3.org/TR/selectors-4/) — W3C International Standard

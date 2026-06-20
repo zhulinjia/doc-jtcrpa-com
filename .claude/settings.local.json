@@ -34,7 +34,31 @@
       "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\打开网页.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\数据清洗.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\添加处理方法.png\", \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\设置变量.png\" | Select-Object Name, Length, @{N='Dimensions';E={\\(New-Object -ComObject WScript.Shell\\).Exec\\(\"cmd /c dir `\"$\\($_.FullName\\)`\" 2>nul\"\\).StdOut.ReadAll\\(\\)}})",
       "PowerShell(Add-Type -AssemblyName System.Drawing; $images = @\\(\"打开网页\", \"数据清洗\", \"添加处理方法\", \"设置变量\"\\); foreach \\($name in $images\\) { $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\$name.png\"; if \\(Test-Path $path\\) { $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$name.png : $\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\) } })",
       "PowerShell(Add-Type -AssemblyName System.Drawing; $path = \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\\\\关闭页面.png\"; $img = [System.Drawing.Image]::FromFile\\($path\\); Write-Output \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
-      "PowerShell(git *)"
+      "PowerShell(git *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/en/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/components/general-components/wait-element)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/en/components/general-components/wait-element)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(curl -s http://localhost:3099/)",
+      "Bash(curl -s http://localhost:3099/en/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3099/en/components/general-components/wait-element)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3099/en/components/general-components/wait-element/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3099/components/general-components/wait-element)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3099/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3099/en/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3100/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3100/en/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3100/components/general-components/wait-element)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:3100/en/components/general-components/wait-element)",
+      "Bash(curl -s http://localhost:3100/en/core-concepts/variables)",
+      "Bash(pkill -f \"node\")",
+      "Bash(pkill -f \"docusaurus\")",
+      "Bash(curl -s http://localhost:3102/en/core-concepts/variables)",
+      "Bash(pkill -f node)",
+      "Bash(curl -s http://localhost:3099/components/general-components/wait-element)",
+      "Bash(curl -s http://localhost:3099/en/components/general-components/wait-element)",
+      "Bash(curl -s http://localhost:3099/en/core-concepts/variables)"
     ]
   }
 }

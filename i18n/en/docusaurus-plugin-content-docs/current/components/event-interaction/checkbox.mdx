@@ -1,0 +1,31 @@
+---
+sidebar_position: 7
+description: "Check or uncheck checkboxes and radio buttons. Supports three operations: check, uncheck, and toggle."
+---
+
+# Checkbox
+
+The Checkbox node operates on `<input type="checkbox">` and `<input type="radio">` elements, toggling their checked state.
+
+## Overview
+
+Three operations are supported: Check, Uncheck, and Toggle (invert the current state).
+
+If the selector points to a label or wrapper div, the node automatically finds the actual checkbox or radio element inside.
+
+<a href="/img/勾选选框.png" target="_blank"><img src="/img/勾选选框.png" alt="Checkbox" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Checkbox" node onto the canvas
+2. Fill in "Target Element" [CSS selector](../../core-concepts/css-selectors) (required), pointing to the target checkbox or radio
+3. Select the operation type: Check / Uncheck / Toggle
+4. Execute
+
+## FAQ
+
+### Checkbox is checked but associated UI doesn't change
+
+The checkbox is checked but the associated form section didn't expand or the button didn't activate.
+
+**Solution**: Add a [Trigger Event](./trigger-event) node after the Checkbox node to manually dispatch a `change` event.

@@ -1,0 +1,50 @@
+{
+  "link.title.文档": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=文档 in the footer"
+  },
+  "link.title.核心概念": {
+    "message": "Core Concepts",
+    "description": "The title of the footer links column with title=核心概念 in the footer"
+  },
+  "link.title.更多": {
+    "message": "More",
+    "description": "The title of the footer links column with title=更多 in the footer"
+  },
+  "link.item.label.介绍": {
+    "message": "Introduction",
+    "description": "The label of footer link with label=介绍 linking to /"
+  },
+  "link.item.label.快速上手": {
+    "message": "Quick Start",
+    "description": "The label of footer link with label=快速上手 linking to /quick-start"
+  },
+  "link.item.label.功能组件": {
+    "message": "Components",
+    "description": "The label of footer link with label=功能组件 linking to /components"
+  },
+  "link.item.label.元素选择器": {
+    "message": "Element Selectors",
+    "description": "The label of footer link with label=元素选择器 linking to /core-concepts/css-selectors"
+  },
+  "link.item.label.变量与表达式": {
+    "message": "Variables & Expressions",
+    "description": "The label of footer link with label=变量与表达式 linking to /core-concepts/variables"
+  },
+  "link.item.label.数据清理管道": {
+    "message": "Data Transform Pipeline",
+    "description": "The label of footer link with label=数据清理管道 linking to /core-concepts/data-transform"
+  },
+  "link.item.label.CSS 选择器教程": {
+    "message": "CSS Selector Tutorial",
+    "description": "The label of footer link with label=CSS 选择器教程 linking to /reference/css-selector-tutorial"
+  },
+  "link.item.label.URL 匹配模式": {
+    "message": "URL Match Patterns",
+    "description": "The label of footer link with label=URL 匹配模式 linking to /reference/match-patterns"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 JTC RPA. Built with Docusaurus.",
+    "description": "The footer copyright"
+  }
+}

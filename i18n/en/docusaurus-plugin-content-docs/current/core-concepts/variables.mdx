@@ -1,0 +1,266 @@
+---
+sidebar_position: 2
+sidebar_label: Variables & Expressions
+---
+
+# Variables & Expressions
+
+JTC RPA uses `{{ }}` double-brace syntax to dynamically reference variables and evaluate expressions within workflows. All node parameter input fields support this syntax.
+
+The expression engine is built on [jsep](https://github.com/EricSmekens/jsep) and is compatible with JavaScript expression semantics. This page details the **input** (what you write) and **output** (what you get at runtime) for each approach.
+
+---
+
+## Basic Rules
+
+### Two Modes
+
+`{{ }}` has two working modes, differing in whether the original type is preserved:
+
+**Pure expression** — the entire input field contains only a single `{{...}}`, and the result keeps its original type:
+
+```
+{{score}}          → 95          (number)
+{{score + 5}}      → 100         (number)
+{{isActive}}       → true        (boolean)
+```
+
+**Mixed text** — `{{ }}` embedded in regular text; all variable values are converted to strings and concatenated:
+
+```
+Total: {{count}}       → "Total: 10"        (string)
+Score: {{score}}/100   → "Score: 95/100"    (string)
+```
+
+> This is the most important rule: **pure expressions preserve the original type; mixed text always outputs a string.**
+
+### Supported Variable Types
+
+Variables in expressions can be any of the following types, with different output behaviors in the two modes:
+
+```
+Variable value        Pure expression output     Mixed text output
+─────────────────────────────────────────────────────────────────
+"Alice"              "Alice" (string)           "Alice"
+95                    95 (number)               "95"
+true                  true (boolean)            "true"
+{name: "Zhang"}       {name: "Zhang"}           JSON string
+[1, 2, 3]             [1, 2, 3]                "[1,2,3]"
+null                  null                      "(empty)"
+undefined             undefined                 "(empty)"
+```
+
+**Numbers, strings, and booleans** are preserved as-is in pure expressions and can continue participating in operations. Objects and arrays are serialized to JSON strings in mixed text. `null` and `undefined` appear as empty in mixed text.
+
+### Where Variables Come From
+
+Variable names in expressions are looked up from the context. The context is dynamically built during workflow execution from these sources:
+
+- Explicit declarations from the [Set Variable](/components/general-components/set-variable) node (supports manual input, page element extraction, code blocks, referencing other variables)
+- Datasets automatically produced by the [Data Collection](/components/general-components/data-collection) node
+- Response data captured by the [Wait HTTP](/components/network-components/wait-http) node
+- Return results from the [Send HTTP](/components/network-components/send-http) node
+
+A variable is visible at all positions **after** the node that declares it. Within branches, use "local variables" to limit scope — they are not visible outside the branch.
+
+---
+
+## Arithmetic Operations
+
+```
+price = 100, quantity = 3
+
+{{price + 10}}         → 110
+{{price - 10}}         → 90
+{{price * quantity}}   → 300
+{{price / 3}}          → 33.333...
+{{score % 10}}         → 6        (score = 96)
+{{base ** 2}}          → 16       (base = 4)
+```
+
+:::caution
+`+` is both addition and string concatenation. If the variable's actual value is a string — e.g., `count = "1"` — then `{{count + 1}}` results in `"11"` instead of `2`. Make sure the type is set to "Number" in the Set Variable node.
+:::
+
+---
+
+## Comparison Operations
+
+Comparison operations output `true` or `false`, commonly used in the [Condition Branch](/components/flow-control/condition-branch) node:
+
+```
+score = 75
+
+{{score > 60}}         → true
+{{score < 60}}         → false
+{{score >= 60}}        → true
+{{score <= 60}}        → false
+
+
+status = 'ok'
+
+{{status === 'ok'}}    → true
+{{status !== 'ok'}}    → false
+{{status == 'ok'}}     → true
+{{status != 'ok'}}     → false
+```
+
+> Prefer `===` and `!==` (strict comparison) to avoid unexpected results from implicit type conversion.
+
+---
+
+## Logical Operations
+
+Logical operations support short-circuit evaluation: `&&` stops at the first falsy value, `||` stops at the first truthy value; subsequent expressions are not evaluated.
+
+```
+isActive = true, count = 10
+
+{{isActive && count > 5}}    → true
+{{isActive && count < 5}}    → false
+
+
+isExpired = false, isCancelled = true
+
+{{isExpired || isCancelled}} → true
+{{isExpired || false}}       → false
+```
+
+### Negation
+
+`!` placed before an expression negates the boolean value. `!!` double negation is commonly used to coerce any value to a boolean.
+
+```
+isEmpty = false, score = 80
+
+{{!isEmpty}}                  → true
+{{!isActive}}                 → false      (isActive = true)
+{{!(score < 60)}}             → true       (score < 60 is false, negated → true)
+{{!!score}}                   → true       (non-zero number, double negation → true)
+```
+
+---
+
+## Property Access
+
+Use dot notation to access object properties, and bracket notation to access array elements or dynamic property names:
+
+```
+user = { name: 'Alice', profile: { city: 'Beijing' } }
+
+{{user.name}}              → "Alice"
+{{user.profile.city}}      → "Beijing"
+
+
+list = ['A', 'B', 'C']
+
+{{list[0]}}                → "A"
+{{list[1]}}                → "B"
+
+
+index = 2
+
+{{list[index]}}            → "C"
+```
+
+When a property does not exist, the output is `undefined`, which appears as an empty string in mixed text.
+
+---
+
+## Ternary Operations
+
+Shorthand for conditional logic: `condition ? truthy : falsy`:
+
+```
+score = 75
+
+{{score >= 60 ? 'Pass' : 'Fail'}}   → "Pass"
+
+
+count = 0
+
+{{count > 0 ? count : 'None'}}      → "None"
+
+
+isVip = true
+
+{{isVip ? 'VIP User' : 'Regular'}}  → "VIP User"
+```
+
+The output type of a ternary expression depends on the types of the truthy/falsy branches. For example, `{{a > 0 ? a : 0}}` outputs a number; `{{a > 0 ? 'Yes' : 'No'}}` outputs a string.
+
+---
+
+## Built-in Functions
+
+The following functions can be called directly in expressions without declaration:
+
+```
+{{getPageUrl()}}               → "https://example.com/orders"
+{{getUUID()}}                  → "550e8400-e29b-41d4-a716-446655440000"
+{{getTimeStamp()}}             → 1718123456789
+{{random(1000, 9999)}}         → 5842          (random integer)
+{{Number('123')}}              → 123           (string to number)
+{{String(456)}}                → "456"         (number to string)
+```
+
+`Number` and `String` are often used for type conversion — for example, when a Set Variable node produces a string value but later arithmetic is needed, use `Number` to convert it:
+
+```
+count = '10'  (string)
+
+{{count + 1}}          → "101"  (string concatenation — not what you want)
+{{Number(count) + 1}}  → 11     (convert to number first, then add — correct)
+```
+
+Built-in functions can participate in operations just like regular variables:
+
+```
+{{getTimeStamp() + 60000}}                       → 1718123516789
+{{'Current page: ' + getPageUrl()}}              → "Current page: https://..."
+{{random(0, 100) >= 50 ? 'Pass' : 'Fail'}}      → "Pass" or "Fail"
+```
+
+---
+
+## FAQ
+
+### Variable is referenced but shows as empty
+
+**Symptom**: Wrote `{{variableName}}` in a node parameter, but it replaces to empty at runtime.
+
+**Cause**: The variable was not declared before being referenced, or its scope doesn't match (e.g., referencing a branch-local variable outside the branch).
+
+**Solution**:
+1. Confirm the [Set Variable](/components/general-components/set-variable) node is positioned before the reference in the workflow order;
+2. Use a [Print Output](/components/general-components/print-output) node before the reference to print the variable value and confirm it exists with the correct type.
+
+### Using variables in JSON
+
+**Symptom**: Wrote variable expressions in a JSON configuration field, but got errors or unexpected results at runtime.
+
+**Cause**: Variable resolution in JSON matches normal JSON type declarations — the final value depends on what type the variable resolves to. String variables must be quoted; otherwise, the result is invalid JSON.
+
+**Solution**: Use variables following normal JSON syntax:
+
+```json
+// String variables need quotes
+{"name": "{{username}}"}        → {"name": "Alice"}
+
+// Number variables don't need quotes
+{"count": {{total}}}            → {"count": 5}
+
+// Booleans don't need quotes
+{"active": {{isActive}}}        → {"active": true}
+
+// Wrong: string variable without quotes → invalid JSON
+{"name": {{username}}}          → {"name": Alice}
+```
+
+### Expression result type doesn't match expectations
+
+**Symptom**: `{{count + 1}}` results in the string `"11"` instead of the number `2`.
+
+**Cause**: The variable `count`'s actual value is the string `"1"`, so the `+` operator performed string concatenation.
+
+**Solution**: Select the correct variable type (Number rather than String) when using the [Set Variable](/components/general-components/set-variable) node, ensuring upstream nodes produce variables of the expected type.

@@ -1,0 +1,24 @@
+---
+sidebar_position: 9
+description: Manually trigger JavaScript events on an element. 9 event types available. Some types support key or text parameters.
+---
+
+# Trigger Event
+
+The Trigger Event node manually dispatches events to an element, used to resolve cases where page events don't respond normally.
+
+## Overview
+
+Manually dispatches events to an element. 9 types are supported: Click, DblClick, Hover, Leave, Key Down, Blur, Change, Focus, Input.
+
+When selecting "Key Down," a key must be configured. When selecting "Change" or "Input," text content must be provided.
+
+<a href="/img/触发事件.png" target="_blank"><img src="/img/触发事件.png" alt="Trigger Event" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Trigger Event" node onto the canvas
+2. Fill in "Target Element" [CSS selector](../../core-concepts/css-selectors) (required)
+3. Select the event type (required), e.g., "Change"
+4. If "Key Down" is selected, configure the key; if "Change" or "Input" is selected, provide the text content
+5. Execute

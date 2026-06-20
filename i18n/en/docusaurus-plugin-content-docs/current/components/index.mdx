@@ -1,0 +1,126 @@
+---
+sidebar_position: 0
+sidebar_label: Components Index
+---
+
+# Components Index
+
+JTC RPA includes 6 modules with 60 functional nodes. Click each node name to jump to its detailed documentation.
+
+---
+
+## Triggers — How Workflows Start
+
+| Component | Description |
+|-----------|-------------|
+| [Manual Execute](./triggers/manual-execute) | Click the Run button to start |
+| [Context Menu](./triggers/context-menu) | Right-click on selected content to trigger |
+| [Keyboard Shortcut](./triggers/keyboard-shortcut) | Bind a key combination for one-press start |
+| [Scheduled Trigger](./triggers/scheduled-trigger) | Cron-based periodic auto-execution |
+| [Element Monitor](./triggers/element-monitor) | Trigger on DOM appearing/updating/disappearing |
+| [URL Match](./triggers/url-match) | Trigger on address bar changes |
+| [Network Intercept](./triggers/network-intercept) | Intercept XHR/Fetch requests |
+| [Signal Trigger](./triggers/signal-trigger) | Receive signals from other workflows |
+| [WebSocket Trigger](./triggers/websocket-trigger) | Server-side long-lived connection commands |
+| [SSE Trigger](./triggers/sse-trigger) | Server-side streaming event push |
+
+## Event Interactions — What You Can Do on the Page
+
+| Component | Description |
+|-----------|-------------|
+| [Click](./event-interaction/click) | Left/right/middle click, single and double |
+| [Hover](./event-interaction/hover) | Mouse hover to trigger menus |
+| [Text Input](./event-interaction/text-input) | Type character by character with simulated delay |
+| [Key Press](./event-interaction/key-press) | Keyboard events, supports key combos |
+| [Select Option](./event-interaction/select-option) | Dropdown and cascading selectors |
+| [Checkbox](./event-interaction/checkbox) | Checkbox/radio toggle |
+| [Form Submit](./event-interaction/form-submit) | Native submit or button click |
+| [Scroll](./event-interaction/scroll) | Simulated scroll wheel, three modes |
+| [Trigger Event](./event-interaction/trigger-event) | Manually dispatch JS events |
+| [File Upload](./event-interaction/file-upload) | Inject files bypassing security restrictions |
+| [File Download](./event-interaction/file-download) | Intercept downloads and save locally |
+| [Read Clipboard](./event-interaction/read-clipboard) | Read clipboard text |
+| [Write Clipboard](./event-interaction/write-clipboard) | Write text to clipboard |
+
+## Browser Control — Window & Tab Management
+
+| Component | Description |
+|-----------|-------------|
+| [Open Page](./browser-control/open-page) | Navigate to a specified URL |
+| [Open Window](./browser-control/open-window) | Create a new window, supports incognito mode |
+| [Close Window](./browser-control/close-window) | Close a specified window |
+| [Close Page](./browser-control/close-page) | Close the current tab |
+| [Refresh Page](./browser-control/refresh-page) | Normal or forced refresh |
+| [Replace Page](./browser-control/replace-page) | Silently replace the URL |
+| [Switch Window](./browser-control/switch-window) | Switch operation context to a specified window |
+| [Switch Page](./browser-control/switch-page) | Switch tabs by index or URL |
+| [Switch iframe](./browser-control/switch-iframe) | Enter an iframe for internal operations |
+| [Handle Dialog](./browser-control/handle-dialog) | Auto-respond to alert/confirm/prompt |
+| [Show Notification](./browser-control/show-notification) | Send a browser notification |
+| [Screenshot](./browser-control/capture-page) | Capture the visible page area |
+
+## Flow Control — Workflow Logic Orchestration
+
+| Component | Description |
+|-----------|-------------|
+| [Condition Branch](./flow-control/condition-branch) | if-else logic |
+| [Multi-Branch](./flow-control/multi-branch) | switch-case multi-path matching |
+| [Loop](./flow-control/loop) | Iterate over arrays or a fixed count |
+| [Converge](./flow-control/converge) | Merge multiple branch paths |
+| [Delay](./flow-control/delay) | Pause for a specified number of seconds |
+| [Call Flow](./flow-control/call-flow) | Nested execution of sub-workflows |
+| [Send Signal](./flow-control/send-signal) | Broadcast a signal to other workflows |
+| [Return](./flow-control/return) | Return results from a sub-workflow |
+
+## General Components — Data & Utilities
+
+| Component | Description |
+|-----------|-------------|
+| [Set Variable](./general-components/set-variable) | Declare or update context variables |
+| [Data Collection](./general-components/data-collection) | Extract element text/attributes/media |
+| [Wait Element](./general-components/wait-element) | Wait for a DOM element to appear/become visible |
+| [Wait Signal](./general-components/wait-signal) | Pause mid-workflow for an external signal |
+| [Execute Code](./general-components/execute-code) | Run custom JavaScript |
+| [Print Output](./general-components/print-output) | Output logs to the panel |
+| [Read File](./general-components/read-file) | Read local or remote files |
+
+## Network Components — HTTP Requests
+
+| Component | Description |
+|-----------|-------------|
+| [Wait HTTP](./network-components/wait-http) | Listen for and extract API response data |
+| [Send HTTP](./network-components/send-http) | Send requests directly, bypassing the UI |
+
+---
+
+## Recommendations by User Level
+
+### Getting Started
+
+Master these first — they cover 80% of daily tasks:
+
+1. [Manual Execute](./triggers/manual-execute) — Understand how workflows run
+2. [Open Page](./browser-control/open-page) — Navigate to target pages
+3. [Click](./event-interaction/click) — Click buttons and links
+4. [Text Input](./event-interaction/text-input) — Fill in forms
+5. [Data Collection](./general-components/data-collection) — Extract page content
+6. [Set Variable](./general-components/set-variable) — Store data for later use
+7. [Print Output](./general-components/print-output) — Check variable values while debugging
+
+### Need Batch Processing
+
+Once data volume grows, add loops and conditionals:
+
+8. [Loop](./flow-control/loop) — Iterate through lists one by one
+9. [Condition Branch](./flow-control/condition-branch) — Take different paths by condition
+10. [Delay](./flow-control/delay) — Control frequency to avoid rate limiting
+
+### Advanced
+
+For finer control and cross-page orchestration:
+
+11. [Switch iframe](./browser-control/switch-iframe) — Operate on embedded pages
+12. [Element Monitor](./triggers/element-monitor) — Wait for dynamic content to appear before processing
+13. [Call Flow](./flow-control/call-flow) — Split into reusable sub-workflows
+14. [Network Intercept](./triggers/network-intercept) — Get API data directly
+15. [Scheduled Trigger](./triggers/scheduled-trigger) — Unattended auto-execution

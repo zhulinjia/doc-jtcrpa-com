@@ -1,0 +1,67 @@
+---
+sidebar_position: 5
+description: Receive server-pushed messages via a WebSocket long-lived connection. Automatically triggers a workflow when the event field matches.
+---
+
+import ReceiveParamsUrl from '../../_snippets/receive-params-url.mdx'
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# WebSocket Trigger
+
+The WebSocket trigger establishes a long-lived connection to receive server messages and triggers a workflow when the `event` field matches.
+
+## Overview
+
+After connecting to a WebSocket server, the extension continuously listens for JSON messages pushed by the server. When the `event` field matches the configured "Trigger Event," the workflow starts automatically, and the `data` field is automatically JSON-parsed and stored in the specified variable. The configuration panel displays the current connection status in real time (Connected / Disconnected).
+
+Messages pushed by the server must be in the following JSON format:
+
+```json
+{
+  "event": "task_notify",
+  "data": {
+    "url": "https://example.com/order/12345",
+    "orderId": "12345"
+  }
+}
+```
+
+<a href="/img/WebSocket.png" target="_blank"><img src="/img/WebSocket.png" alt="WebSocket" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "WebSocket Trigger" node onto the canvas
+2. Fill in the WebSocket server URL, e.g., `wss://ws.example.com`
+3. Fill in "Trigger Event" — corresponds to the `event` field value in server messages, e.g., `task_notify`
+4. Configure the execution mode and the [variable name](../../core-concepts/variables) for receiving data
+5. When the server sends a matching message, the workflow starts automatically
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Server URL | Text | — | WebSocket address, required. Format: `ws://` or `wss://` |
+| Trigger Event | Text | — | Matches the server message `event` field value, required |
+| Execution Mode | Dropdown | — | Required. `Open New Tab` / `Match Open Page` |
+| Execution Page URL | Text | — | Required for "Open New Tab" mode |
+| Match Pattern | Text | — | Required for "Match Open Page" mode; see [URL Match Patterns](../../reference/match-patterns) |
+| Receive Data | Text | — | Variable name to store the parsed result of the `data` field |
+| Activate Tab | Toggle | false | Whether to automatically switch to the target tab when triggered |
+
+## Execution Mode
+
+<ExecutionMode />
+
+## Receiving Parameters & Dynamic URL
+
+<ReceiveParamsUrl />
+
+## FAQ
+
+### Connection status always shows "Disconnected"
+
+**Symptom**: Configured the server URL, but the panel consistently shows a red "Disconnected" status.
+
+**Cause**: The server address is unreachable, or the URL format is incorrect.
+
+**Solution**: First verify the server is reachable using an online WebSocket testing tool; confirm the URL starts with `ws://` or `wss://`.

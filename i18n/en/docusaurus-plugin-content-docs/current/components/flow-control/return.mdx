@@ -1,0 +1,39 @@
+---
+sidebar_position: 7
+description: End execution in a sub-workflow and return JSON data to the main workflow. Used with the Call Flow node.
+---
+
+# Return
+
+The Return node ends execution in a sub-workflow and sends data back to the main workflow.
+
+## Overview
+
+Used together with the [Call Flow](./call-flow) node. When a sub-workflow reaches the Return node, it stops immediately, and the return value is passed to the caller's configured "Output Variable." Only effective when called as a sub-workflow — executing a Return node in a standalone workflow has no meaningful effect.
+
+<img src="/img/返回.png" alt="Return Configuration Panel" width="520" />
+
+## Usage
+
+Drag the Return node to the end of a sub-workflow and fill in the return value in the JSON editor.
+
+**Supports `{{variableName}}` references** — similar to Call Flow's Carry Data, variables are replaced before JSON parsing:
+
+```json
+{
+  "status": "success",
+  "amount": "{{price}}",
+  "count": {{totalCount}},
+  "data": {{resultList}}
+}
+```
+
+If a variable stores a JSON string or array, it can also be embedded directly — just don't quote it.
+
+> **Note**: Don't quote numbers and booleans (`{{totalCount}}` not `"{{totalCount}}"`), or they'll be treated as strings.
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Return Value | JSON5 | — | Data returned to the main workflow. Supports `{{variableName}}` references; replaced before parsing. The main workflow receives it via [Call Flow](./call-flow)'s "Output Variable" |

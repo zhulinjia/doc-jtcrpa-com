@@ -1,0 +1,78 @@
+---
+sidebar_position: 1
+sidebar_label: Create Your First Workflow
+---
+
+# Create Your First Workflow
+
+This page walks you through building a simple data scraping workflow from scratch — context menu trigger, AI natural language data collection. No CSS selectors needed at any point.
+
+Open the extension's main panel, click "New Workflow" to enter the canvas editor, and start building.
+
+<div style={{maxWidth: 640, margin: '0 auto'}}>
+  <div style={{position: 'relative', paddingBottom: '56.25%', height: 0}}>
+    <iframe
+      src="//player.bilibili.com/player.html?isOutside=true&aid=116741791353673&bvid=BV1tQJn6oEtS&cid=39085671097&p=1&autoplay=0"
+      scrolling="no"
+      frameBorder="no"
+      allowFullScreen={true}
+      style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
+    />
+  </div>
+</div>
+
+---
+
+## Example: Context Menu Triggered Data Scraping
+
+### Step 1: Add a Trigger Node
+
+Drag the **[Context Menu](/components/triggers/context-menu)** trigger from the left node library onto the canvas as the workflow entry point.
+
+### Step 2: Add a Data Collection Node
+
+Drag the **[Data Collection](/components/general-components/data-collection)** node (under the "General Components" category) and connect it to the Context Menu trigger.
+
+In the configuration panel, click 🤖 to switch to [AI natural language mode](/core-concepts/css-selectors#ai-natural-language-selectors-recommended-for-beginners), and describe the rows and columns you want to extract in plain English — let AI locate the elements for you.
+
+This example uses a "novel ranking" page, scraping novel information from the leaderboard.
+
+#### Getting Rows
+
+In the "Row Description" input field, write:
+
+```
+Find all root element nodes for each novel card in the novel ranking list
+```
+
+After entering, click the **send button** to the left of the input field — AI will then parse your description and locate the elements. Once AI finishes locating, click the **preview button** to confirm the highlighted row elements cover all novel cards, ensuring the range is correct.
+
+#### Getting Columns
+
+Add the following columns one by one. Remember to click the send button after each column to trigger AI locating:
+
+| Column Name | Description |
+| :--- | :--- |
+| Novel Name | `Get the novel name` |
+| Novel Author | `Get the novel author` |
+| Novel Genre | `Get the novel genre, located below the author` |
+| Novel Cover Image | `Get the novel cover image` |
+
+> For the "Novel Cover Image" column, change the default "Text Content Extraction" output property to **"Attribute Value Extraction"** and set the attribute name to `src` — this gives you the image URL instead of empty text.
+
+Once all columns are configured, it's recommended to click the preview button for an overall check, making sure each column captures the expected content. No CSS selectors needed at any point.
+
+### Step 3: Run the Workflow
+
+After connecting the two nodes (**Context Menu → Data Collection**), click the "Save" button in the top toolbar to save the workflow. Then, right-click on the novel ranking page to trigger the workflow — view the scraped results in the log panel at the bottom.
+
+---
+
+## Next Steps
+
+After completing your first workflow:
+
+- Browse the **[Components Index](/components)** to explore all available nodes
+- Dive into **[Element Selectors](/core-concepts/css-selectors)** to learn all use cases of AI natural language mode
+- Try other triggers — [Manual Execute](/components/triggers/manual-execute), [Keyboard Shortcut](/components/triggers/keyboard-shortcut), [Scheduled Trigger](/components/triggers/scheduled-trigger) — to start workflows in different ways
+- Learn more about the **[Data Collection](/components/general-components/data-collection)** node's advanced configuration

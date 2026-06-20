@@ -1,0 +1,48 @@
+---
+sidebar_position: 3
+description: Simulate keyboard key presses. Select keys via the KeyDown component. Can be combined with modifier keys. Supports execution in a new tab.
+---
+
+# Key Press
+
+The Key Press node simulates keyboard input, sending key events to the page.
+
+## Overview
+
+Press the target key directly in the "Key" input field. Can be combined with modifier keys (Ctrl/Shift/Alt/Meta) for key combinations. Supports opening a new tab and executing subsequent actions in the new page.
+
+<a href="/img/按下按键.png" target="_blank"><img src="/img/按下按键.png" alt="Key Press" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+The following example demonstrates a complete workflow triggered via Context Menu:
+
+- **Trigger**: [Context Menu](../triggers/context-menu) — right-click on a matching page to start the workflow
+- **Step 1**: [Scroll](../event-interaction/scroll) — scroll to the `#card-keydown` element
+- **Step 2**: Key Press — press the Enter key on the `#card-keydown` element
+- **Execution Page**: `https://jtcrpa.com/test/index.html`
+
+<a href="/img/按下按键示例.png" target="_blank"><img src="/img/按下按键示例.png" alt="Key Press Example" style={{maxWidth: 480, width: '100%'}} /></a>
+
+At execution time, first right-click on the matching page and select the menu item to start the workflow, scroll to the target element, then the Key Press node triggers the Enter key on `#card-keydown`.
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Label Name | Text | — | Node name, required. Must follow [variable naming conventions](../../core-concepts/variables) |
+| Target Element | Text | — | [CSS selector](../../core-concepts/css-selectors), required. The element to send the key event to. Leave empty to send to the currently focused element |
+| Key | Text | — | Required. Press the target key directly in the input field |
+| Modifier Keys | Multi-select | — | Multi-select: `Ctrl`, `Shift`, `Alt`, `Meta` |
+| Open New Tab | Toggle | false | Whether to execute in a new tab |
+| Switch to New Page | Toggle | false | Whether to switch to the new tab after opening |
+
+## FAQ
+
+### Key was sent but the input field shows no text
+
+**Symptom**: After sending a character key to an input field, no characters appear.
+
+**Cause**: Some frontend frameworks bind to the `input` event rather than `keydown` for their input fields.
+
+**Solution**: Use the [Text Input](./text-input) node instead, or use the [Trigger Event](./trigger-event) node to manually dispatch an `input` event.

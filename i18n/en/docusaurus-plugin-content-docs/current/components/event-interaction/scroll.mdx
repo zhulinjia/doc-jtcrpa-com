@@ -1,0 +1,68 @@
+---
+sidebar_position: 4
+description: "Control page or element scrolling behavior. Supports five modes: scroll to top, scroll to bottom, scroll to element, relative scroll, and scroll to position."
+---
+
+# Scroll
+
+The Scroll node controls page or element scrolling behavior, supporting five scroll modes.
+
+## Overview
+
+Five scroll modes are supported:
+
+- **Scroll to Top** — scroll to the top of the page or container
+- **Scroll to Bottom** — scroll to the bottom of the page or container
+- **Scroll to Element** — scroll to the position of a specified element
+- **Relative Scroll** — scroll a specified distance from the current position
+- **Scroll to Position** — scroll to a specified pixel position
+
+Unified configuration for "Scroll Element" (choose the container to scroll) and "Duration."
+
+<a href="/img/滚动元素.png" target="_blank"><img src="/img/滚动元素.png" alt="Scroll" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Scroll" node onto the canvas
+2. Fill in "Scroll Element" [CSS selector](../../core-concepts/css-selectors) (typically the page container or `body`)
+3. Select the scroll mode
+4. Fill in the corresponding parameters based on the mode (e.g., anchor element, distance)
+5. Optionally set the scroll duration (seconds)
+6. Execute
+
+## Usage
+
+### Scroll to Top
+
+Set "Scroll Mode" to **Scroll to Top**. The page or container scrolls directly to the top; no extra parameters needed.
+
+### Scroll to Bottom
+
+Set "Scroll Mode" to **Scroll to Bottom**. The page or container scrolls directly to the bottom; no extra parameters needed.
+
+### Scroll to Element
+
+Set "Scroll Mode" to **Scroll to Element**, then fill in the target element's [CSS selector](../../core-concepts/css-selectors) in "Anchor Element." After execution, the page scrolls to that element's position.
+
+### Relative Scroll
+
+Set "Scroll Mode" to **Relative Scroll**, then enter the pixel value to scroll in "Scroll Distance." Positive values scroll down; negative values scroll up.
+
+### Scroll to Position
+
+Set "Scroll Mode" to **Scroll to Position**, then enter the target pixel position in "Specified Distance." After execution, the page or container scrolls directly to that position.
+
+### Common Configuration
+
+- **Scroll Element**: [CSS selector](../../core-concepts/css-selectors), specifies the container to scroll (typically the page container or `body`)
+- **Duration (seconds)**: Scroll animation duration; longer values produce smoother scrolling. Minimum 1 second.
+
+## FAQ
+
+### Lazy-loaded content doesn't trigger after scrolling
+
+**Symptom**: After scrolling to the bottom, the page doesn't load new data.
+
+**Cause**: Lazy loading typically requires scrolling near a specific element to trigger; instantly jumping to the bottom may be recognized as invalid scrolling.
+
+**Solution**: Use "Scroll to Element" mode to scroll to the element at the end of the list, and increase the scroll duration to make the behavior more human-like.

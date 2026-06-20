@@ -1,0 +1,44 @@
+---
+sidebar_position: 1
+description: The most common workflow entry point. Supports manual execution via a run button, and being called by other workflows with parameter passing.
+---
+
+import ReceiveParamsUrl from '../../_snippets/receive-params-url.mdx'
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# Manual Execute
+
+The Manual Execute trigger is the most common workflow entry point, supporting two launch methods:
+
+- **Manual Execution**: Click the "Run" button in the top toolbar of the canvas to run directly — ideal for testing and ad-hoc tasks
+- **Called by Other Workflows**: Invoked via the [Call Flow](../flow-control/call-flow) node, with parameter passing. After the sub-workflow completes, results can be returned to the caller via the [Return](../flow-control/return) node
+
+A workflow can contain multiple Manual Execute nodes, each configurable with different execution pages and variable names to receive calls from different sources.
+
+<a href="/img/手动执行.png" target="_blank"><img src="/img/手动执行.png" alt="Manual Execute" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Manual Execute" node onto the canvas as the workflow entry point
+2. Configure the "Execution Mode": open a new tab or match an already-open page
+3. To receive parameters, fill in a [variable name](../../core-concepts/variables) in "Receive Data" (e.g., `data`). The JSON data passed by the caller will be stored in that variable
+4. If the caller passes a URL, reference it in "Execution Page URL" using `{{data.url}}` to run on the specified page
+5. Click the "Run" button to test, or save and be called by other workflows
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Execution Mode | Dropdown | — | Required. `Open New Tab` — opens a new tab, requires Execution Page URL; `Match Open Page` — matches an already-open page by URL, requires Match Pattern |
+| Execution Page URL | Text | — | Required for "Open New Tab" mode. Supports referencing passed data via `{{variableName}}` for dynamic URLs |
+| Match Pattern | Text | — | Required for "Match Open Page" mode. Chrome match patterns format; see [URL Match Patterns](../../reference/match-patterns) |
+| Receive Data | Text | — | Variable name to store the caller's passed data, e.g., `data`. The JSON data passed via the [Call Flow](../flow-control/call-flow) node is injected into this variable |
+| Activate Tab | Toggle | false | Whether to automatically switch to the target tab when triggered |
+
+## Execution Mode
+
+<ExecutionMode />
+
+## Receiving Parameters & Dynamic URL
+
+<ReceiveParamsUrl />

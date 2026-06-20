@@ -1,0 +1,36 @@
+---
+sidebar_position: 2
+description: Close a specified browser window. Target can be selected from the current window, the initial window, or windows opened upstream.
+---
+
+# Close Window
+
+The Close Window node closes a specified browser window.
+
+## Overview
+
+The dropdown dynamically lists available targets: it always includes "Current Window" and "Initial Window," and automatically detects windows created by upstream "Open Window" nodes, adding them to the list as well.
+
+<a href="/img/关闭窗口.png" target="_blank"><img src="/img/关闭窗口.png" alt="Close Window" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Close Window" node onto the canvas
+2. Select the window to close from the "Close Target" dropdown
+3. Execute
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Close Target | Dropdown | — | Dynamically generated options, including the current window, initial window, and windows created by upstream "Open Window" nodes |
+
+## FAQ
+
+### Workflow breaks after closing a window
+
+**Symptom**: Downstream nodes error out after closing a window.
+
+**Cause**: Subsequent nodes need to operate in the now-closed window.
+
+**Solution**: Use the [Switch Window](./switch-window) node to transfer context to another window before closing.

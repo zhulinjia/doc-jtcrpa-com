@@ -1,0 +1,125 @@
+---
+sidebar_position: 5
+description: Trigger and execute another workflow. Supports passing parameters and receiving return results. The called workflow must be started via Manual Execute or Signal Trigger.
+---
+
+# Call Flow
+
+The Call Flow node triggers and executes another workflow. It supports passing parameters and receiving return values.
+
+## Overview
+
+Save reusable sub-logic (such as login, data cleaning) as an independent workflow file and call it from the main workflow via this node. When called, it blocks and waits for the sub-workflow to finish executing, then continues downstream nodes after receiving the return value.
+
+**The called workflow must be started via [Manual Execute](../triggers/manual-execute) or [Signal Trigger](../triggers/signal-trigger)** — otherwise, it won't appear in the candidate list.
+
+<img src="/img/调用流程-携带数据.png" alt="Call Flow Configuration Panel" width="520" />
+
+## Usage
+
+After dragging in the node, configure the following three items:
+
+### Target Workflow
+
+Select the workflow to call from the dropdown. The dropdown automatically filters to workflows containing a "Manual Execute" or "Signal Trigger" node — only these two entry points can be called externally.
+
+### Carry Data
+
+JSON parameters passed to the sub-workflow. The sub-workflow receives them via its trigger's "Receive Data" field.
+
+**Supports `{{variableName}}` references** — variables are replaced with actual values before JSON parsing, so you can embed upstream variables anywhere in the JSON:
+
+```json
+{
+  "url": "{{targetUrl}}",
+  "orderId": "{{orderId}}",
+  "config": {
+    "timeout": 5000,
+    "retry": {{retryCount}}
+  }
+}
+```
+
+Assuming upstream `retryCount = 3`, the actual JSON passed to the sub-workflow is:
+
+```json
+{
+  "url": "https://shop.example.com/order/12345",
+  "orderId": "12345",
+  "config": {
+    "timeout": 5000,
+    "retry": 3
+  }
+}
+```
+
+> **Note**: `{{retryCount}}` is not quoted, so it's replaced with the number `3`. If written as `"{{retryCount}}"`, it would be replaced with the string `"3"`. Decide whether to quote based on the type the sub-workflow expects.
+
+The data format is **JSON**, supporting relaxed syntax like trailing commas, single quotes, and comments.
+
+### Output Variable
+
+The variable name to store the sub-workflow's return value. Data returned by the sub-workflow via the [Return](./return) node is stored in this variable, available to downstream nodes in the main workflow via `{{variableName.field}}`.
+
+**Main workflow** — referencing the return value after the call:
+
+```
+Assuming Output Variable is set to "result" and the sub-workflow returns:
+{
+  "status": "success",
+  "amount": 99.00,
+  "items": ["A", "B"]
+}
+
+Main workflow downstream references:
+{{result.status}}   → "success"
+{{result.amount}}   → 99.00
+{{result.items}}    → ["A", "B"]
+```
+
+### Complete Example
+
+**Sub-workflow** (the called side):
+
+1. Entry is "Manual Execute" with **Receive Data** set to `data`
+2. The sub-workflow accesses the main workflow's parameters via `{{data.url}}`, `{{data.orderId}}`
+3. After execution, the [Return](./return) node returns the result:
+
+```json
+{
+  "status": "success",
+  "amount": "99.00"
+}
+```
+
+**Main workflow** (the calling side):
+
+1. "Call Flow" node: Target Workflow set to the sub-workflow, Carry Data filled with JSON containing variables, Output Variable set to `result`
+2. After the call completes, reference the return value via `{{result.status}}`, `{{result.amount}}`
+3. If Output Variable is left empty, the return value is discarded and the sub-workflow only executes as a side effect
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Target Workflow | Dropdown | — | Required. Only lists workflows containing Manual Execute or Signal Trigger |
+| Carry Data | JSON | — | Parameters passed to the sub-workflow. Supports `{{variableName}}` references; variables are replaced before JSON parsing |
+| Output Variable | Text | — | Variable name to store the return value. Leave empty to discard |
+
+## FAQ
+
+### Target workflow doesn't appear in the dropdown
+
+**Symptom**: The target workflow has been saved, but doesn't show in the dropdown.
+
+**Cause**: The target workflow is missing a Manual Execute or Signal Trigger node.
+
+**Solution**: Add a "Manual Execute" or "Signal Trigger" node to the target workflow and save it.
+
+### Sub-workflow doesn't receive the passed parameters
+
+**Symptom**: JSON was filled in Carry Data, but the sub-workflow's variables are empty.
+
+**Cause**: The sub-workflow trigger's "Receive Data" field is empty, or the field name doesn't match the variable name referenced inside the sub-workflow.
+
+**Solution**: Confirm the sub-workflow trigger's "Receive Data" is filled in (e.g., `data`), and the sub-workflow references it via `{{data.fieldName}}`.

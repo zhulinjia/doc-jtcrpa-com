@@ -1,0 +1,62 @@
+---
+sidebar_position: 6
+description: Connect to an SSE endpoint and automatically trigger a workflow when the event type matches. The data field is automatically JSON-parsed and injected into a variable.
+---
+
+import ReceiveParamsUrl from '../../_snippets/receive-params-url.mdx'
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# SSE Trigger
+
+The SSE (Server-Sent Events) trigger connects to a server SSE endpoint and triggers a workflow when the event type matches.
+
+## Overview
+
+After connecting to an SSE endpoint, the extension continuously receives event streams pushed by the server. When the event's `event:` type matches the configured "Event Type," the workflow starts automatically, and the `data:` field is automatically JSON-parsed and stored in the specified variable. The configuration panel displays the current connection status in real time (Connected / Disconnected).
+
+Server-pushed SSE event format:
+
+```
+event: task_notify
+data: {"url": "https://example.com/order/12345", "orderId": "12345"}
+```
+
+<a href="/img/sse.png" target="_blank"><img src="/img/sse.png" alt="SSE Trigger" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "SSE Trigger" node onto the canvas
+2. Fill in the SSE endpoint URL, e.g., `https://api.example.com/sse`
+3. Fill in "Event Type" — corresponds to the `event:` field value in the SSE protocol, e.g., `task_notify`, `message`, `order_sync`
+4. Configure the execution mode and the [variable name](../../core-concepts/variables) for receiving data
+5. When the server pushes a matching event, the workflow starts automatically
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| SSE URL | Text | — | SSE endpoint address, required |
+| Event Type | Text | — | Matches the SSE protocol `event:` field value, e.g., `message`, required |
+| Execution Mode | Dropdown | — | Required. `Open New Tab` / `Match Open Page` |
+| Execution Page URL | Text | — | Required for "Open New Tab" mode |
+| Match Pattern | Text | — | Required for "Match Open Page" mode; see [URL Match Patterns](../../reference/match-patterns) |
+| Receive Data | Text | — | Variable name to store the parsed result of the `data:` field |
+| Activate Tab | Toggle | false | Whether to automatically switch to the target tab when triggered |
+
+## Execution Mode
+
+<ExecutionMode />
+
+## Receiving Parameters & Dynamic URL
+
+<ReceiveParamsUrl />
+
+## FAQ
+
+### Connection status always shows "Disconnected"
+
+**Symptom**: Configured the SSE URL, but the panel consistently shows a red "Disconnected" status.
+
+**Cause**: The server address is unreachable, or the endpoint doesn't respond according to the SSE specification (must return `Content-Type: text/event-stream`).
+
+**Solution**: Check the SSE connection status in the browser DevTools Network panel, and confirm the server response headers are correct.

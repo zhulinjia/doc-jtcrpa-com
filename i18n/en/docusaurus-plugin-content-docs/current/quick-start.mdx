@@ -1,0 +1,135 @@
+---
+sidebar_position: 0
+sidebar_label: Quick Start
+---
+
+# Quick Start
+
+JTC RPA is a **browser automation extension** that lets you automate web tasks without writing code — form filling, data scraping, batch processing, all handled automatically.
+
+**Why JTC RPA?**
+
+- **Zero coding required**: No need to know CSS selectors or programming. The built-in AI natural language engine lets you describe elements in plain English, and AI locates them for you.
+- **Ready out of the box**: Drag nodes, connect them, click execute — three steps to build an automation workflow. As simple as building with blocks.
+- **Native browser experience**: As a browser extension, it runs directly on the pages you're working with. No extra software needed, no cross-origin restrictions.
+
+This page walks you through installation. After installing, jump to **[Create Your First Workflow](/first-workflow)** and run your first automation in 5 minutes.
+
+---
+
+## 1. Install the Extension
+
+### From the App Store (Recommended)
+
+Search and install directly from the official browser store:
+
+- **Chrome**: Go to the [Chrome Web Store](https://chromewebstore.google.com/detail/dopdcakmheonlfplanpbeodjicmpalkm?utm_source=item-share-cb) and search for "JTC RPA"
+- **Edge**: Go to the [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/pbojbhbhgenkoebpdcpojfnohjdjckjb) and search for "JTC RPA"
+
+:::tip[Automatic Updates]
+App store versions update automatically — recommended for most users.
+:::
+
+### Manual Installation (Offline Package)
+
+If you can't access the app stores, download the offline package from Baidu Netdisk:
+
+> Download link: [Baidu Netdisk - JTC RPA](https://pan.baidu.com/s/1ipAYJ-A7GVtqB6KYzH381g?pwd=ew24) (please replace with the actual link)
+
+After downloading the `JTC RPA.zip` file, **drag-and-drop installation is recommended** (easiest):
+
+1. Open your browser, enter `chrome://extensions` in the address bar (`edge://extensions` for Edge)
+2. Toggle on **"Developer mode"** at the top right of the page
+3. **Drag** the downloaded `JTC RPA.zip` file directly into the browser extensions page — installation completes on drop
+
+> No unpacking needed — the browser recognizes and loads it automatically.
+
+**Alternative**: If drag-and-drop doesn't work, you can load it manually after unpacking:
+
+1. Extract the ZIP file to a local folder (preferably a dedicated folder, not the desktop or a temp directory)
+2. Open `chrome://extensions` (`edge://extensions` for Edge), enable "Developer mode"
+3. Click **"Load unpacked"** and select the extracted folder
+
+Once installed, the JTC RPA icon will appear in the browser toolbar. If it doesn't, click the puzzle icon on the right side of the toolbar, find JTC RPA, and click the pin to fix it.
+
+:::caution[Important]
+Whichever method you use, **do not delete or move** the extension folder afterward, or the browser will lose track of the extension files.
+:::
+
+---
+
+## 2. Create Your First Workflow
+
+After installation, open the extension's main panel and click "New Workflow." For the next steps, see **[Create Your First Workflow](/first-workflow)** — build a complete data scraping flow from scratch, using AI natural language mode exclusively, with no CSS selectors required.
+
+---
+
+## 3. Core Concepts
+
+Before using JTC RPA, familiarize yourself with three core concepts that apply to every node:
+
+- **[Element Selectors](/core-concepts/css-selectors#ai-natural-language-selectors-recommended-for-beginners)**: Locate page elements. **Beginners are strongly recommended to use [AI natural language mode](/core-concepts/css-selectors#ai-natural-language-selectors-recommended-for-beginners)** — simply describe elements in plain language, no prior experience needed. Once comfortable, you can advance to CSS selectors and custom pseudo-classes like `:contains`, `:shadow`, and `:col`.
+- **[Variables & Expressions](/core-concepts/variables)**: The `{{ }}` double-brace syntax, supporting arithmetic, comparison, logical operations, and built-in functions.
+- **[Data Transform Pipeline](/core-concepts/data-transform)**: 33 built-in operators to clean, transform, and format scraped data.
+
+Two more basics:
+
+- **Nodes**: The smallest execution unit in a workflow. Each node performs one specific action (e.g., click, input, wait).
+- **Connections**: Arrows between nodes that determine execution order and data flow.
+
+---
+
+## Next Steps
+
+After completing your first workflow, browse the **[Components Index](/components)** to explore all available nodes, or check out **[Element Selectors](/core-concepts/css-selectors)** to learn all use cases and scenarios for AI natural language mode.
+
+---
+
+## FAQ
+
+### The extension icon doesn't appear in the toolbar after installation
+
+**Symptom**: The browser extensions page shows it's installed, but the icon is not visible in the toolbar.
+
+**Cause**: The browser hides newly installed extensions in the extensions menu by default.
+
+**Solution**: Click the puzzle icon (Extensions menu) on the right side of the toolbar, find JTC RPA, and click the pin to fix it to the toolbar.
+
+### The manually installed ZIP package fails to load
+
+**Symptom**: After loading the extracted folder, you see "Manifest file missing" or "File corrupted."
+
+**Cause**: The ZIP may not have been fully extracted, or you selected the wrong folder level.
+
+**Solution**:
+1. Verify the ZIP file downloaded completely (compare file size with what's indicated on the Netdisk page)
+2. Re-extract, choosing "Extract to folder with same name"
+3. When loading, **select the folder level that contains `manifest.json`** — not its parent or any subfolder
+
+### Not sure which trigger type to use
+
+**Symptom**: After setting up a workflow, you're unsure how to start it.
+
+**Cause**: JTC RPA offers multiple trigger types, each suited to different scenarios.
+
+**Solution**: Choose the most appropriate trigger for your use case:
+
+- **Manual Execute**: Click the "Run" button at the top of the canvas — ideal for testing and ad-hoc tasks.
+- **Context Menu**: Select a target area on the page and right-click to trigger — useful for quickly running actions on specific elements.
+- **Keyboard Shortcut**: Bind a key combination for one-press activation — perfect for frequent, repetitive tasks.
+- **Scheduled Trigger**: Run periodically via cron expressions — ideal for unattended scenarios like scheduled monitoring and data sync.
+- **Element Monitor / Network Intercept / URL Match**: Auto-trigger when a specified element appears, an API response is received, or the URL changes — suited for event-driven monitoring scenarios.
+
+If you're just trying things out or testing a workflow, go with "Manual Execute."
+
+### The workflow is set to passive trigger but never starts
+
+**Symptom**: Using passive triggers like Element Monitor, Network Intercept, or URL Match, the workflow never executes automatically.
+
+**Cause**: Passive triggers require specific conditions to activate. Common reasons include:
+
+**Solution**:
+1. Check whether the selector or URL rules in the trigger configuration are correct — verify them in the browser's DevTools first
+2. Confirm the target event (DOM node appearing, network request, URL change) is actually occurring on the page — SPA route changes may not trigger URL matching
+3. Element monitor triggers require the target node to be present in the DOM (or wait for it to appear). If the page renders dynamically, increase the monitoring interval or extend the timeout
+4. Check the extension's log panel

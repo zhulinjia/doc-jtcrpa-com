@@ -1,0 +1,61 @@
+---
+sidebar_position: 1
+sidebar_label: URL Match Patterns
+---
+
+# URL Match Patterns
+
+All nodes in JTC RPA that involve URL matching (URL Match trigger, Network Intercept, etc.) use the Chrome extension **match patterns** syntax. This document serves as a unified reference for the "URL Match Rules" field across all relevant nodes.
+
+## Basic Structure
+
+```
+<scheme>://<host>/<path>
+```
+
+## Syntax Rules
+
+### Scheme
+
+| Value | Match Scope |
+|-------|-------------|
+| `http` | HTTP only |
+| `https` | HTTPS only |
+| `*` | Both HTTP and HTTPS |
+| `file` | Local files |
+
+### Host
+
+| Pattern | Match Scope |
+|---------|-------------|
+| `www.example.com` | Exact domain match |
+| `*.example.com` | All subdomains (`*` must be at the start and immediately followed by `.`) |
+| `*` | Any host |
+| `127.0.0.1` | Specific IP |
+| `localhost` | Local localhost (any port) |
+
+### Path
+
+The path uses literal characters; `*` matches any character sequence.
+
+## Common Examples
+
+| Pattern | Match Scope |
+|---------|-------------|
+| `*://*/*` | All HTTP / HTTPS pages |
+| `https://*.example.com/*` | HTTPS pages for all subdomains of example.com |
+| `*://example.com/order/*` | All pages under `/order/` on example.com |
+| `*://*/foo*bar` | Any page with a path starting with `foo` and ending with `bar` |
+| `http://localhost/*` | Local localhost, any port |
+
+## Notes
+
+- The wildcard `*` in the scheme position only matches `http` or `https`; it does not match `file`, `data`, or other protocols.
+- `*` in the hostname can only be a prefix (`*.example.com`); it cannot appear in the middle or at the end.
+- The path is a required field (at minimum `/*`). To match the root path, use `/`.
+
+## Related Nodes
+
+- [URL Match Trigger](../components/triggers/url-match)
+- [Network Intercept](../components/triggers/network-intercept)
+- [Keyboard Shortcut](../components/triggers/keyboard-shortcut) (for limiting which pages the shortcut works on)

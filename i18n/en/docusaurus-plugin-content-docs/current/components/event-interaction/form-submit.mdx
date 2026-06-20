@@ -1,0 +1,32 @@
+---
+sidebar_position: 8
+description: Submit a specified form. Supports opening a new tab and continuing execution in the new page.
+---
+
+# Form Submit
+
+The Form Submit node triggers the submission of a specified `<form>` element.
+
+## Overview
+
+Triggers the submission of a specified `<form>` element. The node automatically finds the submit button within the form and clicks it; if no button is found, it directly calls the native submission.
+
+Supports opening a new tab for submission and continuing execution in the new page.
+
+<a href="/img/提交表单.png" target="_blank"><img src="/img/提交表单.png" alt="Form Submit" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Form Submit" node onto the canvas
+2. Fill in "Label Name" (required; must follow [variable naming conventions](../../core-concepts/variables))
+3. Fill in "Target Element" [CSS selector](../../core-concepts/css-selectors) (required), pointing to the target `<form>` element
+4. If submitting in a new tab, enable the corresponding toggle
+5. Execute
+
+## FAQ
+
+### No redirect or success message after form submission
+
+The node executed successfully but the page didn't redirect or show the expected success message.
+
+**Solution**: Before submitting, check that all form fields are correctly filled in and that required fields and validation rules are all satisfied.

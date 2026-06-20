@@ -1,0 +1,83 @@
+---
+sidebar_position: 4
+description: Listen for signals from other workflows to start the current workflow. Received data is automatically JSON-parsed and injected into a variable.
+---
+
+import ExecutionMode from '../../_snippets/execution-mode.mdx'
+
+# Signal Trigger
+
+The Signal trigger enables communication between multiple workflows. One workflow sends a signal, and another workflow receives it and starts automatically — no human intervention needed.
+
+<a href="/img/信号触发.png" target="_blank"><img src="/img/信号触发.png" alt="Signal Trigger" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Core Concept
+
+The Signal trigger is essentially **one-to-many broadcast communication**: the sender broadcasts a signal ID via the [Send Signal](../flow-control/send-signal) node, and all Signal triggers listening for that ID will receive it and start. A single signal can wake up multiple workflows simultaneously.
+
+Signals can carry data. Data attached by the sender is automatically JSON-parsed and, upon success, stored in the variable configured on the receiver side.
+
+## Configuration Steps
+
+Take two workflows as an example — Workflow A sends a signal, Workflow B receives it and shows a notification.
+
+**Workflow A (Sender): Manual Execute → Send Signal**
+
+<a href="/img/信号触发示例-1.png" target="_blank"><img src="/img/信号触发示例-1.png" alt="Signal Trigger Example - Workflow A" style={{maxWidth: 480, width: '100%'}} /></a>
+
+1. Drag in [Manual Execute](../triggers/manual-execute) as the entry point
+2. Drag in the [Send Signal](../flow-control/send-signal) node
+3. Fill in a signal ID, e.g., `order_updated`
+
+**Workflow B (Receiver): Signal Trigger → Show Notification**
+
+<a href="/img/信号触发示例-2.png" target="_blank"><img src="/img/信号触发示例-2.png" alt="Signal Trigger Example - Workflow B" style={{maxWidth: 480, width: '100%'}} /></a>
+
+1. Drag in the "Signal Trigger" node, set Signal ID to `order_updated` (must match the sender exactly)
+2. Configure the execution mode and the variable name for received data
+3. Drag in the [Show Notification](../browser-control/show-notification) node
+4. After saving, when Workflow A executes, Workflow B will automatically receive the signal and start
+
+## Parameter Reference
+
+### Signal ID
+
+The unique identifier for the signal. **Must match exactly between sender and receiver** (case-sensitive). Use meaningful English names:
+
+```
+order_updated          → Order has been updated
+data_sync_complete     → Data sync completed
+crawl_finished         → Crawling finished
+```
+
+### Receive Data
+
+The variable name to store the sender's attached data after automatic JSON parsing. For example, if set to `data`, subsequent nodes can reference the received content using `{{data}}`.
+
+If the sender doesn't include data, or the data isn't valid JSON, the variable value remains as-is (a string).
+
+### Execution Mode
+
+<ExecutionMode />
+
+### Activate Tab
+
+When enabled, the browser automatically switches focus to the tab running the workflow when a signal is received. Suitable for scenarios where the user needs to see the operation results on the page; can be turned off for pure background data processing.
+
+## Use Cases
+
+Signal trigger is ideal for **multi-workflow orchestration** scenarios:
+
+- After a login workflow completes, send a signal — the data scraping workflow receives it and starts fetching data
+- A scheduled inspection workflow detects an anomaly and sends a signal — the notification workflow receives it and pops up an alert
+- A main workflow is split into multiple sub-workflows running in parallel, using signals to chain execution order
+
+## FAQ
+
+### Signal trigger keeps waiting and never starts
+
+**Symptom**: The workflow never starts, and the log shows "waiting for signal."
+
+**Cause**: The signal ID is spelled inconsistently (case-sensitive), or the sender workflow hasn't executed yet.
+
+**Solution**: Check whether the signal IDs on the sender and receiver match exactly, including case. First trigger the sender manually using "Manual Execute" to confirm the signal is actually sent.

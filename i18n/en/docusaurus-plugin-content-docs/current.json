@@ -1,0 +1,98 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.核心概念": {
+    "message": "Core Concepts",
+    "description": "The label for category '核心概念' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.功能组件": {
+    "message": "Components",
+    "description": "The label for category '功能组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.触发器": {
+    "message": "Triggers",
+    "description": "The label for category '触发器' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.触发器.link.generated-index.title": {
+    "message": "Triggers",
+    "description": "The generated-index page title for category '触发器' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.触发器.link.generated-index.description": {
+    "message": "10 workflow triggers: manual execution, context menu, keyboard shortcut, scheduled, DOM monitoring, network interception, WebSocket/SSE signals, and more.",
+    "description": "The generated-index page description for category '触发器' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.通用组件": {
+    "message": "General Components",
+    "description": "The label for category '通用组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.通用组件.link.generated-index.title": {
+    "message": "General Components",
+    "description": "The generated-index page title for category '通用组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.通用组件.link.generated-index.description": {
+    "message": "7 data & utility components: variables, data extraction, wait signal/element, logging, code execution, file reading.",
+    "description": "The generated-index page description for category '通用组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.事件交互": {
+    "message": "Event Interactions",
+    "description": "The label for category '事件交互' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.事件交互.link.generated-index.title": {
+    "message": "Event Interactions",
+    "description": "The generated-index page title for category '事件交互' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.事件交互.link.generated-index.description": {
+    "message": "13 page interaction actions: click, hover, keypress, scroll, input, select, form submit, file upload/download, clipboard, and more.",
+    "description": "The generated-index page description for category '事件交互' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.浏览器控制": {
+    "message": "Browser Control",
+    "description": "The label for category '浏览器控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.浏览器控制.link.generated-index.title": {
+    "message": "Browser Control",
+    "description": "The generated-index page title for category '浏览器控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.浏览器控制.link.generated-index.description": {
+    "message": "13 window & tab management actions: open/close, navigate, refresh, switch window/tab/iframe, notifications, popup handling.",
+    "description": "The generated-index page description for category '浏览器控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.流程控制": {
+    "message": "Flow Control",
+    "description": "The label for category '流程控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.流程控制.link.generated-index.title": {
+    "message": "Flow Control",
+    "description": "The generated-index page title for category '流程控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.流程控制.link.generated-index.description": {
+    "message": "13 flow logic components: conditionals, switch, loops, sub-workflows, delay, pause, stop, skip, break, and more.",
+    "description": "The generated-index page description for category '流程控制' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.网络组件": {
+    "message": "Network Components",
+    "description": "The label for category '网络组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.网络组件.link.generated-index.title": {
+    "message": "Network Components",
+    "description": "The generated-index page title for category '网络组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.网络组件.link.generated-index.description": {
+    "message": "2 HTTP network components: wait for API response to extract data, send requests bypassing the page UI.",
+    "description": "The generated-index page description for category '网络组件' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.参考": {
+    "message": "Reference",
+    "description": "The label for category '参考' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.快速上手": {
+    "message": "Quick Start",
+    "description": "The label for the doc '快速上手' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.doc.创建第一个工作流": {
+    "message": "Create Your First Workflow",
+    "description": "The label for the doc '创建第一个工作流' in sidebar 'tutorialSidebar'"
+  }
+}

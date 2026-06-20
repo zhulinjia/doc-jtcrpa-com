@@ -1,0 +1,45 @@
+---
+sidebar_position: 5
+description: Select a specified option in a dropdown (Select) by value or by display text.
+---
+
+# Select Option
+
+The Select Option node operates on `<select>` dropdowns, selecting options by value or by display text.
+
+## Overview
+
+Two matching modes are supported:
+
+- **Match by Value** — selects the option based on the `<option>` element's `value` attribute
+- **Match by Display Text** — selects the option based on its displayed text
+
+After choosing the "Match Mode," fill in the corresponding value or text in "Option Value."
+
+<a href="/img/选择选项.png" target="_blank"><img src="/img/选择选项.png" alt="Select Option" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Select Option" node onto the canvas
+2. Fill in "Target Element" [CSS selector](../../core-concepts/css-selectors) (required), pointing to the target `<select>` element
+3. Choose the match mode: By Value or By Display Text
+4. Fill in "Option Value" — the value or text of the option to select
+5. Execute
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Target Element | Text | — | [CSS selector](../../core-concepts/css-selectors) for the `<select>` element, required |
+| Match Mode | Dropdown | value | `value` — match by the option's value attribute; `label` — match by the option's display text |
+| Option Value | Text | — | The value or text of the option to select. Supports `{{variableName}}` references; see [Variables](../../core-concepts/variables) |
+
+## FAQ
+
+### Option exists but "No matching option found" error
+
+**Symptom**: The target option is visible in the dropdown, but the node reports an error.
+
+**Cause**: Wrong match mode — using `value` mode to match display text, or vice versa.
+
+**Solution**: Inspect the target `<option>` element in DevTools to confirm what its `value` attribute and display text are, then choose the corresponding match mode.

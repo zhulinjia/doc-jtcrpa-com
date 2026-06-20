@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "JTC RPA Docs",
+    "description": "The title in the navbar"
+  },
+  "item.label.网站首页": {
+    "message": "Homepage",
+    "description": "Navbar item with label 网站首页"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

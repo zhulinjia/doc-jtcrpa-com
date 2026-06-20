@@ -1,0 +1,8 @@
+Triggers support two execution modes, determining which page the workflow runs on:
+
+| Mode | Description | Configuration Required |
+|------|-------------|------------------------|
+| **Open New Tab** | Opens a new browser tab, loads the specified URL, then executes | Execution Page URL (required) |
+| **Match Open Page** | Matches an already-open tab by URL pattern, executes on the matched page | Match Pattern (Chrome match patterns format; see [URL Match Patterns](/reference/match-patterns)) |
+
+The Execution Page URL supports referencing received data via `{{variableName}}` (see [Variables](/core-concepts/variables)), enabling dynamic target page selection. Match patterns are fixed and do not support variables.

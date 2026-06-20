@@ -1,0 +1,28 @@
+---
+sidebar_position: 13
+description: Write specified text to the system clipboard for pasting into the page or other applications.
+---
+
+# Write Clipboard
+
+Writes text to the clipboard — you can then press Ctrl+V to paste it anywhere.
+
+## Overview
+
+Writes specified text to the clipboard. Follow it with a [Key Press](./key-press) node set to Ctrl+V to paste into an input field.
+
+The content field supports `{{variableName}}` references to upstream variables; see [Variables](../../core-concepts/variables).
+
+<a href="/img/写剪切板.png" target="_blank"><img src="/img/写剪切板.png" alt="Write Clipboard" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Write Clipboard" node onto the canvas
+2. Enter the text to write in "Write Content" (required); supports `{{variableName}}` references
+3. Follow with a [Key Press](./key-press) node, set to Ctrl+V to paste
+
+## FAQ
+
+### No content when pasting after writing
+
+**Solution**: First open Notepad and press Ctrl+V to see if it pastes. If it does, the issue is with the target page — use the [Key Press](./key-press) node to send the Ctrl+V key combination for pasting.

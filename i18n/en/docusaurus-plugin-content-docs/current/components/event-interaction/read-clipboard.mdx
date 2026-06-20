@@ -1,0 +1,27 @@
+---
+sidebar_position: 12
+description: "Read the text content from the system clipboard and store it in a specified variable. Note - requires explicit user authorization or must be triggered within specific interaction events."
+---
+
+# Read Clipboard
+
+Reads the text you just copied (Ctrl+C) and stores it in a variable for downstream nodes.
+
+## Overview
+
+After copying some text, use this node to retrieve it. Must be used with workflows triggered by human interaction such as context menu or keyboard shortcut — scheduled tasks don't have permission to read the clipboard.
+
+<a href="/img/读剪切板.png" target="_blank"><img src="/img/读剪切板.png" alt="Read Clipboard" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "Read Clipboard" node onto the canvas
+2. Fill in "Output Variable" name (required), e.g., `copiedText`
+3. Downstream nodes can access the copied content via `{{copiedText}}`
+4. The workflow must be triggered via context menu or keyboard shortcut — scheduled execution will fail
+
+## FAQ
+
+### Read fails, permission error
+
+**Solution**: Check that the workflow is triggered via context menu or keyboard shortcut. Do not use scheduled triggers.

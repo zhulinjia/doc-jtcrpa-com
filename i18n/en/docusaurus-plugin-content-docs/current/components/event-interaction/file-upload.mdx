@@ -1,0 +1,34 @@
+---
+sidebar_position: 10
+description: Upload local files to a specified input[type=file] element. Requires file access permission to be enabled.
+---
+
+# File Upload
+
+The File Upload node injects local files into an `<input type="file">` element for automated file upload.
+
+## Overview
+
+Uploads files to an `<input type="file">` element. Supports local files and remote files (URL).
+
+**File access permission must be enabled in extension management before use.**
+
+File paths support `{{variableName}}` references; see [Variables](../../core-concepts/variables).
+
+<a href="/img/上传文件.png" target="_blank"><img src="/img/上传文件.png" alt="File Upload" style={{maxWidth: 480, width: '100%'}} /></a>
+
+## Quick Start
+
+1. Drag the "File Upload" node onto the canvas
+2. Fill in "File Input Selector" [CSS selector](../../core-concepts/css-selectors) (required), pointing to the target `<input type="file">`
+3. Fill in "File Path": for local files, use an absolute path (e.g., `C:\data\report.pdf`); for remote files, use a URL (e.g., `https://example.com/file.pdf`)
+4. Execute
+
+## FAQ
+
+### File path inaccessible error on upload
+
+1. Open the browser's extension management page, find this extension, and click "Details"
+2. Enable the "Allow access to file URLs" option
+3. Confirm the path provided is a local absolute path (e.g., `C:\Users\Username\Documents\file.pdf`), not a relative path, and that the file actually exists
+4. If using a remote file, confirm the URL is complete and directly accessible in the browser — the file should be downloadable

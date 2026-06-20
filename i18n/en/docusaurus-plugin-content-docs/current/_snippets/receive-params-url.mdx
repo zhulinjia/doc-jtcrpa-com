@@ -1,0 +1,21 @@
+When a trigger receives data, the data is parsed as JSON and stored in the [variable](/core-concepts/variables) configured in "Receive Data" (e.g., `data`). It can then be referenced anywhere in the workflow using `{{ }}` expressions.
+
+**Typical Usage**: When the received data includes a `url` field, you can dynamically specify the target page in "Execution Page URL" via the variable.
+
+Example received data:
+
+```json
+{
+  "url": "https://shop.example.com/order/12345",
+  "orderId": "12345"
+}
+```
+
+Trigger configuration:
+
+```
+Receive Data: data
+Execution Page URL: {{data.url}}
+```
+
+During workflow execution, nodes such as [Open Page](/components/browser-control/open-page) can also reference fields like `{{data.orderId}}`.
