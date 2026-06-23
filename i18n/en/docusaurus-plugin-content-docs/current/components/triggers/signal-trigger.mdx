@@ -2,9 +2,6 @@
 sidebar_position: 4
 description: Listen for signals from other workflows to start the current workflow. Received data is automatically JSON-parsed and injected into a variable.
 ---
-
-import ExecutionMode from '../../_snippets/execution-mode.mdx'
-
 # Signal Trigger
 
 The Signal trigger enables communication between multiple workflows. One workflow sends a signal, and another workflow receives it and starts automatically — no human intervention needed.
@@ -34,9 +31,29 @@ Take two workflows as an example — Workflow A sends a signal, Workflow B recei
 <a href="/img/信号触发示例-2.png" target="_blank"><img src="/img/信号触发示例-2.png" alt="Signal Trigger Example - Workflow B" style={{maxWidth: 480, width: '100%'}} /></a>
 
 1. Drag in the "Signal Trigger" node, set Signal ID to `order_updated` (must match the sender exactly)
-2. Configure the execution mode and the variable name for received data
+2. Set the variable name for received data (the execution page is controlled by system reserved fields in the signal — see below)
 3. Drag in the [Show Notification](../browser-control/show-notification) node
 4. After saving, when Workflow A executes, Workflow B will automatically receive the signal and start
+
+## Execution Page Control
+
+The Signal trigger's execution page is **entirely determined by system reserved fields in the received signal data** — the trigger itself no longer has a separate execution mode setting. The sender includes the following reserved fields in the signal JSON data to control which page the workflow executes on:
+
+| Field | Description |
+| :--- | :--- |
+| `_target_url` | Navigate to this URL and execute the workflow. |
+| `_target_tab_id` | Execute the workflow in a specified already-opened tab. |
+| (No reserved fields) | When no reserved fields are included, the workflow executes on the signal sender's page. |
+
+**Priority**: `_target_tab_id` > `_target_url`. If both are present, `_target_tab_id` is used.
+
+```json
+// Example: sending a signal with _target_url
+{
+  "orderId": 12345,
+  "_target_url": "https://example.com/orders/12345"
+}
+```
 
 ## Parameter Reference
 
@@ -55,10 +72,6 @@ crawl_finished         → Crawling finished
 The variable name to store the sender's attached data after automatic JSON parsing. For example, if set to `data`, subsequent nodes can reference the received content using `{{data}}`.
 
 If the sender doesn't include data, or the data isn't valid JSON, the variable value remains as-is (a string).
-
-### Execution Mode
-
-<ExecutionMode />
 
 ### Activate Tab
 

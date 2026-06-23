@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-description: Trigger and execute another workflow. Supports passing parameters and receiving return results. The called workflow must be started via Manual Execute or Signal Trigger.
+description: Trigger and execute another workflow. Supports passing parameters and receiving return results. The called workflow must be started via Manual Execute.
 ---
 
 # Call Flow
@@ -11,17 +11,17 @@ The Call Flow node triggers and executes another workflow. It supports passing p
 
 Save reusable sub-logic (such as login, data cleaning) as an independent workflow file and call it from the main workflow via this node. When called, it blocks and waits for the sub-workflow to finish executing, then continues downstream nodes after receiving the return value.
 
-**The called workflow must be started via [Manual Execute](../triggers/manual-execute) or [Signal Trigger](../triggers/signal-trigger)** — otherwise, it won't appear in the candidate list.
+**The called workflow must be started via [Manual Execute](../triggers/manual-execute)** — otherwise, it won't appear in the candidate list.
 
-<img src="/img/调用流程-携带数据.png" alt="Call Flow Configuration Panel" width="520" />
+<img src="/img/调用流程.png" alt="Call Flow Configuration Panel" width="520" />
 
 ## Usage
 
-After dragging in the node, configure the following three items:
+After dragging in the node, configure the following parameters:
 
 ### Target Workflow
 
-Select the workflow to call from the dropdown. The dropdown automatically filters to workflows containing a "Manual Execute" or "Signal Trigger" node — only these two entry points can be called externally.
+Select the workflow to call from the dropdown. The dropdown automatically filters to workflows containing a "Manual Execute" node — only this entry point can be called externally.
 
 ### Carry Data
 
@@ -57,6 +57,14 @@ Assuming upstream `retryCount = 3`, the actual JSON passed to the sub-workflow i
 
 The data format is **JSON**, supporting relaxed syntax like trailing commas, single quotes, and comments.
 
+### Execution Mode
+
+Controls which browser page the called workflow executes on. Three modes are available:
+
+- **Inherit Target Config** (default): Uses the execution mode configured in the called workflow's Manual Execute trigger.
+- **Open New Tab**: Opens a new tab and navigates to the specified URL, then executes the workflow on that page. Requires a target URL, supports `{{variableName}}` references.
+- **Specify Tab (TabId)**: Executes the workflow on a specified already-opened tab. Requires the target tab's TabId, supports `{{variableName}}` references. Mainly used in combination with variables.
+
 ### Output Variable
 
 The variable name to store the sub-workflow's return value. Data returned by the sub-workflow via the [Return](./return) node is stored in this variable, available to downstream nodes in the main workflow via `{{variableName.field}}`.
@@ -76,6 +84,13 @@ Main workflow downstream references:
 {{result.amount}}   → 99.00
 {{result.items}}    → ["A", "B"]
 ```
+
+### After Execution
+
+Controls what happens after the called workflow completes:
+
+- **No Action** (default): No extra operation. Downstream nodes in the main workflow continue execution.
+- **Close Calling Workflow Page**: Closes the page where the called workflow was executing. Useful when you open a new tab for the sub-workflow and want it auto-closed after completion.
 
 ### Complete Example
 
@@ -102,9 +117,11 @@ Main workflow downstream references:
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| Target Workflow | Dropdown | — | Required. Only lists workflows containing Manual Execute or Signal Trigger |
+| Target Workflow | Dropdown | — | Required. Only lists workflows containing Manual Execute |
 | Carry Data | JSON | — | Parameters passed to the sub-workflow. Supports `{{variableName}}` references; variables are replaced before JSON parsing |
+| Execution Mode | Dropdown | Inherit Target Config | Controls which page the sub-workflow executes on. Options: Inherit Target Config, Open New Tab (URL required), Specify Tab (TabId required) |
 | Output Variable | Text | — | Variable name to store the return value. Leave empty to discard |
+| After Execution | Dropdown | No Action | Action after the sub-workflow completes. Options: No Action, Close Calling Workflow Page |
 
 ## FAQ
 
@@ -112,9 +129,9 @@ Main workflow downstream references:
 
 **Symptom**: The target workflow has been saved, but doesn't show in the dropdown.
 
-**Cause**: The target workflow is missing a Manual Execute or Signal Trigger node.
+**Cause**: The target workflow is missing a Manual Execute node.
 
-**Solution**: Add a "Manual Execute" or "Signal Trigger" node to the target workflow and save it.
+**Solution**: Add a "Manual Execute" node to the target workflow and save it.
 
 ### Sub-workflow doesn't receive the passed parameters
 

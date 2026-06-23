@@ -2,9 +2,6 @@
 sidebar_position: 4
 description: 监听来自其他工作流的信号来启动当前工作流，接收的数据自动 JSON 解析后注入变量。
 ---
-
-import ExecutionMode from '../../_snippets/execution-mode.mdx'
-
 # 信号触发
 
 信号触发器让多个工作流之间可以互相通信。一个工作流发出信号，另一个工作流收到信号后自动启动——无需人工介入。
@@ -34,9 +31,29 @@ import ExecutionMode from '../../_snippets/execution-mode.mdx'
 <a href="/img/信号触发示例-2.png" target="_blank"><img src="/img/信号触发示例-2.png" alt="信号触发示例-流程B" style={{maxWidth: 480, width: '100%'}} /></a>
 
 1. 拖入「信号触发」节点，信号 ID 填 `order_updated`（必须和发送方完全一致）
-2. 配置执行方式和接收数据变量名
+2. 填写接收数据变量名（执行页面由信号中的系统保留字段决定，见下方说明）
 3. 拖入「[显示通知](../browser-control/show-notification)」节点
 4. 保存后，流程 A 执行时流程 B 会自动收到信号并启动
+
+## 执行页面控制
+
+信号触发器的执行页面**完全由接收到的信号数据中的系统保留字段决定**，触发器本身不再单独配置执行方式。发送方在信号 JSON 数据中携带以下保留字段来控制工作流在哪个页面执行：
+
+| 字段 | 说明 |
+| :--- | :--- |
+| `_target_url` | 跳转到该 URL 对应的页面并执行工作流。 |
+| `_target_tab_id` | 在指定已打开的标签页中执行工作流。 |
+| （不带保留字段） | 不携带任何保留字段时，在发送信号的页面执行。 |
+
+**优先级**：`_target_tab_id` > `_target_url`。同时携带时优先使用 `_target_tab_id`。
+
+```json
+// 示例：发送信号时携带 _target_url
+{
+  "orderId": 12345,
+  "_target_url": "https://example.com/orders/12345"
+}
+```
 
 ## 参数说明
 
@@ -55,10 +72,6 @@ crawl_finished         → 采集结束了
 发送方附带的数据自动 JSON 解析后存入的变量名。比如填 `data`，后续节点就能用 `{{data}}` 引用接收到的内容。
 
 如果发送方没带数据，或数据不是合法 JSON，变量值保持原样（字符串）。
-
-### 执行方式
-
-<ExecutionMode />
 
 ### 激活标签页
 

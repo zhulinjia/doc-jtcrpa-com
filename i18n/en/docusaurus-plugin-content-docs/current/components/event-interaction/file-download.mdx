@@ -1,29 +1,83 @@
 ---
 sidebar_position: 11
-description: Download a file from a specified URL. Supports a custom save filename.
+description: Download network files, or auto-convert text/JSON data into downloadable files. Supports variable references.
 ---
 
 # File Download
 
-The File Download node downloads a file from a specified URL to the local machine.
+The File Download node supports two modes: pass a URL to download a network file directly, or pass text/JSON data for the system to auto-convert into a file download.
 
 ## Overview
 
-After providing the download URL, the node automatically initiates the download. You can optionally specify a save filename (supports relative directories); if left empty, the server-returned original filename is used.
+The node automatically determines the mode based on the "Download URL" input:
+
+- **It's a web address** (starts with `https://` / `http://` / `ftp://` / `file://`) → downloads the network file directly.
+- **It's raw data** (a variable, JSON object, plain text, etc.) → auto-converts to a file based on the extension in "Save Filename" and triggers download.
+
+Both "Download URL" and "Save Filename" support `{{variableName}}` references to upstream data.
 
 <a href="/img/下载文件.png" target="_blank"><img src="/img/下载文件.png" alt="File Download" style={{maxWidth: 480, width: '100%'}} /></a>
 
 ## Quick Start
 
+### Case 1: Download a network file
+
 1. Drag the "File Download" node onto the canvas
-2. Fill in "Download URL" (required), e.g., `https://example.com/file.pdf`
-3. Optionally fill in "Save Filename": provide just a filename to save to the default directory (e.g., `report.pdf`); provide a relative path to save to a specific subdirectory (e.g., `downloads/report.pdf`)
+2. Fill in "Download URL" with a file link, e.g. `https://example.com/report.pdf`
+3. Fill in "Save Filename" as `report.pdf` (optional; defaults to the server's original filename)
 4. Execute
+
+### Case 2: Save data as a file
+
+Say an upstream "Network Intercept" node captured some JSON data and you want to export it as Excel:
+
+1. Drag the "File Download" node onto the canvas
+2. Set "Download URL" to `{{responseData}}` — the variable holding the captured data
+3. Set "Save Filename" to `export.xlsx` — the extension determines the output format
+4. Execute, and the browser downloads `export.xlsx` automatically
+
+> If the data is an array of objects, Excel and CSV formats will use each object's keys as headers.
+
+## Parameter Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Download URL | Text | — | **Required**. Accepts a URL (direct download) or a data variable (auto-convert). Supports `{{variableName}}` |
+| Save Filename | Text | `download` | Optional. Supports `{{variableName}}`. The extension determines the output format for data conversion (see below) |
+
+### Data-to-file: Extension & Format Mapping
+
+When the "Download URL" is not a web address, the system selects the output format based on the "Save Filename" extension:
+
+| Extension | Output Format | Notes |
+|-----------|---------------|-------|
+| `.txt` | Plain text | Arrays of objects become tab-separated tables |
+| `.json` | JSON | Pretty-printed with indentation |
+| `.csv` | CSV | UTF-8 with BOM; object arrays auto-generate headers |
+| `.xlsx` / `.xls` | Excel | Object arrays become worksheets automatically |
+
+> Extensions not listed above default to `.txt` behavior.
 
 ## FAQ
 
-### Downloaded filename is not what was expected
+### I provided a URL but got raw API data instead of a file
 
-The downloaded file's name is not the custom name specified.
+**Symptom**: Entered `https://example.com/api/data` and the download gave me JSON instead of a file.
 
-**Solution**: Provide the desired filename (including extension) in "Save Filename," e.g., `report.pdf`.
+**Cause**: The URL returns text data, not a binary file — the browser downloads it as-is.
+
+**Solution**: This is actually expected behavior. If you just want to save the API response, make sure "Save Filename" has the right extension (e.g. `.json`).
+
+### Exported CSV shows garbled text in Excel
+
+**Symptom**: CSV downloaded from data mode displays garbled Chinese characters in Excel.
+
+**Solution**: The CSV is UTF-8 encoded. In Excel, use "Data → From Text/CSV" import and select UTF-8 encoding to display correctly.
+
+### Duplicate downloads within a short time only trigger once
+
+**Symptom**: Two consecutive File Download executions in a loop — the second one didn't trigger.
+
+**Cause**: The node has a built-in 10-second cooldown; duplicate downloads of the same content are skipped.
+
+**Solution**: If you genuinely need repeated downloads, insert a "[Delay](../flow-control/delay)" node between them to wait longer than 10 seconds.
