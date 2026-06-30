@@ -58,7 +58,13 @@
       "Bash(pkill -f node)",
       "Bash(curl -s http://localhost:3099/components/general-components/wait-element)",
       "Bash(curl -s http://localhost:3099/en/components/general-components/wait-element)",
-      "Bash(curl -s http://localhost:3099/en/core-concepts/variables)"
+      "Bash(curl -s http://localhost:3099/en/core-concepts/variables)",
+      "Bash(git add *)",
+      "Bash(git rm *)",
+      "Bash(git commit -m 'docs: 更新调用流程/下载文件文档，新增元素选择器工具文档 *)",
+      "Bash(git commit *)",
+      "Bash(git pull *)",
+      "Bash(git push *)"
     ]
   }
 }
