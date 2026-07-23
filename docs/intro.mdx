@@ -6,7 +6,7 @@ sidebar_label: 介绍
 
 # 九头虫 RPA
 
-**会打字就能用的浏览器自动化插件。** 不用写代码，不用学 [CSS 选择器](/core-concepts/css-selectors)——用大白话告诉 AI 你要操作什么，它帮你搞定。
+**会打字就能用的浏览器自动化插件。** 两大 AI 核心能力：**[AI 自然语言选择器](/core-concepts/css-selectors#ai-自然语言选择器推荐新手使用)** 让你用大白话定位页面元素，**[AI 智能采集](/components/general-components/ai-extract-data)** 让你用一句话提取页面数据。不用写代码，不用学 CSS 选择器。
 
 ![九头虫 RPA](/img/ui.png)
 
@@ -23,6 +23,8 @@ sidebar_label: 介绍
 - 想从表格里找某一行？写 `点击订单号 001 那行的查看详情`
 
 不需要打开 F12，不需要理解什么是 class、什么是 id。**你描述页面上的元素，就像你跟同事说话一样。** 当然，如果你熟悉 [CSS 选择器](/core-concepts/css-selectors)，也可以直接手写——两种模式随时切换。
+
+数据采集也一样。传统 RPA 要你定义行选择器、列规则、翻页逻辑……九头虫 RPA 的 **[AI 智能采集](/components/general-components/ai-extract-data)** 只需要一句话：*"提取商品标题、价格、销量"*，AI 自动解析页面结构，几秒出结果。
 
 ---
 
@@ -41,7 +43,7 @@ sidebar_label: 介绍
 | 场景 | 怎么做 |
 |------|--------|
 | 登录网站 | 拖「[打开网页](/components/browser-control/open-page)」+「[输入文字](/components/event-interaction/text-input)」×2 +「[点击事件](/components/event-interaction/click)」，每个节点用 AI 描述目标 |
-| 采集数据 | 拖「[数据采集](/components/general-components/data-collection)」，AI 模式下描述行和列，数据自动导出 |
+| 采集数据 | 拖「[AI 智能采集](/components/general-components/ai-extract-data)」，一句话描述要什么字段，AI 自动提取 |
 | 批量填表 | 拿 Excel 数据源，循环填入网页表单 |
 | 定时巡检 | 设一个[定时触发器](/components/triggers/scheduled-trigger)，每天自动检查页面状态并截图 |
 | 监听新消息 | 配一个[元素监控触发器](/components/triggers/element-monitor)，页面出现新消息立刻采集 |

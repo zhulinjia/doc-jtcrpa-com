@@ -64,7 +64,8 @@
       "Bash(git commit -m 'docs: 更新调用流程/下载文件文档，新增元素选择器工具文档 *)",
       "Bash(git commit *)",
       "Bash(git pull *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\wwwroot\\\\doc-jtcrpa-com\\\\static\\\\img\" -Name | Where-Object { $_ -match \"AI|采集|智能|extract\" })"
     ]
   }
 }

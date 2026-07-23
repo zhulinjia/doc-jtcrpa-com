@@ -6,7 +6,7 @@ sidebar_label: Introduction
 
 # JTC RPA
 
-**Browser automation — no coding required.** Don't know CSS selectors? Just describe what you want in plain language, and the AI will locate the elements for you.
+**Browser automation — no coding required.** Two core AI capabilities: **[AI Natural Language Selectors](/core-concepts/css-selectors#ai-natural-language-selectors-recommended-for-beginners)** let you locate page elements in plain language, and **[AI Smart Extraction](/components/general-components/ai-extract-data)** lets you extract page data with a single sentence. No coding, no CSS selectors.
 
 ![JTC RPA](/img/ui.png)
 
@@ -23,6 +23,8 @@ JTC RPA solves this with **AI-powered natural language element selection**:
 - Looking for a specific row in a table? Type `click "View Details" on order #001`
 
 No F12. No CSS class names. No element IDs. **Describe elements on the page the way you'd describe them to a coworker.** Of course, if you're already comfortable with [CSS selectors](/core-concepts/css-selectors), you can write them directly — switch between modes anytime.
+
+Same for data extraction. Traditional RPA forces you to define row selectors, column rules, pagination logic... JTC RPA's **[AI Smart Extraction](/components/general-components/ai-extract-data)** only needs one sentence: *"Extract product titles, prices, and sales numbers"* — AI parses the page structure and returns results in seconds.
 
 ---
 
@@ -41,7 +43,7 @@ That's it. [CSS selectors](/core-concepts/css-selectors), [variables & expressio
 | Task | How |
 |------|-----|
 | Log into a site | Drag in [Open Page](/components/browser-control/open-page) + [Text Input](/components/event-interaction/text-input) ×2 + [Click](/components/event-interaction/click), describe each target to AI |
-| Scrape data | Drag in [Data Collection](/components/general-components/data-collection), describe rows and columns in AI mode, data exports automatically |
+| Scrape data | Drag in [AI Smart Extraction](/components/general-components/ai-extract-data), describe what fields you want in one sentence, AI extracts automatically |
 | Batch form filling | Use Excel as a data source, loop through and fill web forms |
 | Scheduled checks | Set a [Scheduled Trigger](/components/triggers/scheduled-trigger) to check page status and capture screenshots daily |
 | Monitor for new messages | Set up an [Element Monitor Trigger](/components/triggers/element-monitor) to auto-capture when new content appears |
