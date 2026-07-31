@@ -1,0 +1,55 @@
+---
+sidebar_position: 3
+description: 九头虫RPA 支持的 AI 模型提供商列表及各平台 API Key 申请地址。
+---
+
+# AI 模型配置
+
+九头虫RPA 内置了 AI 能力，支持[AI 条件判断](../components/flow-control/ai-condition)、[AI 多路分支](../components/flow-control/ai-switch)、[AI 智能采集](../components/general-components/ai-extract-data)等功能。使用前需要配置至少一个 AI 模型提供商的 API Key。
+
+<img src="/img/AI配置.png" alt="AI 模型配置面板" width="520" />
+
+---
+
+## 支持的模型提供商
+
+| 提供商 | API Key 申请地址 | 可用模型 |
+|--------|-----------------|---------|
+| **DeepSeek** | [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys) | deepseek-chat |
+| **阿里 (Alibaba)** | [bailian.console.aliyun.com](https://bailian.console.aliyun.com/) | Qwen Flash、Qwen 3.7 Max、Qwen Plus、QwQ Plus、Qwen3 Coder Plus |
+| **Kimi (Moonshot)** | [platform.kimi.ai](https://platform.kimi.ai/) | kimi-k2.7-code、moonshot-v1-128k、kimi-k3 |
+| **OpenAI (ChatGPT)** | [platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys) | GPT-5.6 Luna、GPT-5.6 Sol、GPT-5.6 Terra、GPT-5.2 Pro、GPT-4o、o3-Mini、o1 |
+| **Anthropic (Claude)** | [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys) | Claude Haiku 4.5、Claude Sonnet 4.6、Claude Opus 4.8、Claude Sonnet 5 |
+| **Google (Gemini)** | [aistudio.google.com/app/api-keys](https://aistudio.google.com/app/api-keys) | Gemini 2.5 Flash、Gemini 2.5 Pro、Gemini 3 Pro Preview、Gemini Flash Latest |
+
+---
+
+## 配置步骤
+
+1. 打开九头虫RPA 插件的设置面板，进入 **AI 配置** 页面
+2. 选择一个模型提供商，点击其 API Key 申请链接，前往对应平台注册并创建 API Key
+3. 将获取到的 API Key 粘贴到对应提供商的输入框中
+4. 选择该提供商下的具体模型
+5. 保存配置
+
+配置完成后，AI 条件判断、AI 多路分支、AI 智能采集等节点即可正常使用。
+
+---
+
+## 常见问题
+
+### 哪个模型比较好用？
+
+不同模型各有特点，以下是一般性建议：
+
+- 追求**性价比**：DeepSeek-chat、Qwen Flash
+- 追求**准确度**：Claude Sonnet 5 / Opus 4.8、GPT-5.6 Sol
+- **免费试用**：Google Gemini 通常在 AI Studio 提供免费额度
+
+### API Key 如何计费？
+
+API Key 的调用费用由各模型提供商按使用量（token 数）独立收取，与九头虫RPA 无关。具体计费标准请查看对应提供商的官方定价页面。
+
+### 可以同时配置多个提供商吗？
+
+可以。在 AI 配置页面可以填写多个提供商的 API Key，使用 AI 节点时可以在节点配置中选择本次调用使用哪个模型。
