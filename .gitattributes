@@ -1,0 +1,19 @@
+# 统一换行符：仓库里和工作区里都用 LF。
+#
+# 为什么要有这个文件：Windows 上 core.autocrlf 默认开着，不指明的话每次 git add
+# 都会刷一屏「warning: LF will be replaced by CRLF the next time Git touches it」，
+# 而且工作区里的文件会被悄悄换成 CRLF（提交记录看起来没变，实际字节变了，容易出怪 diff）。
+# 声明 eol=lf 之后，两边都是 LF，警告消失，换行符也不会再自己变。
+* text=auto eol=lf
+
+# 素材文件不走换行符转换（后面补截图会用到）。
+# text=auto 本来就能认出二进制，这里写出来是为了**明确意图**，免得以后有人误改。
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.zip binary
+*.woff binary
+*.woff2 binary
