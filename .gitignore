@@ -1,0 +1,17 @@
+# ── 依赖 ──────────────────────────────────────────────
+node_modules/
+
+# ── 构建产物与缓存（都可由 `npx vitepress build` 重新生成）──
+.vitepress/dist/
+.vitepress/cache/
+# 打包好的 dist 压缩包：内容同上，属于「要上传到服务器」的部署件，
+# 不进版本库（否则每次构建都得推一个 1.4MB 的二进制）。真要留着走版本，
+# 把这一行删掉即可。
+.vitepress/dist.zip
+
+# ── 编辑器 / 系统杂项 ─────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
