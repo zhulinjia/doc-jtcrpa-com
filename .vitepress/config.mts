@@ -17,7 +17,7 @@ export default defineConfig({
       {
         defer: '',
         src: 'https://tongji.jtcrpa.com/script.js',
-        'data-website-id': '746902c1-bd29-49f9-88b7-3dc8aae4802c'
+        'data-website-id': '3f8fa26e-7da5-484d-a86d-c8b76a1ee4f6'
       }
     ]
   ],
