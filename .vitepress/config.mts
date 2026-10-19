@@ -9,6 +9,19 @@ export default defineConfig({
   // CLAUDE.md 是写文档用的内部规范，不是给读者的页面——别让它进构建产物和搜索索引。
   srcExclude: ['CLAUDE.md'],
 
+  // 流量统计（自建 umami）。defer 必须留空串：VitePress 会把空值属性渲染成布尔属性，
+  // 删掉就退化成同步脚本，拖慢首屏。
+  head: [
+    [
+      'script',
+      {
+        defer: '',
+        src: 'https://tongji.jtcrpa.com/script.js',
+        'data-website-id': '746902c1-bd29-49f9-88b7-3dc8aae4802c'
+      }
+    ]
+  ],
+
   themeConfig: {
     nav: [
       // 「首页」回官网主站——站内是纯操作文档、没有营销首页（见 CLAUDE.md），
