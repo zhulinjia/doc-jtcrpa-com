@@ -67,8 +67,17 @@ export default defineConfig({
         items: [
           { text: '列表与翻页采集', link: '/tutorial/list-pagination' },
           { text: '滚动加载采集', link: '/tutorial/infinite-scroll' },
+          // 2026-10-25 新增：等待元素出现/消失（waitElement）是「加载慢」场景的通用手法，
+          // 放在滚动加载之后，与「内容是慢慢刷出来的」这一类页面挨着。
+          { text: '等页面加载完成', link: '/tutorial/wait-page' },
           { text: '列表 + 详情页采集', link: '/tutorial/list-and-detail' },
           { text: '从接口采集数据', link: '/tutorial/from-api' },
+          // 2026-10-25 用户定：这一篇是「拿一份清单去批量采」，属于实战场景。
+          // 同为输入的「读取本地文件」「读取飞书多维表格」不是实战内容，留在「数据」组。
+          { text: '上传表格，按清单采集', link: '/tutorial/upload-table' },
+          // 2026-10-25 新增：表单录入不进「采集场景」的采集链（列表/滚动/详情/接口），
+          // 它是**先交互、再采集**的另一类实战，故排在采集场景之后、调用与登录之前。
+          { text: '表单录入与提交', link: '/tutorial/form-entry' },
           { text: '工作流调用', link: '/tutorial/workflow-invocation' },
           { text: '登录、验证码与人工介入', link: '/tutorial/login-captcha' }
         ]
@@ -80,7 +89,12 @@ export default defineConfig({
           { text: '数据存储与数据预览', link: '/data/storage-preview' },
           { text: '导出数据', link: '/data/export' },
           { text: '上传到飞书多维表格', link: '/data/feishu' },
-          { text: '读取已有数据集', link: '/data/read-dataset' }
+          // 「读取飞书多维表格」「读取本地文件」2026-10-25 回到本组（用户定）：这两篇讲的是
+          // 「怎么读到现成数据」，不是实战场景；从实战组挪来的只有「上传表格，按清单采集」。
+          // 「读取已有数据集」跟着「数据存储」走，也留在这组。
+          { text: '读取飞书多维表格', link: '/data/feishu-read' },
+          { text: '读取已有数据集', link: '/data/read-dataset' },
+          { text: '读取本地文件', link: '/data/local-file' }
         ]
       },
       {

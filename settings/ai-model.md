@@ -30,6 +30,8 @@ title: AI 模型与密钥配置
 页面标题是「**AI 模型服务中心**」，下面写着
 「**直接在下方填写对应厂商的 API Key，所有密钥均保存在您本地浏览器中**」。
 
+![AI 模型服务中心：DeepSeek、OpenAI、Anthropic Claude、Google Gemini 四张厂商卡片，下面是「自定义 AI 提供商」](/images/ai-key-page.png)
+
 ## 三、四个厂商，四个输入框
 
 页面上是**四张厂商卡片**，从上到下：
