@@ -78,6 +78,7 @@ export default defineConfig({
           // 2026-10-25 新增：表单录入不进「采集场景」的采集链（列表/滚动/详情/接口），
           // 它是**先交互、再采集**的另一类实战，故排在采集场景之后、调用与登录之前。
           { text: '表单录入与提交', link: '/tutorial/form-entry' },
+          { text: '通过 HTTP 请求发送数据', link: '/tutorial/http-request' },
           { text: '工作流调用', link: '/tutorial/workflow-invocation' },
           { text: '登录、验证码与人工介入', link: '/tutorial/login-captcha' }
         ]
