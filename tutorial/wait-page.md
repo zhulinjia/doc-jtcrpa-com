@@ -59,7 +59,7 @@ title: 等页面加载完成再采集
 
 ## 相关文档
 
-- [等待提示消失练习](/guide/basic-practice#wait) —— 在练习场里亲自试一次
+- [等待数据加载完成练习](/guide/basic-practice#wait) —— 在练习场里亲自试一次
 - [采不到数据 / 结果为空](/troubleshooting/empty-result) —— 采空时按顺序排查
 - [列表与翻页采集](/tutorial/list-pagination) —— 翻页时等新一页加载好
 - [表单录入与提交](/tutorial/form-entry) —— 提交表单后等结果出来再采

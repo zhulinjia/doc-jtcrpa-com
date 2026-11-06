@@ -21,37 +21,37 @@ title: 嵌入页面练习
 
 ## 1. 采集一张嵌入的订单表 {#orders}
 
-打开[嵌入订单表练习](/practice/scenarios/interactive/frame.html)，采集订单编号、商品和金额，保留金额前的 ¥ 符号。
+打开<a href="/practice/scenarios/interactive/frame.html" target="_self">嵌入订单表练习</a>，采集订单编号、商品和金额，保留金额前的 ¥ 符号。
 
 **核对结果：** 共 3 条，第一条为 DD2001、山海之间、¥32.00；其余内容与页面上的订单表一致。
 
 ## 2. 在嵌入页面里点击 {#click}
 
-打开[嵌入页面点击练习](/practice/scenarios/frame-actions/click.html)，让工作流在物流查询区点击「查看物流」，等结果出现后再采集。
+打开<a href="/practice/scenarios/frame-actions/click.html" target="_self">嵌入页面点击练习</a>，让工作流在物流查询区点击「查看物流」，等结果出现后再采集。
 
 **核对结果：** 页面显示物流信息；数据存储中应有 1 条，订单编号 WL1001，物流状态「运输中」，配送地点「杭州转运中心」。
 
 ## 3. 在嵌入页面里填表 {#form}
 
-打开[嵌入页面填表练习](/practice/scenarios/frame-actions/form.html)，让工作流在取书登记表中填写并提交，再采集提交结果。这是模拟表单，填写的内容只显示在练习页面。
+打开<a href="/practice/scenarios/frame-actions/form.html" target="_self">嵌入页面填表练习</a>，让工作流在取书登记表中填写并提交，再采集提交结果。这是模拟表单，填写的内容只显示在练习页面。
 
 **核对结果：** 页面显示「小林」「门店自取」「周六取书」；数据存储中应有 1 条相同记录。
 
 ## 4. 采集两个并列区域 {#parallel}
 
-打开[并列门店练习](/practice/scenarios/frame-structures/parallel.html)，分别打开东区和西区门店的订单，把两个门店的订单保存到同一份数据集中。
+打开<a href="/practice/scenarios/frame-structures/parallel.html" target="_self">并列门店练习</a>，分别打开东区和西区门店的订单，把两个门店的订单保存到同一份数据集中。
 
 **核对结果：** 应有 4 条，东区、西区各 2 条。核对门店名称、订单编号和金额，确认没有漏掉其中一个门店，也没有重复采集另一个门店。
 
 ## 5. 采集多层嵌入的订单 {#nested}
 
-打开[多层嵌入练习](/practice/scenarios/frame-structures/nested.html)。订单页面在部门面板的里面，需要先点击最里面的「查看订单」，再采集表格。
+打开<a href="/practice/scenarios/frame-structures/nested.html" target="_self">多层嵌入练习</a>。订单页面在部门面板的里面，需要先点击最里面的「查看订单」，再采集表格。
 
 **核对结果：** 应有 3 条订单。将订单编号、商品和金额与最里面的表格逐条核对，金额保留 ¥ 符号。
 
 ## 6. 采集来自其他网站的嵌入页面 {#cross}
 
-打开[跨站嵌入练习](/practice/scenarios/frame-cross/index.html)，等待第三方书籍列表加载，再采集第一页前两本书的完整书名和价格，不翻页。
+打开<a href="/practice/scenarios/frame-cross/index.html" target="_self">跨站嵌入练习</a>，等待第三方书籍列表加载，再采集第一页前两本书的完整书名和价格，不翻页。
 
 **核对结果：** 应有 2 条。当前练习页面列出的参考结果是 A Light in the Attic、£51.77 和 Tipping the Velvet、£53.74。第三方网站内容可能变化，请以嵌入页面实际显示为准。
 
@@ -62,4 +62,4 @@ title: 嵌入页面练习
 - **两个门店的数据一样，或只采到一个门店**：分别打开两个门店的订单，核对采集结果与各自表格是否对应；如不一致，向 AI 说明要分别采集东区和西区。
 - **重复运行后看到旧数据**：数据存储中可能保留之前的采集结果。核对本次新增内容，或查看本次运行日志，再与页面上的结果比较。
 
-还不熟悉点击、输入或查看数据？可以先练习[基础操作](/guide/basic-practice)，然后回到[练习场](/practice/hub.html)。
+还不熟悉点击、输入或查看数据？可以先练习[基础操作](/guide/basic-practice)，然后回到<a href="/practice/hub.html" target="_self">练习场</a>。

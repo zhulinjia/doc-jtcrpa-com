@@ -2,16 +2,17 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>等待加载提示消失 - 采集练习场</title>
+  <title>等待数据加载完成 - 采集练习场</title>
   <link rel="stylesheet" href="../../style.css"><link rel="stylesheet" href="./basics.css">
   <script src="./basics.js" defer></script>
+  <script defer src="https://tongji.jtcrpa.com/script.js" data-website-id="3f8fa26e-7da5-484d-a86d-c8b76a1ee4f6"></script>
 </head>
 <body data-scenario="disappear">
   <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
   <main class="container scenario-main">
     <a class="back-link" href="../../hub.html">← 所有练习</a><p><a href="../../../guide/basic-practice.html#wait">查看对应教程</a></p>
-    <section class="scenario-intro"><p class="scenario-kicker">基础操作 · 等待</p><h1>等待加载提示消失</h1><p>点击按钮后，页面会先显示“正在加载”，过一会儿才显示结果。</p>
-      <div class="scenario-task"><h2>试试这样说</h2><p>在扩展的「AI 编译生成」中复制并发送：</p><blockquote>点击“查询书籍”，等“正在加载”消失后，采集书名和状态，保存到数据存储。</blockquote><p>工作流保存后，先点击「重新开始这个练习」，再在「主工作台」点击「手动启动」。</p><details><summary>如何核对结果</summary><p>应有 3 条：《山海之间》《城市慢行》《生活的留白》，状态均为“可借阅”。</p></details></div>
+    <section class="scenario-intro"><p class="scenario-kicker">基础操作 · 等待</p><h1>等待数据加载完成</h1><p>点击按钮后，页面会先显示“正在加载”，过一会儿才显示书籍表格。</p>
+      <div class="scenario-task"><h2>试试这样说</h2><p>在扩展的「AI 编译生成」中复制并发送：</p><blockquote>点击“查询书籍”，等书籍表格出现后，采集书名和状态，保存到数据存储。</blockquote><p>工作流保存后，先点击「重新开始这个练习」，再在「主工作台」点击「手动启动」。</p><details><summary>如何核对结果</summary><p>应有 3 条：《山海之间》《城市慢行》《生活的留白》，状态均为“可借阅”。</p></details></div>
       <p class="restart-tip"><a href="./disappear.html">重新开始这个练习</a> · 书籍数据均为虚构</p>
     </section>
     <section class="demo-panel" aria-labelledby="lookup-title"><div class="section-head"><h2 id="lookup-title">书籍查询</h2><button id="lookup" class="scenario-button" type="button">查询书籍</button></div><div id="lookup-area" aria-live="polite"><p class="status-text">点击“查询书籍”查看结果。</p></div></section>

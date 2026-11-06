@@ -1,6 +1,7 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
 import AsideInstall from './AsideInstall.vue'
+import AsidePractice from './AsidePractice.vue'
 import AsideVideo from './AsideVideo.vue'
 
 const { Layout } = DefaultTheme
@@ -8,10 +9,10 @@ const { Layout } = DefaultTheme
 
 <template>
     <Layout>
-        <!-- 右栏「本页目录」下面依次挂两块：下载框、视频入口。
-             顺序有意为之：下载是主 CTA，视频是次一级，别调换。 -->
+        <!-- 下载入口优先，视频教程仍放在右栏底部。 -->
         <template #aside-outline-after>
             <AsideInstall />
+            <AsidePractice />
             <AsideVideo />
         </template>
     </Layout>
