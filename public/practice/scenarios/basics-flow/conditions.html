@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>按库存状态决定是否采集 - 采集练习场</title><link rel="stylesheet" href="../../style.css"><link rel="stylesheet" href="../interactive/interactive.css"><link rel="stylesheet" href="./flow.css"><script src="./conditions.js" defer></script></head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container interactive-main">
+    <p class="section-kicker">基础操作 · 条件判断</p><h1>按库存状态决定是否采集</h1>
+    <p class="intro-text">同一件商品可能有货，也可能缺货。试着让工作流根据页面上的状态决定下一步。</p>
+    <section class="interactive-task"><h2>试试这样说</h2><p>打开扩展的「AI 编译生成」，复制并发送：</p><blockquote>查看当前商品的库存状态。如果显示“有货”，采集书名和价格并保存到数据存储；如果显示“缺货”，跳过采集并结束。</blockquote><p>工作流保存后，先选择下方一种库存状态，再回到「主工作台」手动启动。两种状态各试一次。</p><details><summary>如何核对结果</summary><p>有货时应采集 1 条：《山海之间》，¥32.00。缺货时不应新增数据；之前采到的数据仍会保留。可以查看本次运行日志，确认没有执行采集步骤。</p></details></section>
+    <section class="interactive-panel" aria-labelledby="product-title"><h2 id="product-title">练习商品</h2><p>可切换库存状态来重复练习，商品和状态均为虚构。</p><div class="stock-controls" role="group" aria-label="选择练习状态"><a id="set-available" class="stock-link" href="./conditions.html">设为有货</a><a id="set-unavailable" class="stock-link" href="./conditions.html?stock=out">设为缺货</a></div><article class="stock-product"><h3 class="stock-title">山海之间</h3><p>价格：<strong class="stock-price">¥32.00</strong></p><p>库存状态：<strong id="stock-status" aria-live="polite">有货</strong></p></article></section>
+    <p class="interactive-links"><a href="./conditions.html">重新开始这个练习</a> · <a href="../../../guide/basic-practice.html#conditions">查看对应教程</a> · <a href="../../hub.html">返回全部练习</a></p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body></html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="清晨的山">
+  <rect width="400" height="300" fill="#e8f1df"/>
+  <circle cx="292" cy="74" r="34" fill="#eabf80"/>
+  <path d="M0 225 110 87l83 105 54-68 153 151v25H0Z" fill="#a7c5a3"/>
+  <path d="M0 270 102 156l65 78 55-54 110 120H0Z" fill="#618b6d"/>
+  <path d="M0 276c75-27 133-11 211 3 73 14 124 4 189-18v39H0Z" fill="#426e55"/>
+</svg>

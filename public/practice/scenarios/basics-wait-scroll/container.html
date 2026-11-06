@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>滚动页面里的评论框 - 采集练习场</title>
+  <link rel="stylesheet" href="../../style.css"><link rel="stylesheet" href="./basics.css">
+  <script src="./basics.js" defer></script>
+</head>
+<body data-scenario="container">
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container scenario-main">
+    <a class="back-link" href="../../hub.html">← 所有练习</a><p><a href="../../../guide/basic-practice.html#scroll">查看对应教程</a></p>
+    <section class="scenario-intro"><p class="scenario-kicker">基础操作 · 滚动</p><h1>滚动页面里的评论框</h1><p>下面的评论框有自己的滚动条。滚动这个框到底部，会加载剩余评论。</p>
+      <div class="scenario-task"><h2>试试这样说</h2><p>在扩展的「AI 编译生成」中复制并发送：</p><blockquote>在页面中找到有独立滚动条的评论框，把评论框向下滚动到底部，等待 2 秒。等看到评论人“雨禾”后，采集全部评论人的名字和评论内容，保存到数据存储。</blockquote><p>工作流保存后，先点击「重新开始这个练习」，再在「主工作台」点击「手动启动」。</p><details><summary>如何核对结果</summary><p>应有 8 条评论，第一位评论人是<strong>林晓</strong>，最后一位是<strong>雨禾</strong>。</p></details></div>
+      <p class="restart-tip"><a href="./container.html">重新开始这个练习</a> · 评论均为虚构</p>
+    </section>
+    <section class="demo-panel" aria-labelledby="comments-title"><div class="section-head"><div><h2 id="comments-title">读者评论</h2><p class="status-text">请在下面的评论框内滚动。</p></div><span id="comment-count" class="status-text" aria-live="polite"></span></div><div id="comment-box" class="comment-box" tabindex="0" role="region" aria-label="可滚动的评论框"><div id="comments"></div><p id="comment-status" class="status-text" role="status" aria-live="polite">向下滚动查看更多评论</p></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

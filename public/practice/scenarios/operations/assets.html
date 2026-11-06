@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>采集图片和文件地址 - 采集练习场</title>
+  <link rel="stylesheet" href="./operations.css">
+</head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>采集练习场<small>九头虫 RPA</small></span></a><a class="header-link" href="../../../guide/first-task.html">返回帮助文档 ↗</a></div></header>
+  <main class="container operation-main">
+    <a class="operation-back" href="../../hub.html">← 返回练习场</a>
+    <section class="operation-hero"><p class="operation-eyebrow">数据采集 · 图片与文件</p><h1>采集图片和文件地址</h1><p>练习提取图片地址，以及找到网页上的文件下载链接。</p></section>
+    <div class="operation-grid">
+      <section class="operation-panel" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">书店插画</h2>
+        <p>下面是三张练习图片，可以点击各自的链接打开原图。</p>
+        <div class="asset-grid">
+          <article class="asset-card"><img src="./media/morning.svg" alt="清晨的山"><h3>清晨的山</h3><p><a href="./media/morning.svg" target="_blank" rel="noopener">查看原图</a></p></article>
+          <article class="asset-card"><img src="./media/sea.svg" alt="海边的灯塔"><h3>海边的灯塔</h3><p><a href="./media/sea.svg" target="_blank" rel="noopener">查看原图</a></p></article>
+          <article class="asset-card"><img src="./media/garden.svg" alt="窗边的花"><h3>窗边的花</h3><p><a href="./media/garden.svg" target="_blank" rel="noopener">查看原图</a></p></article>
+        </div>
+        <h2>练习文件</h2>
+        <p>文件内容为虚构数据，可以下载后打开查看。</p>
+        <table class="file-list"><thead><tr><th scope="col">文件名称</th><th scope="col">格式</th><th scope="col">操作</th></tr></thead><tbody>
+          <tr><td>书籍价格表</td><td>CSV</td><td><a href="./media/book-prices.csv" download>下载文件</a></td></tr>
+          <tr><td>练习说明</td><td>TXT</td><td><a href="./media/readme.txt" download>下载文件</a></td></tr>
+        </tbody></table>
+      </section>
+      <aside class="operation-tip"><h2>试着这样做</h2><p>在扩展的「AI 编译生成」中发送：</p><blockquote>采集页面中三张书店插画的名称和图片地址，保存到数据存储。</blockquote><p>完成后检查是否有 3 条数据，图片地址能否打开对应的原图。</p><p>还可以尝试：</p><blockquote>下载“练习文件”里的两个文件。</blockquote><p>运行后在浏览器的下载记录中核对是否有书籍价格表和练习说明。</p></aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>模拟数据 · 用于练习</span></div></footer>
+</body>
+</html>

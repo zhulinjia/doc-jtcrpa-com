@@ -127,6 +127,7 @@ AI 会在当前网页模拟向下滚动，识别触底加载规律并提取样�
 
 ## 相关文档
 
+- [滚动页面里的区域](/guide/basic-practice#scroll) —— 练习只滚动评论框
 - [列表与翻页采集](/tutorial/list-pagination) —— 带有下一页按钮的常规翻页
 - [长时间采集防休眠](/troubleshooting/anti-sleep) —— 保持浏览器长时间不休眠的配置指引
 - [提取工具](/tools/extract-tools) —— 快速批量保存图片、电话与邮箱

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>刷新页面查看更新 - 采集练习场</title><link rel="stylesheet" href="../../style.css"><link rel="stylesheet" href="../basics-controls/controls.css"><script src="./practice.js" defer></script></head>
+<body data-scenario="reload">
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container basic-main">
+    <p class="section-kicker">基础操作 · 页面</p><h1>刷新页面查看更新</h1>
+    <p class="basic-intro">有些页面需要刷新后才能看到更新。这里用一条模拟消息练习。</p>
+    <section class="basic-task"><h2>试试这样说</h2><p>打开扩展的「AI 编译生成」，复制并发送下面的需求：</p><blockquote>点击“准备更新”，然后刷新当前页面，查看消息的最新状态。</blockquote><p>工作流保存后，先点「重置练习」，再在「主工作台」手动启动。</p><details><summary>如何核对结果</summary><p>刷新前，消息显示“暂无新消息”；刷新后，应显示“已收到新消息”。</p></details></section>
+    <section class="basic-panel"><h2>消息状态</h2><p>点击「准备更新」后，刷新页面才能看到新消息。</p><div class="basic-result" id="message-status" role="status" aria-live="polite">暂无新消息。</div><div class="basic-actions"><button class="basic-button" id="prepare-update" type="button">准备更新</button><button class="basic-button secondary" id="reset-update" type="button">重置练习</button></div><p id="update-hint" role="status"></p></section>
+    <p class="basic-links"><a href="../../../guide/basic-practice.html#reload">查看对应教程</a> · <a href="../../hub.html">返回全部练习</a></p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body></html>

@@ -1,0 +1,18 @@
+.basic-main{max-width:880px;min-height:calc(100vh - 148px);padding-top:48px;padding-bottom:70px}
+.basic-main h1{font-family:Georgia,"Songti SC",SimSun,serif;font-size:36px;letter-spacing:.03em;color:#284638;margin:8px 0 12px}
+.basic-intro{color:#657b6c;font-size:14px;line-height:1.8;max-width:680px}
+.basic-task,.basic-panel{border:1px solid #dce8d8;border-radius:12px;padding:24px 28px;margin:24px 0}
+.basic-task{background:#edf3e9;color:#526b5d;font-size:13px;line-height:1.8}.basic-panel{background:#fff;border-color:#e6ede3;box-shadow:0 6px 22px #33513c09}
+.basic-task h2,.basic-panel h2{font-size:18px;color:#284638;margin:0 0 10px}.basic-task p,.basic-panel p{font-size:13px;line-height:1.8;color:#657b6c;margin:8px 0}
+.basic-task blockquote{margin:12px 0;padding:12px 16px;background:#fff;border-left:3px solid #87a98b;border-radius:4px;color:#284638}
+.basic-task details{margin-top:10px}.basic-task summary{cursor:pointer;font-weight:700;color:#315b46}
+.basic-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px}
+.basic-button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border:0;border-radius:7px;background:#315b46;color:#fff;font-size:13px;font-weight:700;cursor:pointer}
+.basic-button:hover{background:#234736}.basic-button:disabled{opacity:.58;cursor:default}.basic-button.secondary{background:#fff;color:#416b50;border:1px solid #d9e5d9}.basic-button.secondary:hover{background:#f3f7f1}
+.basic-label,.basic-panel legend{display:block;font-size:13px;font-weight:700;color:#385c46;margin-bottom:8px}
+.basic-input,.basic-select{width:min(100%,380px);height:42px;border:1px solid #dbe5d8;border-radius:7px;background:#fbfcf9;color:#2e4438;padding:0 12px;font:inherit;font-size:14px}
+.basic-result{margin-top:18px;padding:14px 16px;background:#f5f8f2;border:1px solid #e0e9dd;border-radius:8px;color:#315b46;font-size:14px;line-height:1.7}
+.basic-result[hidden]{display:none}.basic-result p{margin:0}.basic-result strong{color:#284638}.basic-links{font-size:12px;color:#718477}.basic-links a{color:#315b46;text-decoration:underline;text-underline-offset:3px}
+.basic-panel fieldset{border:0;padding:0;margin:0}.basic-choice{display:flex;align-items:center;gap:9px;margin:10px 0;color:#385c46;font-size:14px}.basic-choice input{accent-color:#315b46}
+.basic-sequence{display:grid;gap:12px}.basic-sequence .basic-task,.basic-sequence .basic-panel{margin:0}.basic-pair{display:grid;gap:12px;margin:24px 0 32px}
+@media(max-width:580px){.basic-main{padding-top:34px}.basic-main h1{font-size:29px}.basic-task,.basic-panel{padding:20px}}

@@ -1,0 +1,23 @@
+.frame-exercise{min-height:calc(100vh - 148px)}
+.frame-intro{margin:0 0 22px;color:#657b6c;font-size:14px;line-height:1.8}
+.frame-task-detail{margin-top:10px;color:#526b5d}
+.frame-task-detail summary{cursor:pointer;color:#315b46;font-weight:700}
+.frame-task-detail p{margin:7px 0 0}
+.frame-action-view{height:340px}
+.frame-form-view{height:570px}
+.frame-content{background:#fff;margin:0;padding:20px;color:#284638}
+.frame-content *,.frame-content *::before,.frame-content *::after{box-sizing:border-box}
+.frame-content h1{font:700 18px/1.4 system-ui,"Microsoft YaHei",sans-serif;margin:0 0 8px}
+.frame-content p{font-size:13px;line-height:1.7;color:#718477;margin:0 0 16px}
+.frame-button{min-height:42px;padding:0 18px;background:#315b46;color:white;border:0;border-radius:7px;font:700 13px system-ui,"Microsoft YaHei",sans-serif;cursor:pointer}
+.frame-button:hover{background:#234736}
+.frame-button:focus-visible,.frame-content input:focus-visible,.frame-content select:focus-visible{outline:3px solid #b47b25;outline-offset:2px}
+.frame-result{margin-top:18px;padding:16px;background:#f5f9f3;border:1px solid #d9e8d7;border-radius:8px}
+.frame-result h2{font-size:15px;margin:0 0 10px;color:#284638}
+.frame-result dl{display:grid;grid-template-columns:90px 1fr;gap:8px;margin:0;font-size:13px;line-height:1.6}
+.frame-result dt{color:#718477}.frame-result dd{margin:0;color:#284638}
+.frame-form{display:grid;gap:12px;max-width:420px}
+.frame-form label{display:block;font-size:12px;font-weight:700;color:#536b5c;margin-bottom:5px}
+.frame-form input,.frame-form select{width:100%;height:40px;border:1px solid #dfe7dd;border-radius:7px;background:#fbfcf9;padding:0 11px;color:#284638;font:14px system-ui,"Microsoft YaHei",sans-serif}
+.frame-form .frame-button{justify-self:start}
+@media(max-width:580px){.frame-action-view{height:350px}.frame-form-view{height:580px}.frame-content{padding:16px}.frame-result dl{grid-template-columns:75px 1fr}}

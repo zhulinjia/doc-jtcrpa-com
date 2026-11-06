@@ -1,0 +1,47 @@
+.hub-main{padding-bottom:80px}
+.hub-intro{position:relative;display:flex;justify-content:space-between;align-items:center;gap:30px;overflow:hidden;margin-top:30px;padding:48px 56px;background:#e6eee3;border-radius:16px}
+.hub-intro h1{font-family:Georgia,"Songti SC",SimSun,serif;font-size:42px;font-weight:600;letter-spacing:.04em;color:#294b3b;margin:0 0 15px}
+.hub-intro p:not(.hub-kicker){font-size:15px;color:#566e60;line-height:1.8;margin:0}
+.hub-intro p.hub-intro-note{font-size:12px;color:#718577;margin-top:15px}
+.hub-kicker{font-size:10px;letter-spacing:.16em;font-weight:700;color:#9a7a56;margin:0 0 12px}
+.hub-intro-mark{position:relative;flex:0 0 150px;width:150px;height:150px;border:1px solid #c7d8c5;border-radius:50%}
+.hub-intro-mark::before,.hub-intro-mark::after{content:"";position:absolute;border:1px solid #c7d8c5;border-radius:50%;inset:18px}
+.hub-intro-mark::after{inset:37px}
+.hub-intro-mark span{position:absolute;top:46px;width:22px;height:60px;border-radius:3px;background:#728e75;transform:rotate(-9deg);z-index:1}
+.hub-intro-mark span:nth-child(1){left:39px;background:#bf9271;transform:rotate(-14deg)}
+.hub-intro-mark span:nth-child(2){left:64px;top:38px;height:68px;background:#587a60;transform:rotate(1deg)}
+.hub-intro-mark span:nth-child(3){left:88px;background:#b9a076;transform:rotate(12deg)}
+.hub-nav{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0}
+.hub-nav a{display:inline-block;padding:9px 15px;border:1px solid #e0e8dd;border-radius:99px;background:#fff;color:#587063;font-size:13px;font-weight:600}
+.hub-nav a:hover{background:#edf4ea;border-color:#c6d8c9}
+.hub-how{margin-top:18px;padding:15px 18px;background:#fff;border:1px solid #e0e8dd;border-radius:10px;color:#587063;font-size:13px;line-height:1.8}.hub-how summary{cursor:pointer;font-weight:700;color:#315b46}.hub-how ol{margin:10px 0 0;padding-left:20px}.hub-how li+li{margin-top:5px}
+.hub-section{scroll-margin-top:24px;margin-top:66px}
+.hub-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:22px}
+.hub-heading h2{font-family:Georgia,"Songti SC",SimSun,serif;font-size:28px;font-weight:600;color:#274336;margin:0 0 9px}
+.hub-heading p:not(.hub-kicker){font-size:13px;line-height:1.8;color:#718276;margin:0}
+.task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.task-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:25px;background:#fff;border:1px solid #e6ede4;border-radius:12px;box-shadow:0 5px 20px #3f594609}
+.task-label{display:inline-block;padding:4px 8px;border-radius:4px;background:#edf4e9;color:#56755e;font-size:11px;font-weight:700}
+.task-card h3{font-size:18px;color:#294a38;margin:13px 0 8px}
+.task-card p{font-size:13px;line-height:1.8;color:#6a7e70;margin:0}
+.task-card p.task-caption{font-size:11px;font-weight:700;color:#72887b;margin-top:16px}
+.task-card blockquote{align-self:stretch;margin:8px 0 12px;padding:12px 14px;border-left:3px solid #a2bea3;border-radius:3px;background:#f5f8f2;font-size:13px;line-height:1.8;color:#345344}
+.task-card p.task-result{color:#617467;margin:0 0 20px}
+.task-card p.task-result strong{color:#41634b}
+.task-link{display:inline-flex;align-items:center;gap:10px;margin-top:auto;color:#315b46;font-size:13px;font-weight:700}
+.task-link:hover,.hub-external-links a:hover{text-decoration:underline;text-underline-offset:4px}
+.scene-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.scene-card{display:flex;align-items:flex-start;gap:14px;min-width:0;min-height:118px;padding:21px;border:1px solid #e6ede4;border-radius:12px;background:#fff;transition:transform .18s ease,border-color .18s ease}
+.scene-card:hover{transform:translateY(-2px);border-color:#bdcfbf}
+.scene-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:9px;background:#edf4e9;color:#4b755a;font-size:18px}
+.scene-card strong{display:block;color:#294a38;font-size:15px;line-height:1.5;margin-bottom:6px}
+.scene-card small{display:block;color:#718276;font-size:12px;line-height:1.7}
+.scene-arrow{margin-left:auto;color:#91a398;font-size:14px}
+.hub-external{margin-top:18px;padding:22px 25px;border:1px solid #e4eade;border-radius:12px;background:#f2f5ee}
+.hub-external h3{font-size:15px;color:#345643;margin:0 0 8px}
+.hub-external p{font-size:12px;color:#718276;line-height:1.8;margin:0 0 14px}
+.hub-external-links{display:flex;flex-wrap:wrap;gap:10px 22px}
+.hub-external-links a{color:#426d53;font-size:12px;font-weight:700}
+@media(max-width:850px){.scene-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-intro{padding:38px}}
+@media(max-width:580px){.hub-main{padding-bottom:48px}.hub-intro{margin-top:16px;padding:30px 24px}.hub-intro h1{font-size:34px}.hub-intro p:not(.hub-kicker){font-size:13px}.hub-intro-mark{display:none}.hub-nav{gap:7px;margin-top:20px}.hub-nav a{padding:8px 12px;font-size:12px}.hub-section{margin-top:48px}.hub-heading h2{font-size:25px}.task-grid,.scene-grid{grid-template-columns:1fr;gap:12px}.task-card{padding:21px}.task-card h3{font-size:17px}.scene-card{min-height:0;padding:18px}.hub-external{padding:20px}}
+@media(prefers-reduced-motion:reduce){.scene-card{transition:none}}

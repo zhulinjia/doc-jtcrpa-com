@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="练习采集来自其他网站的嵌入页面。">
+  <title>采集跨站嵌入页面 - 采集练习场</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./cross.css">
+</head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>采集练习场<small>九头虫 RPA</small></span></a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container cross-main">
+    <p class="section-kicker">FRAME PRACTICE</p>
+    <h1>采集跨站嵌入页面</h1>
+    <p class="cross-intro">下面嵌入的是另一个网站的书籍列表。练习采集嵌入页面里的数据，而不是采集当前页面的说明。</p>
+    <section class="cross-task" aria-labelledby="task-heading">
+      <h2 id="task-heading">试试这样说</h2>
+      <blockquote>采集下方嵌入的书籍网站中第一页前两本书的完整书名和价格，不要翻页，保存到数据存储。</blockquote>
+      <p>工作流保存后回到本页，在「主工作台」点击「手动启动」，再到「数据存储」查看结果。</p>
+      <details><summary>完成后核对结果</summary><p>共 2 条：A Light in the Attic，£51.77；Tipping the Velvet，£53.74。第三方网站内容可能变化，以嵌入页面实际显示为准。</p></details>
+    </section>
+    <section class="cross-panel" aria-labelledby="frame-heading">
+      <h2 id="frame-heading">嵌入的书籍网站</h2>
+      <p>书籍页面来自第三方练习网站。手机上可在下方书籍区域内滚动查看；如果没有加载出来，请检查网络后<a href="./index.html">重新打开本练习</a>。</p>
+      <iframe class="cross-frame" title="第三方书籍练习网站" src="https://books.toscrape.com/"></iframe>
+    </section>
+    <p class="cross-links"><a href="./index.html">重新开始这个练习</a> · <a href="../../../guide/frame-practice.html#cross">查看对应教程</a> · <a href="../../hub.html">返回全部练习</a></p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>公开练习数据 · 不涉及真实业务</span></div></footer>
+</body>
+</html>

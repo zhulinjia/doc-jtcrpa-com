@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="选择一个采集场景，边操作边学习九头虫 RPA。">
+  <title>采集练习场 - 九头虫 RPA</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./hub.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./hub.html" aria-label="采集练习场首页">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>采集练习场<small>九头虫 RPA</small></span>
+      </a>
+      <a class="header-link" href="../guide/first-task.html">返回帮助文档 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main class="container hub-main">
+    <section class="hub-intro" aria-labelledby="hub-title">
+      <div>
+        <p class="hub-kicker">动手练一练</p>
+        <h1 id="hub-title">采集练习场</h1>
+        <p>选一个你想学的场景，打开练习页面，跟着做一遍。</p>
+        <p class="hub-intro-note">练习数据均为虚构，不会提交到真实业务系统。</p>
+      </div>
+      <div class="hub-intro-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+
+    <nav class="hub-nav" aria-label="练习分类">
+      <a href="#basics">基础操作</a><a href="#books">书籍采集</a><a href="#loading">加载与等待</a><a href="#actions">网页操作</a><a href="#frames">嵌入页面</a><a href="#data">接口与其他</a>
+    </nav>
+
+    <details class="hub-how">
+      <summary>第一次使用？先看这三步</summary>
+      <ol>
+        <li>打开一个练习页面，点击浏览器工具栏上的九头虫图标，进入「AI 编译生成」。</li>
+        <li>复制练习里的需求并发送；如果 AI 提问，按页面上的练习目标回答。</li>
+        <li>工作流保存后，按练习提示恢复页面初始状态，在「主工作台」点击「手动启动」，完成后按提示核对结果。</li>
+      </ol>
+    </details>
+
+    <section class="hub-section" id="basics" aria-labelledby="basics-title">
+      <div class="hub-heading"><div><p class="hub-kicker">01 / 从这里开始</p><h2 id="basics-title">基础操作</h2><p>每次练习一个简单动作，先看看扩展能帮你做什么。 <a href="../guide/basic-practice.html">查看基础操作教程</a></p></div></div>
+      <div class="scene-grid">
+        <a class="scene-card" href="./scenarios/basics-controls/click.html"><span class="scene-icon" aria-hidden="true">☞</span><span><strong>点击按钮</strong><small>点击按钮并查看页面上的变化。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-controls/search.html"><span class="scene-icon" aria-hidden="true">⌕</span><span><strong>输入后按回车</strong><small>在搜索框输入文字，按回车查看结果。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-input-reload/tab.html"><span class="scene-icon" aria-hidden="true">⇥</span><span><strong>输入后按 Tab</strong><small>离开输入框，让页面检查填写的内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-controls/choices.html"><span class="scene-icon" aria-hidden="true">☑</span><span><strong>选择与取消勾选</strong><small>练习下拉框、单选框和复选框。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-wait-scroll/disappear.html"><span class="scene-icon" aria-hidden="true">◷</span><span><strong>等待提示消失</strong><small>等加载提示消失后再采集内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-wait-scroll/container.html"><span class="scene-icon" aria-hidden="true">↓</span><span><strong>滚动页面里的区域</strong><small>只滚动评论框，查看并采集更多内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-scroll-extract/target.html"><span class="scene-icon" aria-hidden="true">⇣</span><span><strong>滚动到指定内容</strong><small>找到书架里的指定书籍并滚动到可见位置。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-scroll-extract/links.html"><span class="scene-icon" aria-hidden="true">↗</span><span><strong>采集文字和链接</strong><small>采集练习标题和对应的链接地址。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-input-reload/reload.html"><span class="scene-icon" aria-hidden="true">⟳</span><span><strong>刷新页面查看更新</strong><small>刷新页面后查看消息的新状态。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-flow/tabs.html"><span class="scene-icon" aria-hidden="true">▢</span><span><strong>切换标签页</strong><small>打开新标签页，采集后返回并关闭。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/basics-flow/conditions.html"><span class="scene-icon" aria-hidden="true">◇</span><span><strong>按条件处理</strong><small>根据有货或缺货，决定下一步怎么做。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="hub-section" id="books" aria-labelledby="books-title">
+      <div class="hub-heading"><div><p class="hub-kicker">02 / 采集列表</p><h2 id="books-title">书籍采集</h2><p>下面几个练习都在同一个书店页面完成。开始每项练习前，请先回到书店首页。</p></div></div>
+      <div class="task-grid">
+        <article class="task-card">
+          <span class="task-label">入门</span><h3>采集当前页</h3>
+          <p>采集这一页书籍的书名和价格。</p>
+          <p class="task-caption">可以这样告诉 AI</p>
+          <blockquote>请采集当前书籍列表这一页每本书的书名和价格，保存到数据存储，不要翻页。</blockquote>
+          <p class="task-result"><strong>核对结果：</strong>首页共 4 本，第一本是《山海之间》，价格 ¥32.00。</p>
+          <a class="task-link" href="./index.html">打开书店 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="task-card">
+          <span class="task-label">翻页</span><h3>采集前两页</h3>
+          <p>先采集第一页，再翻到下一页继续采集。</p>
+          <p class="task-caption">可以这样告诉 AI</p>
+          <blockquote>先采集第一页的书名和价格。点击“下一页”后等待 3 秒，只有页面显示“第 2 / 3 页”时才采集第二页，否则暂停并提示我。把结果保存在同一份数据集中，采完第二页就结束。</blockquote>
+          <p class="task-result"><strong>核对结果：</strong>前两页共 8 本，第二页第一本是《旅途中的小地图》，价格 ¥48.00。</p>
+          <a class="task-link" href="./index.html">打开书店 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="task-card">
+          <span class="task-label">搜索</span><h3>搜索后采集</h3>
+          <p>先搜索书名，再采集搜索结果。</p>
+          <p class="task-caption">可以这样告诉 AI</p>
+          <blockquote>在搜索框输入“城市”，点击搜索，采集搜索结果的书名和价格。</blockquote>
+          <p class="task-result"><strong>核对结果：</strong>找到《城市慢行》，价格 ¥45.00。</p>
+          <a class="task-link" href="./index.html">打开书店 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="task-card">
+          <span class="task-label">详情</span><h3>进入详情页采集</h3>
+          <p>从书籍列表进入详情页，采集每本书的简介。</p>
+          <p class="task-caption">可以这样告诉 AI</p>
+          <blockquote>依次打开列表前两本书的详情页，采集书名和内容简介，把每本书的信息保存在同一行。</blockquote>
+          <p class="task-result"><strong>核对结果：</strong>应有两条：《山海之间》的简介提到“远方与归途”，《城市慢行》的简介提到“街巷慢慢行走”。</p>
+          <a class="task-link" href="./index.html">打开书店 <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="task-card">
+          <span class="task-label">网址清单</span><h3>按清单逐条采集</h3>
+          <p>在书店点击“下载练习清单”，把文件添加到 AI 对话，再发送需求。</p>
+          <p class="task-caption">可以这样告诉 AI</p>
+          <blockquote>逐条打开上传表格中“网址”列的网页，采集每本书的书名和价格，保存到同一份数据集中，不使用自定义脚本。</blockquote>
+          <p class="task-result"><strong>核对结果：</strong>清单有两本书，查看结果中的“数据来源页”，核对网址和书名是否对应。</p>
+          <a class="task-link" href="./index.html">打开书店并下载清单 <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="hub-section" id="loading" aria-labelledby="loading-title">
+      <div class="hub-heading"><div><p class="hub-kicker">03 / 内容逐渐出现</p><h2 id="loading-title">加载与等待</h2><p>练习页面会在滚动、点击或等待后显示更多内容。</p></div></div>
+      <div class="scene-grid">
+        <a class="scene-card" href="./scenarios/dynamic/scroll.html"><span class="scene-icon" aria-hidden="true">↓</span><span><strong>滚动加载</strong><small>向下滚动，让后面的内容出现，再采集列表。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/dynamic/more.html"><span class="scene-icon" aria-hidden="true">＋</span><span><strong>点击加载更多</strong><small>反复点击按钮，采集逐批显示的内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/dynamic/loading.html"><span class="scene-icon" aria-hidden="true">◷</span><span><strong>等待内容出现</strong><small>页面需要一些时间加载，等内容出现后再采集。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="hub-section" id="actions" aria-labelledby="actions-title">
+      <div class="hub-heading"><div><p class="hub-kicker">04 / 先操作，再查看</p><h2 id="actions-title">网页操作</h2><p>练习填写、下载，以及运行时需要人工处理的情况。</p></div></div>
+      <div class="scene-grid">
+        <a class="scene-card" href="./scenarios/operations/form.html"><span class="scene-icon" aria-hidden="true">✎</span><span><strong>填写表单</strong><small>填写和选择信息，提交后查看页面显示的结果。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/operations/assets.html"><span class="scene-icon" aria-hidden="true">◇</span><span><strong>采集与下载图片</strong><small>查看图片信息，练习采集地址和下载文件。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/operations/access.html"><span class="scene-icon" aria-hidden="true">☑</span><span><strong>人工处理后继续</strong><small>遇到需要人工确认的模拟页面时，暂停并继续。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/interactive/hover.html"><span class="scene-icon" aria-hidden="true">◉</span><span><strong>悬停后采集信息</strong><small>鼠标移到按钮上，采集显示出的联系方式。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/interactive/dialog.html"><span class="scene-icon" aria-hidden="true">▢</span><span><strong>采集弹窗详情</strong><small>打开订单弹窗，采集其中的内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="hub-section" id="frames" aria-labelledby="frames-title">
+      <div class="hub-heading"><div><p class="hub-kicker">05 / 页面里的页面</p><h2 id="frames-title">嵌入页面（iframe）</h2><p>目标内容有时不在当前页面最外层。下面练习在嵌入页面中采集和操作。 <a href="../guide/frame-practice.html">查看嵌入页面教程</a></p></div></div>
+      <div class="scene-grid">
+        <a class="scene-card" href="./scenarios/interactive/frame.html"><span class="scene-icon" aria-hidden="true">▤</span><span><strong>采集嵌入页面</strong><small>从嵌入页面的订单表中采集数据。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/frame-actions/click.html"><span class="scene-icon" aria-hidden="true">☞</span><span><strong>在嵌入页面里点击</strong><small>点击嵌入页面中的按钮，再采集结果。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/frame-actions/form.html"><span class="scene-icon" aria-hidden="true">✎</span><span><strong>在嵌入页面里填表</strong><small>填写并提交嵌入页面中的表单。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/frame-structures/parallel.html"><span class="scene-icon" aria-hidden="true">▥</span><span><strong>采集多个并列页面</strong><small>分别操作并列的两个门店页面。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/frame-structures/nested.html"><span class="scene-icon" aria-hidden="true">▣</span><span><strong>采集多层嵌入页面</strong><small>进入多层嵌套的页面，采集最里面的内容。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/frame-cross/index.html"><span class="scene-icon" aria-hidden="true">↗</span><span><strong>采集跨站嵌入页面</strong><small>从另一个网站嵌入的页面中采集数据。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="hub-section" id="data" aria-labelledby="data-title">
+      <div class="hub-heading"><div><p class="hub-kicker">06 / 数据从哪里来</p><h2 id="data-title">接口与其他</h2><p>先试试读取网页加载的数据；连接真实系统时再参考对应教程。</p></div></div>
+      <div class="scene-grid">
+        <a class="scene-card" href="./scenarios/api/index.html"><span class="scene-icon" aria-hidden="true">{ }</span><span><strong>从接口采集数据</strong><small>查看页面加载的数据，并练习从中采集。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+        <a class="scene-card" href="./scenarios/api/send.html"><span class="scene-icon" aria-hidden="true">↗</span><span><strong>发送订单并查看返回</strong><small>发送虚构订单到第三方测试服务，核对返回数据。</small></span><span class="scene-arrow" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hub-external">
+        <h3>需要真实环境的练习</h3>
+        <p>下面的操作需要连接实际服务或使用扩展的功能，练习场不会模拟真实发送或写入成功。</p>
+        <div class="hub-external-links">
+          <a href="../tutorial/http-request.html">发送 HTTP 请求 <span aria-hidden="true">↗</span></a>
+          <a href="../data/feishu.html">写入飞书多维表格 <span aria-hidden="true">↗</span></a>
+          <a href="../data/feishu-read.html">读取飞书多维表格 <span aria-hidden="true">↗</span></a>
+          <a href="../data/local-file.html">读取本地文件 <span aria-hidden="true">↗</span></a>
+          <a href="../data/export.html">导出采集结果 <span aria-hidden="true">↗</span></a>
+          <a href="../automation/scheduled-task.html">设置定时任务 <span aria-hidden="true">↗</span></a>
+          <a href="../automation/batch-collection.html">批量采集 <span aria-hidden="true">↗</span></a>
+          <a href="../tutorial/workflow-invocation.html">调用工作流 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

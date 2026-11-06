@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>采集弹窗中的详情 - 采集练习场</title><link rel="stylesheet" href="../../style.css"><link rel="stylesheet" href="./interactive.css"><script src="./dialog.js" defer></script></head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container interactive-main">
+    <p class="section-kicker">PAGE PRACTICE</p><h1>采集弹窗中的详情</h1>
+    <p class="intro-text">有些详情不会跳转到新页面，而是在当前页面弹出。先打开详情，再采集其中的内容。</p>
+    <section class="interactive-task"><h2>试试这样说</h2><blockquote>点击“查看订单详情”，采集弹窗里的订单编号、商品和金额，保存到数据存储，然后关闭弹窗。</blockquote><p>核对结果：应有 <strong>1 条</strong>，内容是 <strong>DD3001、山海之间、¥32.00</strong>。</p></section>
+    <section class="interactive-panel"><h2>待查看的订单</h2><p>订单 DD3001 · 练习数据</p><button id="open-detail" type="button" class="interactive-button">查看订单详情</button></section>
+    <dialog id="order-dialog" class="interactive-dialog" aria-labelledby="dialog-title"><h2 id="dialog-title">订单详情</h2><div class="dialog-data"><p>订单编号：<strong class="dialog-number">DD3001</strong></p><p>商品：<strong class="dialog-product">山海之间</strong></p><p>金额：<strong class="dialog-price">¥32.00</strong></p></div><button id="close-detail" type="button" class="interactive-button">关闭</button></dialog>
+    <p class="interactive-links"><a href="./dialog.html">重新开始这个练习</a> · <a href="../../hub.html">返回全部练习</a></p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

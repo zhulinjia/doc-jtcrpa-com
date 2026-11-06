@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>采集多层嵌入的订单 - 采集练习场</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../interactive/interactive.css">
+  <link rel="stylesheet" href="./structures.css">
+</head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html">采集练习场</a><a class="header-link" href="../../hub.html">← 返回练习场</a></div></header>
+  <main class="container interactive-main">
+    <p class="section-kicker">FRAME PRACTICE</p>
+    <h1>采集多层嵌入的订单</h1>
+    <p class="intro-text">下面的部门面板里还嵌着一张订单页面。打开订单后，再采集最里面的表格。</p>
+    <section class="interactive-task">
+      <h2>试试这样说</h2>
+      <blockquote>在部门面板中找到最里面的订单页面，点击“查看订单”，采集订单编号、商品和金额。金额保留 ¥ 符号，保存到数据存储。</blockquote>
+      <p>工作流保存后，先点「重新开始这个练习」，再从「主工作台」启动。完成后应采到 <strong>3 条</strong>，订单内容可与最里面的表格逐条核对。</p>
+    </section>
+    <section class="interactive-panel">
+      <h2>部门面板</h2>
+      <p>面板中的订单页面是另一层嵌入内容，数据均为虚构。</p>
+      <iframe class="nested-frame" title="部门面板" src="./department.html"></iframe>
+    </section>
+    <p class="interactive-links"><a href="./nested.html">重新开始这个练习</a> · <a href="../../../guide/frame-practice.html#nested">查看对应教程</a> · <a href="../../hub.html">返回全部练习</a></p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

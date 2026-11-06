@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>书店练习场 - 九头虫 RPA</title>
+  <meta name="description" content="在模拟书店练习搜索、翻页和采集详情。">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./practice.js" defer></script>
+</head>
+<body data-page="list">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html" aria-label="书店练习场首页">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>书店练习场<small>九头虫 RPA</small></span>
+      </a>
+      <nav class="header-links" aria-label="页面导航"><a class="header-link" href="./hub.html">全部练习</a><a class="header-link" href="../guide/first-task.html">返回帮助文档 <span aria-hidden="true">↗</span></a></nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> 一起动手试一试</p>
+          <h1 id="page-title">欢迎来到<br><em>书店练习场</em></h1>
+          <p class="intro-description">在这里练习搜索、翻页和采集详情。<br>选一个简单的任务，跟着做一遍。</p>
+          <a class="intro-link" href="#book-list">开始浏览 <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="intro-visual" aria-hidden="true">
+          <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+          <div class="hero-book book-back"><span>远方</span><i></i></div>
+          <div class="hero-book book-front"><span>读一本<br>好书</span><i></i><small>BOOKS FOR PRACTICE</small></div>
+          <div class="visual-caption"><span class="sparkle">✳</span> 每一本，都值得翻开</div>
+        </div>
+      </section>
+
+      <div class="notice"><span class="notice-icon" aria-hidden="true">i</span><span>练习场中的书籍和价格均为虚构，不涉及真实购买。</span></div>
+
+      <section class="catalog" id="book-list" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div><p class="section-kicker">THE LITTLE BOOKSHOP</p><h2 id="catalog-title">逛逛书架</h2><p>从一本感兴趣的书开始，练习采集网页上的信息。</p></div>
+          <a class="download-link" id="download-list" download="书籍网址清单.csv" href="#">↓ 下载练习清单</a>
+        </div>
+
+        <form class="filters" action="./index.html" method="get" role="search">
+          <div class="search-control"><label for="keyword">搜索书籍</label><div class="input-wrap"><span aria-hidden="true">⌕</span><input id="keyword" name="q" type="search" placeholder="输入书名或作者" autocomplete="off"></div></div>
+          <div class="category-control"><label for="category">分类</label><select id="category" name="category"><option value="">全部分类</option><option value="文学">文学</option><option value="旅行">旅行</option><option value="生活">生活</option></select></div>
+          <button type="submit" class="search-button">搜索</button>
+        </form>
+
+        <div class="results-header"><p id="result-count" role="status" aria-live="polite">正在加载书籍…</p><a id="clear-filters" class="clear-link" href="./index.html" hidden>清除筛选</a></div>
+        <div id="books" class="book-grid"></div>
+        <p id="empty-state" class="empty-state" hidden>没有找到符合条件的书。换个关键词再试试，或<a href="./index.html">查看全部书籍</a>。</p>
+        <nav id="pagination" class="pagination" aria-label="书籍列表分页"></nav>
+        <noscript><p class="empty-state">请在浏览器中开启 JavaScript 后查看书籍。</p></noscript>
+      </section>
+
+      <section class="practice-note" aria-labelledby="practice-title">
+        <div><p class="section-kicker">A LITTLE PRACTICE</p><h2 id="practice-title">可以练习什么？</h2></div>
+        <div class="practice-items"><div><strong>01</strong><span>翻页采集书名和价格</span></div><div><strong>02</strong><span>搜索后采集结果</span></div><div><strong>03</strong><span>打开详情采集简介</span></div><div><strong>04</strong><span>下载清单逐条采集</span></div></div>
+        <div class="first-task">
+          <h3>第一次练习：采集这一页</h3>
+          <p>先<a href="./index.html">回到书架首页</a>，点击浏览器工具栏上的九头虫图标，进入「AI 编译生成」，复制并发送：</p>
+          <blockquote>请采集当前书籍列表这一页每本书的书名和价格，保存到数据存储，不要翻页。</blockquote>
+          <p>工作流保存后，先回到<a href="./index.html">书架首页</a>，再在「主工作台」点击「手动启动」。完成后打开「数据存储」，核对这一页的 4 本书。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>书店练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

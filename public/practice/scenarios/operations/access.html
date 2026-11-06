@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>人工处理后继续采集 - 采集练习场</title>
+  <link rel="stylesheet" href="./operations.css">
+  <script src="./access.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>采集练习场<small>九头虫 RPA</small></span></a><a class="header-link" href="../../../guide/first-task.html">返回帮助文档 ↗</a></div></header>
+  <main class="container operation-main">
+    <a class="operation-back" href="../../hub.html">← 返回练习场</a>
+    <section class="operation-hero"><p class="operation-eyebrow">运行控制 · 人工介入</p><h1>人工处理后继续采集</h1><p>练习遇到需要本人处理的页面时，暂停任务并在处理后继续。</p></section>
+    <div class="operation-grid">
+      <section class="operation-panel" aria-labelledby="report-title">
+        <h2 id="report-title">练习报表</h2>
+        <div class="notice-inline">这是模拟页面，不需要真实账号、密码或验证码。这里的确认只影响当前浏览器标签页。</div>
+        <div id="gate" class="gate-message"><h3>需要人工处理</h3><p>请由你本人点击下方按钮，模拟完成网页上的确认。</p><button id="confirm-access" class="operation-button" type="button">我已完成</button></div>
+        <div id="report" aria-live="polite" hidden></div>
+        <div class="operation-actions"><button id="reset-access" class="operation-button secondary" type="button">重置练习</button></div>
+      </section>
+      <aside class="operation-tip"><h2>试着这样做</h2><p>先点击「重置练习」，再在扩展的「AI 编译生成」中发送：</p><blockquote>如果页面显示需要人工处理，请暂停并提示我。等我在网页点击“我已完成”并恢复运行后，采集报表中每个项目的名称和金额，保存到数据存储。</blockquote><p>工作流保存后，先回到这个页面再次点击「重置练习」，再启动工作流。当扩展暂停时，回到这个页面点「我已完成」，再按扩展里的提示恢复运行。</p><p>结果应有 3 条，第一项是「春日读书会」，金额为 ¥120.00。</p><p>不同网页的提示不同；这个页面只模拟人工处理，不代表扩展总能识别真实登录或验证码。</p></aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>模拟数据 · 用于练习</span></div></footer>
+</body>
+</html>

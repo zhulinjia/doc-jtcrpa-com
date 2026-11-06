@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="海边的灯塔">
+  <rect width="400" height="300" fill="#e2f0ee"/>
+  <circle cx="72" cy="73" r="28" fill="#ebc79b"/>
+  <path d="M0 198c82-25 119-18 199 0 78 17 133 5 201-12v114H0Z" fill="#8cbdb8"/>
+  <path d="M0 242c83-21 139-10 216 4 72 13 128 5 184-10v64H0Z" fill="#5e9594"/>
+  <path d="m257 89 20-23 20 23-7 150h-26Z" fill="#f9f5e7"/>
+  <path d="M253 88h48v17h-48ZM264 137h26v17h-26ZM260 190h33v18h-33Z" fill="#c98269"/>
+  <rect x="271" y="112" width="12" height="17" rx="2" fill="#638481"/>
+</svg>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="练习从网页请求中采集订单数据。">
+  <title>从接口采集订单 - 九头虫练习场</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./api.css">
+  <script src="./orders.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../hub.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>采集练习场<small>九头虫 RPA</small></span></a>
+      <a class="header-link" href="../../hub.html">← 全部练习</a>
+    </div>
+  </header>
+  <main class="container api-main">
+    <div class="api-intro">
+      <p class="section-kicker">DATA PRACTICE</p>
+      <h1>从接口采集订单</h1>
+      <p>点击加载后，网页会从本站读取一份订单数据。练习通过网页请求采集订单，而不是手动复制表格。</p>
+    </div>
+    <section class="task-box" aria-labelledby="task-title">
+      <h2 id="task-title">练习目标</h2>
+      <p>先点击下面的「加载订单」，等表格出现，再打开九头虫扩展，复制并发送：</p>
+      <blockquote>点击加载订单，尝试通过网页的数据请求采集订单编号、商品名称和金额，保存到数据存储。</blockquote>
+      <p>工作流保存后，点击「重新开始」，再到「主工作台」点击「手动启动」。</p>
+      <p>完成后在数据预览中核对：共 <strong>4 条</strong>，第一条是 <strong>DD1001、山海之间、¥32.00</strong>。订单均为练习数据。</p>
+    </section>
+    <section class="order-panel" aria-labelledby="orders-title">
+      <div class="panel-heading"><div><p class="section-kicker">PRACTICE ORDERS</p><h2 id="orders-title">练习订单</h2></div><div class="panel-actions"><button class="search-button" id="load-orders" type="button">加载订单</button><button class="reset-button" id="reset-orders" type="button">重新开始</button></div></div>
+      <p id="order-status" class="order-status" role="status" aria-live="polite">还没有加载订单。</p>
+      <div class="table-wrap" id="order-result" hidden>
+        <table><thead><tr><th scope="col">订单编号</th><th scope="col">商品名称</th><th scope="col">金额</th></tr></thead><tbody id="order-rows"></tbody></table>
+      </div>
+    </section>
+    <p class="api-help">如果 AI 没有识别到请求，先重新点击「加载订单」，再试一次。接口采集依赖网页实际发出的请求，详见<a href="../../../tutorial/from-api.html">从接口采集数据</a>。</p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

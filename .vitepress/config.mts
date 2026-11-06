@@ -34,6 +34,7 @@ export default defineConfig({
       { text: '首页', link: 'https://jtcrpa.com/', target: '_blank', rel: 'noopener noreferrer' },
       { text: '入门', link: '/guide/what-is-jtcrpa' },
       { text: '采集实战', link: '/tutorial/list-pagination' },
+      { text: '练习场', link: '/practice/hub.html', target: '_blank', rel: 'noopener noreferrer' },
       { text: '数据', link: '/data/storage-preview' },
       { text: '自动化', link: '/automation/scheduled-task' },
       { text: '常见问题', link: '/troubleshooting/' }
@@ -59,6 +60,14 @@ export default defineConfig({
         items: [
           { text: '采集需求怎么写', link: '/guide/write-requirement' },
           { text: '编译期间会发生什么', link: '/guide/during-compile' }
+        ]
+      },
+      {
+        text: '基础操作',
+        collapsed: false,
+        items: [
+          { text: '基础操作练习', link: '/guide/basic-practice' },
+          { text: '嵌入页面练习', link: '/guide/frame-practice' }
         ]
       },
       {

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>滚动加载评论 - 采集练习场</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./dynamic.css">
+  <script src="./dynamic.js" defer></script>
+</head>
+<body data-scenario="scroll">
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="../../hub.html">采集练习场</a>
+    <a class="header-link" href="../../hub.html">← 返回练习场</a>
+  </div></header>
+  <main class="container scenario-main">
+    <a class="back-link" href="../../hub.html">← 所有练习</a>
+    <section class="scenario-intro">
+      <p class="scenario-kicker">动态列表 · 01</p>
+      <h1>向下滚动加载评论</h1>
+      <p>下面的评论会在滚动到页面底部时分批出现。试着让工作流一直采集到没有更多评论。</p>
+      <div class="scenario-task">
+        <h2>试试这样说</h2>
+        <p>点击浏览器工具栏上的九头虫图标，在「AI 编译生成」中发送：</p>
+        <blockquote>采集评论列表中的评论人、评分和评论内容。向下滚动加载更多，直到没有更多评论，保存全部评论到数据存储。</blockquote>
+        <p>工作流保存后，先点击下方的「重新开始这个练习」，再在「主工作台」点击「手动启动」。</p>
+        <p>采集完成后，在「数据存储」核对：共 <strong>12 条</strong>，第一位评论人是<strong>林晓</strong>，最后一位是<strong>雨禾</strong>。</p>
+      </div>
+      <p class="restart-tip"><a href="./scroll.html">重新开始这个练习</a> · 页面中的评论均为虚构内容</p>
+    </section>
+    <section aria-labelledby="reviews-heading">
+      <div class="section-head"><div><p class="scenario-kicker">读者评论</p><h2 id="reviews-heading">大家的阅读感受</h2></div><span id="count" class="count" aria-live="polite"></span></div>
+      <div id="reviews" class="review-list"></div>
+      <div id="load-status" class="load-status" role="status" aria-live="polite">向下滚动，查看更多评论</div>
+      <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>采集练习场</span><span>虚构数据 · 用于采集练习</span></div></footer>
+</body>
+</html>

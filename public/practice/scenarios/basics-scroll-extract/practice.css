@@ -1,0 +1,3 @@
+.bookshelf{height:260px;overflow-y:auto;border:1px solid #dbe5d8;border-radius:8px;background:#fbfcf9}
+.shelf-list,.practice-links{list-style:none;margin:0;padding:0}.shelf-list li{padding:15px 18px;border-bottom:1px solid #e8eee6;color:#385c46}.shelf-list li:last-child{border-bottom:0}.shelf-list #target-book{font-weight:700;color:#284638;background:#f1f7ed}
+.practice-link{padding:14px 0;border-bottom:1px solid #e8eee6}.practice-link:last-child{border-bottom:0}.practice-link a{color:#315b46;text-decoration:underline;text-underline-offset:3px}

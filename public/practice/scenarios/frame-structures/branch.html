@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>门店订单</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../interactive/interactive.css">
+  <link rel="stylesheet" href="./structures.css">
+  <script src="./branch.js" defer></script>
+</head>
+<body class="frame-content">
+  <h1 id="branch-name">门店订单</h1>
+  <p>点击按钮后显示本门店的订单。</p>
+  <button class="interactive-button" id="show-orders" type="button">查看订单</button>
+  <p class="frame-status" id="branch-status" role="status" aria-live="polite">订单尚未显示。</p>
+  <table class="interactive-table" id="branch-table" hidden>
+    <thead><tr><th scope="col">门店</th><th scope="col">订单编号</th><th scope="col">金额</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</body>
+</html>
