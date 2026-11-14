@@ -5,7 +5,7 @@ title: 基础操作练习
 
 # 基础操作练习
 
-第一次使用九头虫RPA-Agent，可以从这些小练习开始。每次只练一个动作，再逐步尝试采集数据、切换标签页和判断条件。练习场中的商品和评论都是虚构的，可以放心操作。
+这里是按需选做的小练习，无需全部学完。第一次使用先做[第一个采集任务](/guide/first-task)；只有想单独试某个网页动作时，再来选一个。练习数据都是虚构的。
 
 ## 每次练习怎么做
 
@@ -13,25 +13,25 @@ title: 基础操作练习
 2. 进入「**AI 编译生成**」，复制练习页面「试试这样说」里的需求，发送给 AI。选择与取消勾选页面有三个小练习，一次复制其中一条即可。
 3. 等 AI 完成分析并保存工作流。分析期间页面可能被操作，请先不要手动点击。
 4. 按练习页面提示重置状态，再打开「**主工作台**」，找到刚生成的工作流，点击「**手动启动**」。
-5. 对照下方的预期结果核对。需要查看采集数据时，打开「**数据存储**」，在对应数据集上点击「**查看数据预览**」。
+5. 对照下方的预期结果核对。需要查看采集数据时，打开「**数据存储**」，在对应数据集上点击「**预览**」。
 
 AI 生成的工作流可能需要调整；如果结果不符合预期，可以把发现的问题告诉 AI，再次生成或修改工作流。初次使用可先阅读[第一个采集任务](/guide/first-task)。
 
 ## 1. 点击按钮 {#click}
 
-打开<a href="/practice/scenarios/basics-controls/click.html" target="_self">点击按钮练习</a>，让工作流点击「领取书签」。
+打开<a href="/practice/scenarios/basics-controls/click.html" target="_blank" rel="noopener noreferrer">点击按钮练习</a>，让工作流点击「领取书签」。
 
 **怎样算完成？** 页面上显示「已领取书签」。想再试一次，点击「重置练习」。
 
 ## 2. 输入后按回车 {#search}
 
-打开<a href="/practice/scenarios/basics-controls/search.html" target="_self">回车搜索练习</a>，让工作流在书名搜索框中输入「城市」，然后按回车。
+打开<a href="/practice/scenarios/basics-controls/search.html" target="_blank" rel="noopener noreferrer">回车搜索练习</a>，让工作流在书名搜索框中输入「城市」，然后按回车。
 
 **怎样算完成？** 页面显示《城市慢行》，价格为 ¥45.00。再次运行前，点击「重置练习」。
 
 ## 3. 选择与取消勾选 {#choices}
 
-打开<a href="/practice/scenarios/basics-controls/choices.html" target="_self">选择与取消勾选练习</a>。页面上有三个小练习，可以分别发送需求、分别生成工作流：
+打开<a href="/practice/scenarios/basics-controls/choices.html" target="_blank" rel="noopener noreferrer">选择与取消勾选练习</a>。页面上有三个小练习，可以分别发送需求、分别生成工作流：
 
 | 小练习 | 完成后的页面 |
 | :--- | :--- |
@@ -43,25 +43,25 @@ AI 生成的工作流可能需要调整；如果结果不符合预期，可以�
 
 ## 4. 等待数据加载完成 {#wait}
 
-打开<a href="/practice/scenarios/basics-wait-scroll/disappear.html" target="_self">等待数据加载完成练习</a>，让工作流点击「查询书籍」，等书籍表格出现后，采集书名和状态。
+打开<a href="/practice/scenarios/basics-wait-scroll/disappear.html" target="_blank" rel="noopener noreferrer">等待数据加载完成练习</a>，让工作流点击「查询书籍」，等书籍表格出现后，采集书名和状态。
 
 工作流保存后，先点击「重新开始这个练习」，再手动启动。到「数据存储」查看结果，应有 3 条：《山海之间》《城市慢行》《生活的留白》，状态均为「可借阅」。
 
 ## 5. 滚动页面里的区域 {#scroll}
 
-打开<a href="/practice/scenarios/basics-wait-scroll/container.html" target="_self">滚动评论框练习</a>。评论框有自己的滚动条，滚到底部后会加载剩余评论。
+打开<a href="/practice/scenarios/basics-wait-scroll/container.html" target="_blank" rel="noopener noreferrer">滚动评论框练习</a>。评论框有自己的滚动条，滚到底部后会加载剩余评论。
 
-让工作流滚动评论框到底部，等待 2 秒，并等看到评论人「雨禾」后，再采集所有评论人的名字和评论内容。工作流保存后，先点击「重新开始这个练习」，再手动启动。到「数据存储」查看，应有 8 条评论，第一位评论人是林晓，最后一位是雨禾。
+让工作流滚动评论框，加载全部评论，再整理评论人的名字和评论内容。工作流保存后，先点击「重新开始这个练习」，再手动启动。到「数据存储」查看，应有 8 条评论，第一位评论人是林晓，最后一位是雨禾。
 
 ## 6. 切换标签页 {#tabs}
 
-打开<a href="/practice/scenarios/basics-flow/tabs.html" target="_self">标签页练习</a>，让工作流在新标签页打开「书籍详情」，采集书名和价格，然后返回练习页面并关闭详情标签页。
+打开<a href="/practice/scenarios/basics-flow/tabs.html" target="_blank" rel="noopener noreferrer">标签页练习</a>，让工作流在新标签页打开「书籍详情」，采集书名和价格，然后返回练习页面并关闭详情标签页。
 
 工作流保存后，先回到标签页练习页面，再手动启动。到「数据存储」查看，应有 1 条：《山海之间》，¥32.00；浏览器应回到练习页面，详情标签页已关闭。
 
 ## 7. 按条件处理 {#conditions}
 
-打开<a href="/practice/scenarios/basics-flow/conditions.html" target="_self">库存判断练习</a>，让工作流在商品「有货」时采集书名和价格，显示「缺货」时跳过采集。
+打开<a href="/practice/scenarios/basics-flow/conditions.html" target="_blank" rel="noopener noreferrer">库存判断练习</a>，让工作流在商品「有货」时采集书名和价格，显示「缺货」时跳过采集。
 
 工作流保存后，分别测试两种状态：
 
@@ -70,26 +70,26 @@ AI 生成的工作流可能需要调整；如果结果不符合预期，可以�
 
 ## 8. 输入后按 Tab {#tab}
 
-打开<a href="/practice/scenarios/basics-input-reload/tab.html" target="_self">输入后按 Tab 练习</a>，让工作流在取书人输入框中输入「小林」，再按 Tab，让页面检查姓名。
+打开<a href="/practice/scenarios/basics-input-reload/tab.html" target="_blank" rel="noopener noreferrer">输入后按 Tab 练习</a>，让工作流在取书人输入框中输入「小林」，再按 Tab，让页面检查姓名。
 
 工作流保存后，先点击「重置练习」，再手动启动。**怎样算完成？** 输入框里显示「小林」，下方显示「姓名已确认：小林」。
 
 ## 9. 刷新页面查看更新 {#reload}
 
-打开<a href="/practice/scenarios/basics-input-reload/reload.html" target="_self">刷新页面练习</a>，让工作流先点击「准备更新」，再刷新当前页面。
+打开<a href="/practice/scenarios/basics-input-reload/reload.html" target="_blank" rel="noopener noreferrer">刷新页面练习</a>，让工作流先点击「准备更新」，再刷新当前页面。
 
 工作流保存后，先点击「重置练习」，再手动启动。**怎样算完成？** 刷新前页面显示「暂无新消息」，刷新后显示「已收到新消息」。
 
 ## 10. 滚动到指定书籍 {#target}
 
-打开<a href="/practice/scenarios/basics-scroll-extract/target.html" target="_self">滚动到指定书籍练习</a>，让工作流在书架里找到「第 12 本：山海之间」，并滚动到能看到它的位置。
+打开<a href="/practice/scenarios/basics-scroll-extract/target.html" target="_blank" rel="noopener noreferrer">滚动到指定书籍练习</a>，让工作流在书架里找到「第 12 本：山海之间」，并滚动到能看到它的位置。
 
 工作流保存后，先点击「重新开始这个练习」，再手动启动。**怎样算完成？** 书架向下滚动，书架里能看到「第 12 本：山海之间」。
 
 ## 11. 采集标题和链接地址 {#links}
 
-打开<a href="/practice/scenarios/basics-scroll-extract/links.html" target="_self">采集标题和链接地址练习</a>，让工作流采集「基础练习推荐」里每个练习的标题和对应链接地址。
+打开<a href="/practice/scenarios/basics-scroll-extract/links.html" target="_blank" rel="noopener noreferrer">采集标题和链接地址练习</a>，让工作流采集「基础练习推荐」里每个练习的标题和对应链接地址。
 
 工作流保存后，回到练习页面再手动启动。到「数据存储」查看，应有 3 条，标题分别为「点击按钮」「输入后按回车」和「切换标签页」。每条数据都应有对应的完整链接地址，可以复制到浏览器打开核对。
 
-基础操作熟悉后，可以回到<a href="/practice/hub.html" target="_self">练习场</a>，尝试列表采集、翻页和表单等完整任务。
+基础操作熟悉后，可以回到<a href="/practice/hub.html" target="_blank" rel="noopener noreferrer">练习场</a>，尝试列表采集、翻页和表单等完整任务。

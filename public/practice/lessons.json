@@ -1,0 +1,129 @@
+[
+  {
+    "id": "first",
+    "title": "把这一页的书整理成表格",
+    "doc": "/guide/first-task.html",
+    "path": "/practice/index.html",
+    "request": "帮我把这一页的书名和价格整理成表格。",
+    "expected": "首页 4 本书：《山海之间》32 元、《城市慢行》45 元、《生活的留白》39 元、《月光落在书页上》28.50 元。"
+  },
+  {
+    "id": "pagination",
+    "title": "整理前两页书籍",
+    "doc": "/tutorial/list-pagination.html",
+    "path": "/practice/index.html?lesson=pagination",
+    "request": "帮我把前两页的书名和价格整理成表格。",
+    "expected": "共 8 本不同的书，第二页第一本是《旅途中的小地图》，价格 48 元。"
+  },
+  {
+    "id": "detail",
+    "title": "整理书籍详情",
+    "doc": "/tutorial/list-and-detail.html",
+    "path": "/practice/index.html?lesson=detail",
+    "request": "帮我打开前两本书的详情，整理书名和内容简介。",
+    "expected": "共 2 本书。《山海之间》的简介提到“远方与归途”，《城市慢行》的简介提到“街巷慢慢行走”。"
+  },
+  {
+    "id": "search",
+    "title": "先搜索，再整理结果",
+    "doc": "/tutorial/form-entry.html",
+    "path": "/practice/index.html?lesson=search",
+    "request": "搜索“城市”，把找到的书名和价格整理成表格。",
+    "expected": "1 本书：《城市慢行》，45 元。"
+  },
+  {
+    "id": "file-list",
+    "title": "按上传的清单整理书籍",
+    "doc": "/tutorial/upload-table.html",
+    "path": "/practice/index.html?lesson=file-list",
+    "request": "按我上传的清单，逐条打开“网址”列，整理书名和价格。",
+    "expected": "清单中的 2 本书：《山海之间》32 元、《城市慢行》45 元；每行的来源网址与书籍对应。"
+  },
+  {
+    "id": "scroll",
+    "title": "整理滚动加载的评论",
+    "doc": "/tutorial/infinite-scroll.html",
+    "path": "/practice/scenarios/dynamic/scroll.html",
+    "request": "把全部评论整理成表格，每条评论一行，包括评论人、评分和内容。",
+    "expected": "共 12 条不同评论，第一位评论人是林晓，最后一位是雨禾。"
+  },
+  {
+    "id": "more",
+    "title": "整理加载更多后的评论",
+    "doc": "/tutorial/infinite-scroll.html#more",
+    "path": "/practice/scenarios/dynamic/more.html",
+    "request": "帮我把全部评论整理成表格，包括评论人、评分和内容。",
+    "expected": "共 12 条不同评论，第一位评论人是林晓，最后一位是雨禾。"
+  },
+  {
+    "id": "wait",
+    "title": "等订单出现后再整理",
+    "doc": "/tutorial/wait-page.html",
+    "path": "/practice/scenarios/dynamic/loading.html",
+    "request": "点击“开始加载订单”，把出现的订单编号、商品和金额整理成表格。",
+    "expected": "共 4 条订单，第一条是 DD1001、《山海之间》、32 元。"
+  },
+  {
+    "id": "form",
+    "title": "填写并提交练习咨询",
+    "doc": "/tutorial/fill-form.html",
+    "path": "/practice/scenarios/operations/form.html",
+    "request": "帮小林提交一条订单咨询，站内留言，加急处理，内容是“希望了解订单进度”。",
+    "expected": "页面显示“模拟提交成功”，称呼小林，主题订单咨询，回复方式站内留言，加急处理，内容为希望了解订单进度。"
+  },
+  {
+    "id": "hover",
+    "title": "整理悬停后出现的联系方式",
+    "doc": "/tutorial/hover-dialog.html#hover",
+    "path": "/practice/scenarios/interactive/hover.html",
+    "request": "帮我查看书店客服的联系方式，整理邮箱和电话。",
+    "expected": "邮箱 hello@example.com，电话 010-5555-0101。"
+  },
+  {
+    "id": "dialog",
+    "title": "整理弹窗里的订单",
+    "doc": "/tutorial/hover-dialog.html#dialog",
+    "path": "/practice/scenarios/interactive/dialog.html",
+    "request": "查看订单详情，把订单编号、商品和金额整理成表格，然后关闭弹窗。",
+    "expected": "1 条订单：DD3001、《山海之间》、32 元；运行后弹窗关闭。"
+  },
+  {
+    "id": "frame",
+    "title": "整理嵌入页面中的订单",
+    "doc": "/guide/frame-practice.html#extract",
+    "path": "/practice/scenarios/interactive/frame.html",
+    "request": "帮我整理嵌入订单表中的订单编号、商品和金额。",
+    "expected": "3 条订单；按嵌入表格逐行核对编号、商品和金额。"
+  },
+  {
+    "id": "api",
+    "title": "从接口整理订单",
+    "doc": "/tutorial/from-api.html",
+    "path": "/practice/scenarios/api/index.html",
+    "request": "点击“加载订单”，通过接口整理订单编号、商品名称和金额。",
+    "expected": "4 条订单，第一条 DD1001、《山海之间》、32 元；还需确认任务使用网页加载的数据。"
+  },
+  {
+    "id": "send",
+    "title": "发送虚构订单并核对返回",
+    "doc": "/tutorial/http-request.html",
+    "path": "/practice/scenarios/api/send.html",
+    "request": "把页面上的这条练习订单发送到 https://httpbin.org/post，再把返回的订单编号、商品和金额保存成表格。",
+    "expected": "返回的订单编号、商品和金额与页面上的练习订单一致；这是向第三方测试服务真实发送虚构数据。"
+  },
+  {
+    "id": "tidy",
+    "title": "按工作要求筛选和整理结果",
+    "doc": "/data/tidy-results.html",
+    "path": "/practice/index.html?lesson=tidy",
+    "request": "只整理首页价格超过 35 元的书名和价格，用中文列名，单独存成一张新表。",
+    "expected": "2 本书：《城市慢行》45 元、《生活的留白》39 元，书名与价格两列使用中文。"
+  },
+  {
+    "id": "contacts",
+    "title": "提取邮箱、电话和图片",
+    "doc": "/tools/extract-tools.html",
+    "path": "/practice/scenarios/contacts/index.html",
+    "expected": "3 个不同邮箱、2 个带国际区号的练习电话，以及页面中的 2 张示例图片。"
+  }
+]

@@ -1,15 +1,20 @@
 <script setup>
-import { withBase } from 'vitepress'
+import { computed } from 'vue'
+import { useData, withBase } from 'vitepress'
+import lessons from '../../public/practice/lessons.json'
+
+const { page } = useData()
+const lesson = computed(() => lessons.find(item => item.doc.split('#')[0] === '/' + page.value.relativePath.replace(/\.md$/, '.html')))
 </script>
 
 <template>
-    <a class="practice-card" :href="withBase('/practice/hub.html')" target="_blank" rel="noopener noreferrer">
+    <a class="practice-card" :href="withBase(lesson?.path || '/practice/hub.html')" target="_blank" rel="noopener noreferrer">
         <svg class="practice-card__icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 6.5c-2.7-2-5.7-2-8.5-.7v12c2.8-1.3 5.8-1.3 8.5.7m0-12c2.7-2 5.7-2 8.5-.7v12c-2.8-1.3-5.8-1.3-8.5.7m0-12v12" />
         </svg>
         <span class="practice-card__body">
-            <span class="practice-card__head">练习场</span>
-            <span class="practice-card__sub">边学边练，动手试试</span>
+            <span class="practice-card__head">{{ lesson ? '打开本课练习' : '练习场' }}</span>
+            <span class="practice-card__sub">{{ lesson?.title || '边学边练，动手试试' }}</span>
         </span>
         <svg class="practice-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 17 17 7" />

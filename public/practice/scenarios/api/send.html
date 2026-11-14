@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="./api.css">
   <script defer src="https://tongji.jtcrpa.com/script.js" data-website-id="3f8fa26e-7da5-484d-a86d-c8b76a1ee4f6"></script>
+  <script src="../../learning.js" defer></script>
 </head>
 <body>
   <header class="site-header"><div class="container header-inner"><a class="brand" href="../../hub.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>采集练习场<small>九头虫 RPA</small></span></a><a class="header-link" href="../../hub.html">← 全部练习</a></div></header>
@@ -16,7 +17,7 @@
     <section class="task-box" aria-labelledby="send-task-title">
       <h2 id="send-task-title">练习目标</h2>
       <p>打开九头虫扩展，在「AI 编译生成」中复制并发送：</p>
-      <blockquote>采集当前页面的练习订单，金额保留 ¥ 符号。用 HTTP 请求以 POST 方式按 JSON 发送到 https://httpbin.org/post。把返回结果中 json 里的订单编号、商品和金额保存到数据存储；如果发送失败，暂停并提示我。</blockquote>
+      <blockquote>把页面上的这条练习订单发送到 https://httpbin.org/post，再把返回的订单编号、商品和金额保存成表格。</blockquote>
       <p>工作流保存后，在「主工作台」点击「手动启动」。完成后打开「数据存储」，核对返回的订单编号、商品和金额是否与下方一致。</p>
       <p><strong>注意：</strong>此练习会真实发送到第三方测试服务，只能使用页面上的虚构订单，请不要发送个人信息或真实业务数据。</p>
     </section>

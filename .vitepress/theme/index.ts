@@ -5,9 +5,14 @@
  * 之后、`.spacer` 之前。插槽清单见 node_modules 里 VPDocAside.vue 的 <slot> 列表。
  */
 import DefaultTheme from 'vitepress/theme'
+import type { Theme } from 'vitepress'
 import Layout from './Layout.vue'
+import PracticeTask from './PracticeTask.vue'
 
 export default {
     extends: DefaultTheme,
     Layout,
-}
+    enhanceApp({ app }) {
+        app.component('PracticeTask', PracticeTask)
+    },
+} satisfies Theme

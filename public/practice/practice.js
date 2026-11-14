@@ -25,6 +25,8 @@ function element(tag, className, text) {
 function bookUrl(book) {
   const url = new URL('./detail.html', window.location.href);
   url.search = new URLSearchParams({ id: book.id }).toString();
+  const lesson = new URLSearchParams(window.location.search).get('lesson');
+  if (lesson) url.searchParams.set('lesson', lesson);
   return url.href;
 }
 
@@ -42,8 +44,30 @@ function pageUrl(params, page) {
   const url = new URL('./index.html', window.location.href);
   if (params.get('q')) url.searchParams.set('q', params.get('q'));
   if (params.get('category')) url.searchParams.set('category', params.get('category'));
+  if (params.get('lesson')) url.searchParams.set('lesson', params.get('lesson'));
   if (page > 1) url.searchParams.set('page', String(page));
   return url.href;
+}
+
+function setupRequestCopy() {
+  const button = document.querySelector('#copy-request');
+  const request = document.querySelector('#first-task-request');
+  const status = document.querySelector('#copy-status');
+  if (!button || !request || !status) return;
+
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    status.textContent = '';
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(request.textContent.trim());
+      status.textContent = '已复制，去扩展里粘贴并发送。';
+    } catch {
+      status.textContent = '未能复制，请选中上面这句话，手动复制。';
+    } finally {
+      button.disabled = false;
+    }
+  });
 }
 
 function renderList() {
@@ -61,6 +85,7 @@ function renderList() {
   const pageCount = Math.max(1, Math.ceil(matches.length / PAGE_SIZE));
   const requestedPage = Number(params.get('page'));
   const page = Number.isInteger(requestedPage) && requestedPage > 0 ? Math.min(requestedPage, pageCount) : 1;
+  document.querySelector('#first-page-hint').hidden = !(query || category || page > 1);
   const visible = matches.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   const grid = document.querySelector('#books');
 
@@ -145,5 +170,8 @@ function renderDetail() {
   detail.append(image, info);
 }
 
-if (document.body.dataset.page === 'list') renderList();
+if (document.body.dataset.page === 'list') {
+  renderList();
+  setupRequestCopy();
+}
 if (document.body.dataset.page === 'detail') renderDetail();
