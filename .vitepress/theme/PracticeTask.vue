@@ -1,10 +1,11 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
-import lessons from '../../public/practice/lessons.json'
+import { useDocLocale } from './useDocLocale'
 
 const props = defineProps({ lesson: { type: String, required: true } })
-const entry = computed(() => lessons.find(item => item.id === props.lesson))
+const { isEnglish, lessons } = useDocLocale()
+const entry = computed(() => lessons.value.find(item => item.id === props.lesson))
 const message = ref('')
 const copying = ref(false)
 async function copyRequest() {
@@ -13,9 +14,9 @@ async function copyRequest() {
   message.value = ''
   try {
     await navigator.clipboard.writeText(entry.value.request)
-    message.value = '已复制，切换到练习页，在扩展中粘贴并发送。'
+    message.value = isEnglish.value ? 'Copied. Switch to the practice page, then paste and send it in the extension.' : '已复制，切换到练习页，在扩展中粘贴并发送。'
   } catch {
-    message.value = '未能复制，请选中这句话手动复制。'
+    message.value = isEnglish.value ? 'Could not copy. Select the request and copy it manually.' : '未能复制，请选中这句话手动复制。'
   } finally {
     copying.value = false
   }
@@ -24,11 +25,11 @@ async function copyRequest() {
 
 <template>
   <div v-if="entry" class="practice-task">
-    <a :href="withBase(entry.path)" target="_blank" rel="noopener noreferrer">打开练习：{{ entry.title }}</a>
+    <a :href="withBase(entry.path)" target="_blank" rel="noopener noreferrer">{{ isEnglish ? 'Open practice: ' : '打开练习：' }}{{ entry.title }}</a>
     <template v-if="entry.request">
       <blockquote><p>{{ entry.request }}</p></blockquote>
       <div class="practice-task__actions">
-        <button type="button" :disabled="copying" @click="copyRequest">复制这句话</button>
+        <button type="button" :disabled="copying" @click="copyRequest">{{ isEnglish ? 'Copy this request' : '复制这句话' }}</button>
         <span role="status" aria-live="polite">{{ message }}</span>
       </div>
     </template>

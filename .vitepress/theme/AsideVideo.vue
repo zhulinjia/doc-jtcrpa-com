@@ -20,6 +20,8 @@
 
 /** 视频地址。B 站分享链接里那串 spm_id_from / vd_source 是分享来源追踪参数，
  *  去掉后照样能打开，所以这里只留作品号这一段。换视频只改这一行。 */
+import { useDocLocale } from './useDocLocale'
+const { isEnglish } = useDocLocale()
 const VIDEO_URL = 'https://www.bilibili.com/video/BV1UeHi63E2m/'
 </script>
 
@@ -30,8 +32,8 @@ const VIDEO_URL = 'https://www.bilibili.com/video/BV1UeHi63E2m/'
         </svg>
 
         <span class="vd-card__body">
-            <span class="vd-card__head">视频教程</span>
-            <span class="vd-card__sub">在 B 站观看</span>
+            <span class="vd-card__head">{{ isEnglish ? 'Video tutorial' : '视频教程' }}</span>
+            <span class="vd-card__sub">{{ isEnglish ? 'Watch on Bilibili (Chinese)' : '在 B 站观看' }}</span>
         </span>
 
         <svg class="vd-card__arrow" viewBox="0 0 24 24" aria-hidden="true">

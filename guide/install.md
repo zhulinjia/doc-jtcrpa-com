@@ -1,7 +1,9 @@
 ---
 layout: doc
 title: 安装与首次使用
-prev: false
+prev:
+  text: 介绍
+  link: /guide/what-is-jtcrpa
 next:
   text: 第一个采集任务
   link: /guide/first-task

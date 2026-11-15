@@ -1,0 +1,7 @@
+.site-header .header-inner{flex-wrap:wrap;gap:10px 16px;padding-top:10px;padding-bottom:10px}
+.practice-language-switch{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border:1px solid #d7e2d5;border-radius:6px;color:#315b46;background:#fff;font-size:13px;font-weight:600;white-space:nowrap;text-decoration:none}
+.practice-language-switch:hover{background:#f1f7ed}.practice-language-switch:focus-visible{outline:2px solid #315b46;outline-offset:3px}
+html[lang="en"] .cover-title{font-size:clamp(16px,2vw,25px);overflow-wrap:anywhere;max-width:100%;letter-spacing:.02em}
+html[lang="en"] .book-cover:not(.cover-large){min-height:190px}
+html[lang="en"] .cover-large .cover-title{font-size:clamp(25px,4vw,42px)}
+@media(max-width:580px){.site-header .header-links{flex-wrap:wrap;gap:8px 12px}.practice-language-switch{font-size:12px}.site-header .brand{max-width:100%}.site-header .header-link{overflow-wrap:anywhere}}

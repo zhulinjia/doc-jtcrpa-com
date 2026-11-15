@@ -12,8 +12,8 @@ if (scenario === 'search') {
   const result = document.querySelector('#search-result');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const query = document.querySelector('#keyword').value.trim();
-    result.textContent = query && '城市慢行'.includes(query) ? '搜索结果：城市慢行 · ¥45.00' : '没有找到相关书籍。';
+    const query = document.querySelector('#keyword').value.trim().toLocaleLowerCase();
+    result.textContent = query && '城市慢行'.toLocaleLowerCase().includes(query) ? '搜索结果：城市慢行 · ¥45.00' : '没有找到相关书籍。';
     result.hidden = false;
   });
   form.addEventListener('reset', () => { result.hidden = true; result.textContent = ''; });

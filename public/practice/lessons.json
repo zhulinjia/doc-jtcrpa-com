@@ -4,7 +4,7 @@
     "title": "把这一页的书整理成表格",
     "doc": "/guide/first-task.html",
     "path": "/practice/index.html",
-    "request": "帮我把这一页的书名和价格整理成表格。",
+    "request": "帮我采集这一页的书名和价格",
     "expected": "首页 4 本书：《山海之间》32 元、《城市慢行》45 元、《生活的留白》39 元、《月光落在书页上》28.50 元。"
   },
   {
@@ -12,7 +12,7 @@
     "title": "整理前两页书籍",
     "doc": "/tutorial/list-pagination.html",
     "path": "/practice/index.html?lesson=pagination",
-    "request": "帮我把前两页的书名和价格整理成表格。",
+    "request": "帮我采集前两页的书名和价格",
     "expected": "共 8 本不同的书，第二页第一本是《旅途中的小地图》，价格 48 元。"
   },
   {
@@ -28,7 +28,7 @@
     "title": "先搜索，再整理结果",
     "doc": "/tutorial/form-entry.html",
     "path": "/practice/index.html?lesson=search",
-    "request": "搜索“城市”，把找到的书名和价格整理成表格。",
+    "request": "搜索“城市”，把找到的书名和价格采集下来",
     "expected": "1 本书：《城市慢行》，45 元。"
   },
   {
@@ -44,7 +44,7 @@
     "title": "整理滚动加载的评论",
     "doc": "/tutorial/infinite-scroll.html",
     "path": "/practice/scenarios/dynamic/scroll.html",
-    "request": "把全部评论整理成表格，每条评论一行，包括评论人、评分和内容。",
+    "request": "采集每条评论，包括评论人、评分和内容",
     "expected": "共 12 条不同评论，第一位评论人是林晓，最后一位是雨禾。"
   },
   {

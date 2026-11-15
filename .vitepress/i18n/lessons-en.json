@@ -1,0 +1,81 @@
+{
+  "first": {
+    "title": "Collect the books on this page",
+    "request": "Collect the book titles and prices on this page",
+    "expected": "The 4 books on the first page: Between Mountains and Seas, ¥32.00; City Strolls, ¥45.00; Room to Breathe, ¥39.00; Moonlight on the Page, ¥28.50."
+  },
+  "pagination": {
+    "title": "Collect the first two pages of books",
+    "request": "Collect the book titles and prices from the first two pages",
+    "expected": "8 different books. The first book on page 2 is Little Maps for the Journey, ¥48.00."
+  },
+  "detail": {
+    "title": "Collect book details",
+    "request": "Open the first two books and collect their titles and descriptions.",
+    "expected": "2 books. The description of Between Mountains and Seas mentions journeys and homecomings; City Strolls mentions walking through city streets."
+  },
+  "search": {
+    "title": "Search first, then collect the results",
+    "request": "Search for “City” and collect the matching book titles and prices",
+    "expected": "1 book: City Strolls, ¥45.00."
+  },
+  "file-list": {
+    "title": "Collect books from an uploaded list",
+    "request": "Use my uploaded list. Open each link in the “URL” column and collect the book title and price.",
+    "expected": "The 2 books in the list: Between Mountains and Seas, ¥32.00; City Strolls, ¥45.00. Each source URL must match the book on that row."
+  },
+  "scroll": {
+    "title": "Collect reviews loaded by scrolling",
+    "request": "Collect each review, including the reviewer, rating, and review text",
+    "expected": "12 different reviews. The first reviewer is Lin Xiao; the last is Yu He."
+  },
+  "more": {
+    "title": "Collect reviews with Load more",
+    "request": "Collect all reviews, including the reviewer, rating, and review text.",
+    "expected": "12 different reviews. The first reviewer is Lin Xiao; the last is Yu He."
+  },
+  "wait": {
+    "title": "Wait for orders, then collect them",
+    "request": "Click “Start loading orders” and collect the order number, product, and amount when they appear.",
+    "expected": "4 orders. The first is DD1001, Between Mountains and Seas, ¥32.00."
+  },
+  "form": {
+    "title": "Fill in and submit the practice form",
+    "request": "Submit an order inquiry for Lin. Choose an on-site message and urgent handling, and enter “I would like an update on my order.”",
+    "expected": "The page shows “Practice submission successful”. Name: Lin; topic: Order inquiry; reply: On-site message; urgent handling selected; message: I would like an update on my order."
+  },
+  "hover": {
+    "title": "Collect contact details revealed on hover",
+    "request": "Find the bookshop support contact details and collect the email address and phone number.",
+    "expected": "Email: hello@example.com. Phone: 010-5555-0101."
+  },
+  "dialog": {
+    "title": "Collect an order from a dialog",
+    "request": "Open the order details, collect the order number, product, and amount, then close the dialog.",
+    "expected": "1 order: DD3001, Between Mountains and Seas, ¥32.00. The dialog is closed after the run."
+  },
+  "frame": {
+    "title": "Collect orders from an embedded page",
+    "request": "Collect the order number, product, and amount from the embedded order table.",
+    "expected": "3 orders. Check each order number, product, and amount against the embedded table."
+  },
+  "api": {
+    "title": "Collect orders from a web API",
+    "request": "Click “Load orders” and collect the order number, product name, and amount from the API.",
+    "expected": "4 orders. The first is DD1001, Between Mountains and Seas, ¥32.00. Also check that the task uses the data loaded by the page."
+  },
+  "send": {
+    "title": "Send a sample order and check the response",
+    "request": "Send the sample order on this page to https://httpbin.org/post, then save the returned order number, product, and amount as a table.",
+    "expected": "The returned order number, product, and amount match the sample on the page. This sends fictional data to a real third-party test service."
+  },
+  "tidy": {
+    "title": "Filter and format the collected results",
+    "request": "Collect the titles and prices of books over ¥35 on the first page. Use English column names and save the results to a separate new table.",
+    "expected": "2 books: City Strolls, ¥45.00; Room to Breathe, ¥39.00. Both columns have English names."
+  },
+  "contacts": {
+    "title": "Extract emails, phone numbers, and images",
+    "expected": "3 different email addresses, 2 practice phone numbers with country codes, and the 2 sample images on the page."
+  }
+}

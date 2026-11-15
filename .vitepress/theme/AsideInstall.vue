@@ -12,29 +12,29 @@
  *    所以字号压到 12px、行高收紧，别往这里加长文案。
  */
 import { computed } from 'vue'
-import { useData } from 'vitepress'
 import { DOWNLOADS } from '../downloads'
+import { useDocLocale } from './useDocLocale'
 
-const { page } = useData()
+const { isEnglish, pagePath } = useDocLocale()
 
 /** 安装页（guide/install.md）不显示——那篇正文里已经有完整的下载与安装说明 */
-const isInstallPage = computed(() => page.value.relativePath === 'guide/install.md')
+const isInstallPage = computed(() => pagePath.value === 'guide/install.md')
 </script>
 
 <template>
     <div v-if="!isInstallPage" class="dl-card">
-        <p class="dl-card__head">安装扩展</p>
-        <p class="dl-card__sub">推荐从应用商店安装，能自动更新</p>
+        <p class="dl-card__head">{{ isEnglish ? 'Install the extension' : '安装扩展' }}</p>
+        <p class="dl-card__sub">{{ isEnglish ? 'Install from a store for automatic updates' : '推荐从应用商店安装，能自动更新' }}</p>
 
         <a class="dl-card__store" :href="DOWNLOADS.chrome" target="_blank" rel="noreferrer">
-            <span>Chrome 应用商店</span>
+            <span>{{ isEnglish ? 'Chrome Web Store' : 'Chrome 应用商店' }}</span>
             <svg class="dl-card__store-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 17 17 7" />
                 <path d="M8 7h9v9" />
             </svg>
         </a>
         <a class="dl-card__store" :href="DOWNLOADS.edge" target="_blank" rel="noreferrer">
-            <span>Microsoft Edge 扩展商店</span>
+            <span>{{ isEnglish ? 'Microsoft Edge Add-ons' : 'Microsoft Edge 扩展商店' }}</span>
             <svg class="dl-card__store-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 17 17 7" />
                 <path d="M8 7h9v9" />
@@ -42,7 +42,7 @@ const isInstallPage = computed(() => page.value.relativePath === 'guide/install.
         </a>
 
         <p class="dl-card__alt">
-            商店打不开？<a :href="DOWNLOADS.pan" target="_blank" rel="noreferrer">网盘下载</a>（提取码 {{ DOWNLOADS.panCode }}）
+            {{ isEnglish ? 'Store unavailable? ' : '商店打不开？' }}<a :href="DOWNLOADS.pan" target="_blank" rel="noreferrer">{{ isEnglish ? 'Download archive' : '网盘下载' }}</a>{{ isEnglish ? ' (code ' : '（提取码 ' }}{{ DOWNLOADS.panCode }}{{ isEnglish ? ')' : '）' }}
         </p>
     </div>
 </template>
