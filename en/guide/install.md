@@ -57,3 +57,5 @@ If the extension interface is in another language, open its **Language** menu an
 Start with the default AI service. You do not need to obtain your own key first. Continue to [Your first collection](/en/guide/first-task) to collect the 4 books and download an Excel file.
 
 If you later want to use your own AI service, see [AI model settings](/en/settings/ai-model).
+
+To use Codex or another AI app with this browser, follow the [MCP connection guide](/en/advanced/mcp).

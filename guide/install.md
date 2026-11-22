@@ -55,3 +55,5 @@ import { DOWNLOADS } from '../.vitepress/downloads'
 初次使用先用默认 AI 通道即可，无需自己申请密钥。继续[第一个采集任务](/guide/first-task)，把 4 本书整理成表格并下载到电脑。
 
 以后确实需要自己的 AI 服务时，再看[AI 模型配置](/settings/ai-model)。
+
+想在 Codex 等客户端里让 AI 操作这个浏览器，可按[九头虫 MCP 连接指南](/advanced/mcp)完成接入。

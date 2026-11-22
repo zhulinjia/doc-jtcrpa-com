@@ -55,6 +55,7 @@ const groups: DefaultTheme.SidebarItem[] = [
     { text: '通过 HTTP 请求发送数据', link: '/tutorial/http-request' },
     { text: '组合使用多个工作流', link: '/tutorial/workflow-invocation' },
     { text: 'AI 模型配置', link: '/settings/ai-model' },
+    { text: '九头虫 MCP 连接指南', link: '/advanced/mcp' },
     { text: '自定义脚本：按提示完成准备', link: '/advanced/user-script' }
   ] },
   { text: '遇到问题', items: [
@@ -88,7 +89,8 @@ const englishLabels: Record<string, string> = {
   '批量采集：一次处理多个网址': 'Batch collection: multiple URLs', '任务完成或中断时提醒我': 'Email notifications',
   '备份、迁移与分享工作流': 'Back up, move, and share workflows', '进阶与设置': 'Advanced use and settings',
   '从接口采集数据': 'Collect data from a web API', '通过 HTTP 请求发送数据': 'Send data with HTTP requests',
-  '组合使用多个工作流': 'Combine workflows', 'AI 模型配置': 'AI model settings', '自定义脚本：按提示完成准备': 'Enable user scripts when prompted',
+  '组合使用多个工作流': 'Combine workflows', 'AI 模型配置': 'AI model settings',
+  '九头虫 MCP 连接指南': 'Connect an AI app with MCP', '自定义脚本：按提示完成准备': 'Enable user scripts when prompted',
   '遇到问题': 'Troubleshooting', '遇到问题先看这里': 'Start troubleshooting here', '采不到数据 / 结果为空': 'No data or empty results',
   '运行中断了怎么办': 'A run has stopped', '页面不支持操作 / 需要刷新': 'Unsupported page or refresh required',
   '长时间采集防休眠': 'Keep long runs awake', '执行日志': 'Run logs', '报错对照表': 'Error reference'
@@ -113,7 +115,7 @@ function sidebar(english = false): Record<string, DefaultTheme.SidebarItem[]> {
     '/tutorial/fill-form': 2, '/tutorial/hover-dialog': 2, '/tutorial/login-captcha': 2,
     '/tutorial/from-api': 5, '/tutorial/http-request': 5, '/tutorial/workflow-invocation': 5, '/tutorial/': 1,
     '/data/': 3, '/automation/run-logs': 6, '/automation/': 4,
-    '/advanced/user-script': 5, '/advanced/': 4, '/settings/': 5, '/tools/': 1,
+    '/advanced/mcp': 5, '/advanced/user-script': 5, '/advanced/': 4, '/settings/': 5, '/tools/': 1,
     '/troubleshooting/': 6, '/': 0
   }
   return Object.fromEntries(Object.entries(routes).map(([route, active]) => [(english ? '/en' : '') + route, sidebarFor(active, english)]))
