@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { localizePractice } from './localize-practice.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const directories = ['guide', 'tutorial', 'data', 'automation', 'advanced', 'settings', 'tools', 'troubleshooting'];
+const directories = ['guide', 'tutorial', 'nodes', 'data', 'automation', 'advanced', 'settings', 'tools', 'troubleshooting'];
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const documents = ['index.md', ...directories.flatMap(directory => fs.readdirSync(path.join(root, directory)).filter(file => file.endsWith('.md')).map(file => directory + '/' + file))];
@@ -17,7 +17,7 @@ for (const relative of documents) {
   check(/layout: doc/.test(content), `English document must use doc layout: ${relative}`);
   const visible = content.replace(/<!--[\s\S]*?-->/g, '').replace(/\{#[^}]+\}/g, '').replace(/<[^>]+>/g, '').replace(/\]\([^)]*\)/g, ']');
   check(!/\p{Script=Han}/u.test(visible), `Untranslated English document: ${relative}`);
-  for (const match of content.matchAll(/(?:\]\(|href=")\/(guide|tutorial|data|automation|advanced|settings|tools|troubleshooting|practice)\//g)) {
+  for (const match of content.matchAll(/(?:\]\(|href=")\/(guide|tutorial|nodes|data|automation|advanced|settings|tools|troubleshooting|practice)\//g)) {
     failures.push(`English document links outside its locale: ${relative} (${match[0]})`);
   }
 }

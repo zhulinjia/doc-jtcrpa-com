@@ -18,6 +18,8 @@ In **Compile with AI**, click **Add file**. Excel, CSV, JSON, and TXT are suppor
 
 The extension saves a local snapshot. Later changes to the original disk file do not update that snapshot automatically. Replace it from its file card in Storage to keep the reference used by existing workflows. Duplicate rows in the file are preserved.
 
+In **Workbench**, open **Input files** on a workflow card that uses an uploaded file. Click **View data** to check its contents, or click **Update file** and select a newer version. Once the extension confirms the update, workflows that use the same file will use the new data.
+
 ## Read the disk file on each run
 
 This method currently needs file-access capabilities in Chrome or Edge. In Firefox, use Add file instead.

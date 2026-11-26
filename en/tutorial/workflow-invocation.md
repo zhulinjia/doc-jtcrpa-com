@@ -19,6 +19,8 @@ Replace the example names with the actual saved names in **Workbench**. Answer A
 
 Run the new workflow on a small sample. Check its output in Storage and open **Logs** to confirm that both parts ran. If the second part needs results from the first, explain that relationship and verify it in the output.
 
+If a workflow needs [run parameters](/en/automation/start-stop#run-parameters), tell AI where its values should come from. For example, say, “Ask me for the order status when the combined workflow starts and pass it to ‘Set order filter’.” Test with a value you can easily check in the results.
+
 ## Editing and moving combined workflows
 
 Changing a referenced workflow can change the combined task, so test it again. Before deleting a workflow, check whether other workflows or scheduled tasks use it.

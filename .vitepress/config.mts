@@ -4,19 +4,19 @@ import { localizePractice, practiceLocaleWatcher } from '../scripts/localize-pra
 localizePractice()
 
 const groups: DefaultTheme.SidebarItem[] = [
-  { text: '新手入门', items: [
+  { text: '新手入门', collapsed: false, items: [
     { text: '介绍', link: '/guide/what-is-jtcrpa' },
     { text: '安装与首次使用', link: '/guide/install' },
     { text: '第一个采集任务', link: '/guide/first-task' },
     { text: '修改已有工作流', link: '/guide/modify-workflow' },
     { text: '换成自己的网页', link: '/guide/own-page' },
-    { text: '按需要查看', collapsed: true, items: [
+    { text: '按需要查看', collapsed: false, items: [
       { text: '按工作目标选择教程', link: '/guide/cases' },
       { text: '像聊天一样提出采集需求', link: '/guide/write-requirement' },
       { text: 'AI 准备任务时会发生什么', link: '/guide/during-compile' }
     ] }
   ] },
-  { text: '常见采集任务', items: [
+  { text: '常见采集任务', collapsed: false, items: [
     { text: '列表与翻页采集', link: '/tutorial/list-pagination' },
     { text: '滚动加载与点击加载更多', link: '/tutorial/infinite-scroll' },
     { text: '列表与详情页采集', link: '/tutorial/list-and-detail' },
@@ -26,31 +26,42 @@ const groups: DefaultTheme.SidebarItem[] = [
     { text: '采集网页中嵌入的内容', link: '/guide/frame-practice' },
     { text: '邮箱、电话与图片提取', link: '/tools/extract-tools' }
   ] },
-  { text: '网页操作与表单', items: [
+  { text: '网页操作与表单', collapsed: false, items: [
     { text: '常用网页操作练习', link: '/guide/basic-practice' },
     { text: '填写与提交表单', link: '/tutorial/fill-form' },
     { text: '采集悬停和弹窗中的内容', link: '/tutorial/hover-dialog' },
     { text: '登录、验证码与人工确认', link: '/tutorial/login-captcha' }
   ] },
-  { text: '查看与使用数据', items: [
+  { text: '节点操作手册', collapsed: false, items: [
+    { text: '节点总览', link: '/nodes/' },
+    { text: '网页与标签页操作', link: '/nodes/browser' },
+    { text: '等待页面和数据', link: '/nodes/waiting' },
+    { text: '采集、读写与下载', link: '/nodes/data' },
+    { text: '判断与流程控制', link: '/nodes/flow' },
+    { text: '参数、变量与工作流组合', link: '/nodes/reuse' },
+    { text: '日志、通知与脚本', link: '/nodes/diagnostics' }
+  ] },
+  { text: '查看与使用数据', collapsed: false, items: [
     { text: '数据存储与数据预览', link: '/data/storage-preview' },
     { text: '检查采集结果是否正确', link: '/data/check-results' },
     { text: '按工作要求整理结果', link: '/data/tidy-results' },
     { text: '导出数据', link: '/data/export' },
     { text: '上传到飞书多维表格', link: '/data/feishu' },
+    { text: 'Webhook 推送', link: '/data/webhook' },
     { text: '读取本地文件', link: '/data/local-file' },
     { text: '读取飞书多维表格', link: '/data/feishu-read' },
     { text: '继续使用已有采集结果', link: '/data/read-dataset' },
     { text: '数据保存与去向', link: '/data/privacy-storage' }
   ] },
-  { text: '重复运行与自动化', items: [
+  { text: '重复运行与自动化', collapsed: false, items: [
     { text: '启动、中断与结束', link: '/automation/start-stop' },
+    { text: '参数节点与启动参数', link: '/automation/workflow-parameters' },
     { text: '定时任务', link: '/automation/scheduled-task' },
     { text: '批量采集：一次处理多个网址', link: '/automation/batch-collection' },
     { text: '任务完成或中断时提醒我', link: '/automation/notifications' },
     { text: '备份、迁移与分享工作流', link: '/advanced/import-export' }
   ] },
-  { text: '进阶与设置', items: [
+  { text: '进阶与设置', collapsed: false, items: [
     { text: '从接口采集数据', link: '/tutorial/from-api' },
     { text: '通过 HTTP 请求发送数据', link: '/tutorial/http-request' },
     { text: '组合使用多个工作流', link: '/tutorial/workflow-invocation' },
@@ -58,7 +69,7 @@ const groups: DefaultTheme.SidebarItem[] = [
     { text: '九头虫 MCP 连接指南', link: '/advanced/mcp' },
     { text: '自定义脚本：按提示完成准备', link: '/advanced/user-script' }
   ] },
-  { text: '遇到问题', items: [
+  { text: '遇到问题', collapsed: false, items: [
     { text: '遇到问题先看这里', link: '/troubleshooting/' },
     { text: '采不到数据 / 结果为空', link: '/troubleshooting/empty-result' },
     { text: '运行中断了怎么办', link: '/troubleshooting/interrupted' },
@@ -81,11 +92,17 @@ const englishLabels: Record<string, string> = {
   '邮箱、电话与图片提取': 'Extract emails, phone numbers, and images', '网页操作与表单': 'Web actions and forms',
   '常用网页操作练习': 'Practice common web actions', '填写与提交表单': 'Fill in and submit forms',
   '采集悬停和弹窗中的内容': 'Hover details and dialogs', '登录、验证码与人工确认': 'Sign-in, CAPTCHAs, and manual steps',
+  '节点操作手册': 'Workflow nodes', '节点总览': 'Node overview', '网页与标签页操作': 'Webpage and tab actions',
+  '等待页面和数据': 'Wait for pages and data', '采集、读写与下载': 'Collect, read, write, and download',
+  '判断与流程控制': 'Decisions and flow control', '参数、变量与工作流组合': 'Parameters, variables, and workflow reuse',
+  '日志、通知与脚本': 'Logs, notifications, and scripts',
   '查看与使用数据': 'View and use your data', '数据存储与数据预览': 'Storage and preview',
   '检查采集结果是否正确': 'Check your results', '按工作要求整理结果': 'Filter and format results',
   '导出数据': 'Export data', '上传到飞书多维表格': 'Upload to Feishu Bitable', '读取本地文件': 'Read local files',
+  'Webhook 推送': 'Webhook delivery',
   '读取飞书多维表格': 'Read Feishu Bitable', '继续使用已有采集结果': 'Reuse collected data', '数据保存与去向': 'Data storage and destinations',
   '重复运行与自动化': 'Repeat and automate', '启动、中断与结束': 'Start, pause, and end a run', '定时任务': 'Scheduled tasks',
+  '参数节点与启动参数': 'Parameter node and run parameters',
   '批量采集：一次处理多个网址': 'Batch collection: multiple URLs', '任务完成或中断时提醒我': 'Email notifications',
   '备份、迁移与分享工作流': 'Back up, move, and share workflows', '进阶与设置': 'Advanced use and settings',
   '从接口采集数据': 'Collect data from a web API', '通过 HTTP 请求发送数据': 'Send data with HTTP requests',
@@ -102,23 +119,6 @@ function translateSidebar(items: DefaultTheme.SidebarItem[]): DefaultTheme.Sideb
     if (item.text && !text) throw new Error(`Missing English sidebar label: ${item.text}`)
     return { ...item, text, ...(item.link ? { link: '/en' + item.link } : {}), ...(item.items ? { items: translateSidebar(item.items) } : {}) }
   })
-}
-
-function sidebarFor(active: number, english = false): DefaultTheme.SidebarItem[] {
-  const items = groups.map((group, index) => ({ ...group, collapsed: index > 1 && index !== active }))
-  return english ? translateSidebar(items) : items
-}
-
-function sidebar(english = false): Record<string, DefaultTheme.SidebarItem[]> {
-  const routes: Record<string, number> = {
-    '/guide/basic-practice': 2, '/guide/frame-practice': 1, '/guide/': 0,
-    '/tutorial/fill-form': 2, '/tutorial/hover-dialog': 2, '/tutorial/login-captcha': 2,
-    '/tutorial/from-api': 5, '/tutorial/http-request': 5, '/tutorial/workflow-invocation': 5, '/tutorial/': 1,
-    '/data/': 3, '/automation/run-logs': 6, '/automation/': 4,
-    '/advanced/mcp': 5, '/advanced/user-script': 5, '/advanced/': 4, '/settings/': 5, '/tools/': 1,
-    '/troubleshooting/': 6, '/': 0
-  }
-  return Object.fromEntries(Object.entries(routes).map(([route, active]) => [(english ? '/en' : '') + route, sidebarFor(active, english)]))
 }
 
 export default defineConfig({
@@ -144,7 +144,7 @@ export default defineConfig({
           { text: 'Playground', link: '/en/practice/hub.html', target: '_blank', rel: 'noopener noreferrer' },
           { text: 'Troubleshooting', link: '/en/troubleshooting/' }
         ],
-        sidebar: sidebar(true),
+        sidebar: translateSidebar(groups),
         outline: { level: [2, 3], label: 'On this page' },
         docFooter: { prev: 'Previous page', next: 'Next page' },
         returnToTopLabel: 'Back to top', sidebarMenuLabel: 'Menu', langMenuLabel: 'Language',
@@ -162,8 +162,7 @@ export default defineConfig({
       { text: '练习场', link: '/practice/hub.html', target: '_blank', rel: 'noopener noreferrer' },
       { text: '遇到问题', link: '/troubleshooting/' }
     ],
-    // 前两组默认展开，其他分组按当前页面展开。
-    sidebar: sidebar(),
+    sidebar: groups,
     search: { provider: 'local', options: {
       miniSearch: {
         options: {

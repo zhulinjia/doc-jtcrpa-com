@@ -27,6 +27,10 @@ Open the <a href="/en/practice/index.html" target="_blank" rel="noopener norefer
 
 If a run is already paused, editing the workflow does not change the steps used by that run. End it and start a new run to use the updated workflow.
 
+To enter a different keyword or page count each time you start, ask AI to add a parameter node to the saved workflow. [Parameter node and run parameters](/en/automation/workflow-parameters)
+
+To adjust a particular click, wait, or data collection step, look it up in the [workflow node guide](/en/nodes/).
+
 ## Change the column language {#column-language}
 
 Click **Edit** as above, then add this after the selected workflow name:

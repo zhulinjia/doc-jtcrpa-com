@@ -25,6 +25,8 @@ One red error does not always mean the whole task failed; some workflows continu
 
 Click **Expand details** on a row to see **Arguments** and **Result**, which can also be copied. Long logs initially show only part of the record; load earlier lines when needed.
 
+Once you find the step to change, look it up in the [workflow node guide](/en/nodes/) to see what to adjust and what to check on the next run.
+
 If the technical details are unfamiliar, keep the relevant rows and time for support. See [Error reference](/en/troubleshooting/error-reference).
 
 ## Export a log for support

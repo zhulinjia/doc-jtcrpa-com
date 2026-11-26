@@ -23,6 +23,7 @@ Local result storage does not make AI analysis fully offline. The receiving AI s
 
 - **Feishu writes:** data goes to the authorized Feishu Bitable table.
 - **HTTP requests:** specified content goes to the destination in the request.
+- **Webhook delivery** sends selected fields from newly saved dataset rows to the configured endpoint. [Webhook delivery](/en/data/webhook)
 - **Email notifications:** task status goes to the configured email address. This is not the same as sending the full table as an attachment.
 - **Downloads:** the browser saves local files. Check them before sharing.
 

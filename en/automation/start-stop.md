@@ -7,6 +7,10 @@ title: Start, pause, and end a run
 
 Find the saved workflow in **Workbench**. Switch to the webpage it should process, then click **Manual start**. Preparing the workflow and running it are separate steps.
 
+## Enter run parameters {#run-parameters}
+
+When a workflow has a parameter node, **Manual start** opens **Enter run parameters**. Keep the prefilled defaults or enter the keyword, page count, or other values for this run, then click **Start run**. [Add and use a parameter node](/en/automation/workflow-parameters)
+
 ## Controls during a run
 
 The card shows the current action and may pause while the page needs your help. The run controls are at the bottom of the workflow card.

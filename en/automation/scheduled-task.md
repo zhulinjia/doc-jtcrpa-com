@@ -19,6 +19,14 @@ The computer, browser, and extension must be running, and the target page must r
 
 Check the card switch and next-run time. Click **Run now** once, verify the result in Storage, and check Logs. Also check the first run that happens at the scheduled time.
 
+## Save workflow parameters for a task {#workflow-parameters}
+
+When you select a workflow with a [parameter node](/en/automation/workflow-parameters), the form shows **Workflow parameters**. Enter the values for this task and save it. Choose **Use default** to use the workflow's default value for a field.
+
+Each task saves its own values. For example, two tasks can use the same workflow to collect results for “travel” and “history”. All URLs within one task use its saved values. **Run now** uses them as well.
+
+If the workflow later adds a required parameter without a default, edit the task to provide it before testing again. A missing required value stops the task before it opens the target page.
+
 ::: tip Access requirements
 Saving settings and executing the task have different permissions. Scheduled execution and Run now require VIP1 or above. Follow the current account and plan prompt.
 :::

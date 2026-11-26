@@ -25,6 +25,8 @@ After another run, refresh an already-open preview. Check the pagination at the 
 
 Collected rows can accumulate. Identical content usually updates its collection time and source instead of adding a row. Changed content, new columns, or new column names can create additional rows. The total count is not necessarily the number collected in the latest run.
 
+To update an existing row when a product's price changes, use **Edit** on the workflow and ask AI to identify products by product ID and replace each matching row with the newly collected row. For multiple marketplaces, you can match on both product ID and marketplace. Choose columns that have a value for every row. A dataset with existing rows must keep its matching rule. To try a different rule, save the results to a new dataset.
+
 For example, the first 4 title-and-price rows may remain when another 4 rows with authors are added. Check the newly collected content; see [Check your results](/en/data/check-results).
 
 For a separate result, click **Edit** on the workflow and say:
